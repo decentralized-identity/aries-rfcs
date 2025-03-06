@@ -264,9 +264,9 @@ The font color is either black or white, as determined by calculating contrast l
 
 This space should not be used for anything other than the issuer logo. The logo image may be masked to fit within a rounded square with varying corner radii. Thus, the logo must be a square image (aspect ratio 1:1), as noted in the table below. The background is default white, therefore logo files with a transparent background will overlay a white background.
 
-For version 1.0, the issuer logo is located at the top left of the credential.
+For version 1.0, the issuer's name and logo is located at the top left of the credential.
 
-With version 1.1, the issuer logo is located on the bottom of the credential, left of the issuer's name.
+With version 1.1, the issuer's name is located on the bottom right of the credential.
 
 The following are the specifications for the credential logo for issuers. 
 
