@@ -246,7 +246,7 @@ The font color is either black or white, as determined by calculating contrast l
 <table>
   <tr>
    <td>
-<img src="./images/image 4_1.png" width="" alt="alt_text" title="image_tooltip">
+<img src="./images/image4_1.png" width="" alt="alt_text" title="image_tooltip">
 
    </td>
    <td>
