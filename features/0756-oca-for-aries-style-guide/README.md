@@ -60,7 +60,7 @@ creating an OCA Bundle and delivering to holders (and optionally, from holders
 to verifiers) and the holders role in extracting information from the OCA Bundle
 about a held credential. This Style Guide provides the details about what each
 participant is expected to do in creating OCA Bundles and using the data in OCA
-Bundles to render credentials on screen. 
+Bundles to render credentials on screen.
 
 <!-- Copy and paste the converted output. -->
 
