@@ -118,6 +118,8 @@ Format identifier: `didcomm/dc-sd-jwt-request@v1.0`
 
 This format is used to request issuance of a credential. A request with this format MUST be sent in response to an `offer-credential` message with a `didcomm/dc-sd-jwt-offer@v1.0` offer in the same thread, because the credential content and the binding nonce come from the offer. The issuer MUST reject a request that has no such offer by sending a `problem-report` with the code `issuance-abandoned`.
 
+When the issuer sent the `offer-credential` over a connection, the holder MUST authcrypt the `request-credential` over that connection. The issuer MUST reject a `request-credential` in that thread unless it is authcrypted and its sender key is the holder's key for that connection.
+
 The JSON structure might look like this:
 
 ```json
@@ -237,13 +239,13 @@ The holder and later verifiers need to find the issuer key for the `iss` of the 
 - One of the two mechanisms defined in SD-JWT VC section 2.5, JWT VC Issuer Metadata or Inline X.509 Certificates.
 - DID-based key discovery. `iss` is a DID and the header `kid` MUST be a DID URL of that DID: either relative, such as `#key-1`, and resolved against `iss`, or absolute with the same DID as `iss`. A relative `kid` is RECOMMENDED. The key is the verification method that DID URL dereferences to, and it MUST be in the `assertionMethod` relationship of the resolved DID document.
 
-When `iss` is a DID, the issuer MUST use DID-based key discovery and the credential MUST NOT have an `x5c` header. A holder or verifier that permits DID-based key discovery MUST use only that mechanism when `iss` is a DID, so that an attacker cannot change which mechanism is used, for example by adding an `x5c` header ([SD-JWT VC section 7.3, Ecosystem-specific Public Key Verification Methods](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-7.3)). This is the same DID-based key discovery that [RFC 0882](https://github.com/decentralized-identity/aries-rfcs/pull/882) uses for `dc+sd-jwt` presentations.
+When `iss` is a DID, the issuer MUST use DID-based key discovery and the credential MUST NOT have an `x5c` header. A holder that permits DID-based key discovery MUST use only that mechanism when `iss` is a DID, so that an attacker cannot change which mechanism is used, for example by adding an `x5c` header ([SD-JWT VC section 7.3, Ecosystem-specific Public Key Verification Methods](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-7.3)). [RFC 0882](https://github.com/decentralized-identity/aries-rfcs/pull/882) defines how its verifiers find the issuer key of a `dc+sd-jwt` presentation.
 
 #### Status
 
 When the credential references a Token Status List, `status` follows [Token Status List section 6.2, Referenced Token in JOSE](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21#section-6.2) and the `uri` of `status_list` MUST be an `https` URI. The Status List Token SHOULD be signed by the issuer of the credential, with a key that can be found the same way as the credential's issuer key.
 
-An [RFC 0882](https://github.com/decentralized-identity/aries-rfcs/pull/882) verifier checks the status of every credential that has a `status` claim. It fetches a status list only from an `https` URI and only accepts one signed by a key it trusts for that issuer. It discards a presentation whose credential is revoked, and also one whose status it cannot determine, for example because it does not support the status mechanism. An issuer that uses a status mechanism other than Token Status List SHOULD do so only when the verifiers of the credential support it.
+[RFC 0882](https://github.com/decentralized-identity/aries-rfcs/pull/882) defines how its verifiers check the `status` claim. An issuer that uses a status mechanism other than Token Status List SHOULD do so only when the verifiers of the credential support it.
 
 #### Holder Verification
 
@@ -326,97 +328,23 @@ This section defines a set of binding methods supported by this attachment forma
 
 Identifier: `didcomm_signed_attachment`
 
-This is the binding method of the same name defined in [RFC 0881](../0881-w3c-vc-sd-jwt-credential-attachment/README.md#didcomm-signed-attachment) and [RFC 0809](../0809-w3c-data-integrity-credential-attachment/README.md#didcomm-signed-attachment). It uses [DIDComm signed attachments](../../concepts/0017-attachments/README.md#signing-attachments) to bind a credential to a specific key. This section adds rules and makes some rules stricter, for example `kid` MUST be an absolute DID URL. It also lets the holder sign with a bare key in a `jwk` header when the offer sets `jwk_supported`. An implementation that shares code with RFC 0881 has to apply the rules of this section.
+This is the binding method of the same name defined in [RFC 0881](../0881-w3c-vc-sd-jwt-credential-attachment/README.md#didcomm-signed-attachment), including its `jwk_supported` option. This RFC adds these rules:
 
-##### Binding Method in Offer
+- The issuer MUST create a new `nonce` for every offer from a cryptographically secure random source with at least 120 bits of entropy. A version 4 UUID made with such a source ([RFC 9562 section 5.4, UUID Version 4](https://www.rfc-editor.org/rfc/rfc9562.html#section-5.4), 122 random bits) meets this, and so does the base64url encoding of 16 or more random bytes. The issuer stores it with the protocol thread. When the issuer sends more than one offer in a thread, only the nonce of the last offer is valid.
+- The JWS payload is the base64url encoding, without padding, of the bytes decoded from `data.base64`. Writers SHOULD put that unpadded base64url string in `data.base64`, as [RFC 0017](../../concepts/0017-attachments/README.md#base64url) recommends, and the issuer verifies the signature over the re-encoded payload.
+- If a check of the signed attachment fails, the issuer sends a `problem-report` with the code `issuance-abandoned`.
 
-```json
-{
-  "didcomm_signed_attachment": {
-    "algs_supported": ["ES256", "EdDSA"],
-    "did_methods_supported": ["key", "peer"],
-    "jwk_supported": true,
-    "nonce": "jypsHZPgS3pcEdDm-bKnxA"
-  }
-}
-```
-
-- `algs_supported` - Required. List of strings indicating the JSON Web Algorithms supported by the issuer for verifying the signed attachment. The list MUST contain at least one value. The values MUST be a valid algorithm identifier as defined in the [JSON Web Signature and Encryption Algorithms](https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms) registry.
-- `did_methods_supported` - Required. List of strings indicating which DID methods are supported by the issuer for binding the credential to the holder. The list MUST contain at least one value unless `jwk_supported` is `true`. Values MUST be the DID method name only, for example `key` or `jwk`.
-- `jwk_supported` - Optional. Boolean indicating whether the issuer accepts a signed attachment with a bare key in a `jwk` header instead of a DID URL in `kid`. Defaults to `false`.
-- `nonce` - Required. Nonce to be used in the request to prevent replay attacks of the signed attachment. The issuer MUST create a new nonce for every offer from a cryptographically secure random source with at least 120 bits of entropy. A version 4 UUID made with such a source ([RFC 9562 section 5.4, UUID Version 4](https://www.rfc-editor.org/rfc/rfc9562.html#section-5.4), 122 random bits) meets this, and so does the base64url encoding of 16 or more random bytes. The issuer stores it with the protocol thread. When the issuer sends more than one offer in a thread, only the nonce of the last offer is valid.
-
-##### Binding Proof in Request
-
-The binding proof in the request points to an appended attachment containing the signed attachment.
-
-```json
-{
-  "didcomm_signed_attachment": {
-    "attachment_id": "<@id of the attachment>"
-  }
-}
-```
-
-- `attachment_id` - Required. The id of the appended attachment included in the request message that contains the signed attachment. Over DIDComm v2 it is the `id` of an attachment in the top-level `attachments` (see [DIDComm v2](#didcomm-v2)).
-
-###### Signed Attachment Content
-
-The attachment MUST be signed by including a signature in the `jws` field of the attachment. The data MUST be a JSON document encoded in the `base64` field of the attachment. The JWS payload is the base64url encoding, without padding, of the bytes decoded from `data.base64`. Writers SHOULD put that unpadded base64url string in `data.base64`, as [RFC 0017](../../concepts/0017-attachments/README.md#base64url) recommends, and the issuer verifies the signature over the re-encoded payload.
-
-**JWS Payload:**
-
-```json
-{
-  "nonce": "jypsHZPgS3pcEdDm-bKnxA"
-}
-```
-
-- `nonce` - Required. The `nonce` from the `didcomm_signed_attachment` object within `binding_method` from the credential offer.
-
-**Protected Header:**
-
-```json
-{
-  "alg": "ES256",
-  "kid": "did:key:zDnaerDaTF5BXEavCrfRZEk316dpbLsfPDZ3WJ5hRTPFU2169#zDnaerDaTF5BXEavCrfRZEk316dpbLsfPDZ3WJ5hRTPFU2169"
-}
-```
-
-With a bare key in `jwk` instead of `kid`:
-
-```json
-{
-  "alg": "ES256",
-  "jwk": {
-    "kty": "EC",
-    "crv": "P-256",
-    "x": "fyNYMN0976ci7xqiSdag3buk-ZCwgXU4kz9XNkBlNUI",
-    "y": "hW2ojTNfH7Jbi8--CJUo3OCbH3y5n91g-IMA9MLMbTU"
-  }
-}
-```
-
-- `alg` - Required. A digital signature algorithm identifier as per IANA "JSON Web Signature and Encryption Algorithms" registry. MUST NOT be `none` or an identifier for a symmetric algorithm (MAC). MUST match one of the `algs_supported` entries from the offer `binding_method` object.
-- `kid` - Required unless `jwk` is present. JOSE Header containing an absolute DID URL pointing to a specific key in a DID document. The DID method of the DID URL MUST match one of the `did_methods_supported` from the offer `binding_method` object. The verification method it dereferences to MUST be in the `authentication` relationship of the resolved DID document ([DID Core section 5.3.1, Authentication](https://www.w3.org/TR/did-1.0/#authentication)).
-- `jwk` - Required unless `kid` is present. JOSE Header containing the holder's public key ([RFC 7515 section 4.1.3, "jwk" (JSON Web Key) Header Parameter](https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.3)). It MUST NOT contain private key members or `x5u`. It MUST NOT be used unless the offer `binding_method` object has `jwk_supported` set to `true`.
-
-The header MUST NOT have both `kid` and `jwk`, as for the `jwt` proof type of [OpenID4VCI Appendix F.1](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-F.1).
-
-The issuer MUST verify the signature with the key named by `kid` or `jwk` and MUST check the `nonce`, `alg`, `kid` and `jwk` rules above before it issues a credential bound to that key. If a check fails, it sends a `problem-report` with the code `issuance-abandoned`.
+An implementation that shares code with RFC 0881 can apply these rules to both formats.
 
 ##### Binding in Credential
 
-If the request carried a `didcomm_signed_attachment` binding proof, the issued SD-JWT VC MUST include a `cnf` claim ([SD-JWT VC section 2.2.2.3](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.2.2.3)) with exactly one member, taken from the protected header of the signed attachment:
-
-- `cnf.kid` - When the header has `kid`. It is the same DID URL string.
-- `cnf.jwk` - When the header has `jwk`. It is the same public key ([RFC 7800 section 3.2, Representation of an Asymmetric Proof-of-Possession Key](https://www.rfc-editor.org/rfc/rfc7800.html#section-3.2)). It MUST NOT contain private key members or `x5u`.
+If the request carried a `didcomm_signed_attachment` binding proof, the issued SD-JWT VC MUST include a `cnf` claim ([SD-JWT VC section 2.2.2.3](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.2.2.3)) taken from the signed attachment as in [RFC 0881](../0881-w3c-vc-sd-jwt-credential-attachment/README.md#binding-in-credential): `cnf.kid` for a `kid` header and `cnf.jwk` for a `jwk` header.
 
 If the request carried no binding proof, the issued credential MUST NOT have a `cnf` claim.
 
 ### DIDComm v2
 
-Issue-credential 2.0 messages with these formats can also be sent over [DIDComm v2.1](https://identity.foundation/didcomm-messaging/spec/v2.1/). The attachment content and the format identifiers do not change. These rules replace the DIDComm v1 message layout and the role of the DIDComm v1 connection:
+Issue-credential 2.0 messages with these formats can also be sent over [DIDComm v2.1](https://identity.foundation/didcomm-messaging/spec/v2.1/). The attachment content and the format identifiers do not change. These rules replace the DIDComm v1 message layout and the connection rule in [Credential Request Attachment Format](#credential-request-attachment-format):
 
 - Layout: this layout is used until a specification defines issue-credential 2.0 over DIDComm v2. Each attachment that would be in `offers~attach`, `requests~attach` or `credentials~attach` goes in the top-level `attachments` ([Attachments](https://identity.foundation/didcomm-messaging/spec/v2.1/#attachments)). It has an `id`, a `media_type` of `application/json`, the format identifier in `format`, and the same `data` object as in DIDComm v1, with the content in `data.json` or `data.base64`. `body` has no `formats` and none of these `~attach` arrays. Other fields such as `comment`, `goal_code`, `replacement_id` and `credential_preview` stay in `body`.
 - Binding proof: the signed attachment of a [`didcomm_signed_attachment`](#didcomm-signed-attachment) binding proof goes in the top-level `attachments` instead of `~attach`, with a `media_type` of `application/json` and no `format`. Its `id` is the `attachment_id` of the binding proof. Its `data` object, including `data.jws`, stays the same as in DIDComm v1.
@@ -438,6 +366,10 @@ This RFC uses these versions:
 - [Decentralized Identifiers (DIDs) v1.0](https://www.w3.org/TR/did-1.0/), W3C Recommendation
 - [DIDComm Messaging v2.1](https://identity.foundation/didcomm-messaging/spec/v2.1/)
 
+### Security considerations
+
+The signed attachment payload has only the `nonce`, so a binding proof is not tied to one issuer. A dishonest issuer can copy another issuer's nonce into its own offer, pass the holder's proof on to that issuer and get back a credential bound to the holder's key, which the holder then receives from an issuer it never talked to.
+
 ### Privacy considerations
 
 The privacy considerations of [RFC 9901 section 10](https://www.rfc-editor.org/rfc/rfc9901.html#section-10), [SD-JWT VC section 8](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-8) and [Token Status List section 12](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21#section-12) apply.
@@ -452,11 +384,11 @@ The privacy considerations of [RFC 9901 section 10](https://www.rfc-editor.org/r
 ## Rationale and alternatives
 
 - [RFC 0881](../0881-w3c-vc-sd-jwt-credential-attachment/README.md) issues W3C VCDM 2.0 credentials secured with SD-JWT. An SD-JWT VC payload is a flat JWT Claims Set with `vct` instead of a VCDM credential, has its own list of claims that are never selectively disclosable, and proves holder binding with a Key Binding JWT. Earlier SD-JWT VC drafts used the `typ` `vc+sd-jwt`, which now names VCDM 2.0 secured with SD-JWT. A separate format with `typ` `dc+sd-jwt` keeps the two credential types apart and keeps both RFCs simple.
-- The structure and the `didcomm_signed_attachment` binding method are the same as in RFC 0881, with the stricter rules and the `jwk` option of [DIDComm Signed Attachment](#didcomm-signed-attachment), so an implementation can share most code between the two formats.
+- The structure and the `didcomm_signed_attachment` binding method are the same as in RFC 0881, so an implementation can share most code between the two formats.
 - `selectively_disclosable_claims` uses claims path pointers instead of the JSONPath subset of RFC 0881. The same syntax is used by OpenID4VCI claims metadata ([Appendix B.2](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-B.2), [Appendix C](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-C)), by SD-JWT VC Type Metadata ([section 5.6.1](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-5.6.1)) and by DCQL in OpenID4VP and RFC 0882. Claim names that contain `.` or `[` need no escaping. An issuer can take the pointers from its Type Metadata or OpenID4VCI configuration.
 - The holder picks the binding by how it signs the signed attachment: a DID URL in `kid` gives `cnf.kid` and a bare key in `jwk` gives `cnf.jwk`, the way the OpenID4VCI `jwt` proof binds the credential to the DID or to the key ([OpenID4VCI Appendix F.1](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-F.1)). The issuer never turns one into the other. A holder that wants `cnf.jwk`, which SD-JWT VC recommends, signs with `jwk`.
-- A binding key named by `kid` MUST be in the `authentication` relationship. RFC 0882 verifiers require this for a `cnf.kid` key, and a key the holder's DID only lists for other purposes should not become a credential key.
-- [OpenID4VCI Appendix A.3, IETF SD-JWT VC](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-A.3) issues the same credential but is not a DIDComm-based protocol. Its parameters map onto this format: `vct` and the claims stay the same, `cryptographic_binding_methods_supported` values `did:<method>` map to `did_methods_supported` and the value `jwk` to `jwk_supported`, and `proof_signing_alg_values_supported` maps to `algs_supported`. The OpenID4VCI `jwt` proof carries `aud` and `iat` as well as the nonce. The signed attachment here keeps only the nonce, as in RFC 0881, so that its payload stays the same across RFC 0809, RFC 0881 and this RFC. See Unresolved questions for what this leaves out.
+- RFC 0881 requires a binding key named by `kid` to be in the `authentication` relationship. RFC 0882 verifiers require this for a `cnf.kid` key, and a key the holder's DID only lists for other purposes should not become a credential key.
+- [OpenID4VCI Appendix A.3, IETF SD-JWT VC](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-A.3) issues the same credential but is not a DIDComm-based protocol. Its parameters map onto this format: `vct` and the claims stay the same, `cryptographic_binding_methods_supported` values `did:<method>` map to `did_methods_supported` and the value `jwk` to `jwk_supported`, and `proof_signing_alg_values_supported` maps to `algs_supported`. The OpenID4VCI `jwt` proof carries `aud` and `iat` as well as the nonce. The signed attachment here keeps only the nonce, as in RFC 0881, so that its payload stays the same across RFC 0809, RFC 0881 and this RFC. See [Security considerations](#security-considerations) for what this leaves out.
 
 ## Prior art
 
@@ -465,7 +397,7 @@ This attachment format is structurally based on [RFC 0881: W3C SD-JWT Verifiable
 ## Unresolved questions
 
 - Should `selectively_disclosable_claims` allow the `null` component to make every element of an array selectively disclosable?
-- Should the signed attachment payload add `aud`, `iat` or a `typ` header, as in the OpenID4VCI `jwt` proof? Without `aud` the proof is not tied to one issuer. A dishonest issuer can copy another issuer's nonce into its own offer, pass the holder's proof on to that issuer and get back a credential bound to the holder's key, which the holder then receives from an issuer it never talked to. Adding these would change the binding method shared with RFC 0809 and RFC 0881.
+- Should the signed attachment payload add `aud`, `iat` or a `typ` header, as in the OpenID4VCI `jwt` proof? Adding these would change the binding method shared with RFC 0809 and RFC 0881. See [Security considerations](#security-considerations).
 - When SD-JWT VC and Token Status List are published as RFCs, this RFC should reference those.
 
 ## Implementations
