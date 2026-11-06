@@ -196,7 +196,7 @@ A complete [`issue-credential` message from the Issue Credential protocol 2.0](.
 
 - `credential` - Required. The SD-JWT in compact serialization format. The credential MUST conform to the VC Data Model 2.0 and use the `application/vc+sd-jwt` media type as defined in [VC-JOSE-COSE section 6.1.3, application/vc+sd-jwt](https://www.w3.org/TR/vc-jose-cose/#vc-json-sd-jwt).
 
-It is up to the issuer to decide which claims are selectively disclosable, except that the top-level `@context`, `type`, `issuer`, `validFrom`, `validUntil`, `credentialStatus`, `credentialSchema`, `relatedResource` and `cnf` properties, and any property inside them, MUST NOT be selectively disclosable. A verifier needs them to check that the credential is authentic and still valid ([RFC 9901 section 9.7, Selectively Disclosable Validity Claims](https://www.rfc-editor.org/rfc/rfc9901.html#section-9.7), [VC-JOSE-COSE section 3.2.1](https://www.w3.org/TR/vc-jose-cose/#securing-with-sd-jwt)). `selectively_disclosable_claims` in the offer MUST NOT point to any of them. If `selectively_disclosable_claims` was provided in the offer, the issued SD-JWT MUST make at least those claims selectively disclosable. If `binding_required` was `true` in the offer, the issued SD-JWT MUST include a `cnf` (confirmation) claim bound to the holder's key as provided through the binding proof.
+It is up to the issuer to decide which claims are selectively disclosable, except that the top-level `@context`, `type`, `issuer`, `validFrom`, `validUntil`, `credentialStatus`, `credentialSchema`, `relatedResource` and `cnf` properties, and any property inside them, MUST NOT be selectively disclosable. A verifier needs them to check that the credential is authentic and still valid ([RFC 9901 section 9.7, Selectively Disclosable Validity Claims](https://www.rfc-editor.org/rfc/rfc9901.html#section-9.7), [VC-JOSE-COSE section 3.2.1](https://www.w3.org/TR/vc-jose-cose/#securing-with-sd-jwt)). `selectively_disclosable_claims` in the offer MUST NOT point to any of them. If `selectively_disclosable_claims` was provided in the offer, the issued SD-JWT MUST make at least those claims selectively disclosable. If `binding_required` was `true` in the offer, the issued SD-JWT MUST include a `cnf` (confirmation) claim bound to the holder's key as provided through the binding proof. When presenting the credential, the holder proves possession of the `cnf` key as the presentation format defines, for example by signing a `vp+sd-jwt` ([VC-JOSE-COSE section 3.2.2](https://www.w3.org/TR/vc-jose-cose/#securing-vps-sd-jwt)) with it. A Key Binding JWT ([RFC 9901 section 4.3](https://www.rfc-editor.org/rfc/rfc9901.html#section-4.3)) is not used for this.
 
 ### Binding Methods
 
@@ -217,13 +217,15 @@ This binding method leverages [DIDComm signed attachments](../../concepts/0017-a
   "didcomm_signed_attachment": {
     "algs_supported": ["ES256", "EdDSA"],
     "did_methods_supported": ["key", "jwk"],
+    "jwk_supported": true,
     "nonce": "b19439b0-4dc9-4c28-b796-99d17034fb5c"
   }
 }
 ```
 
 - `algs_supported` - Required. List of strings indicating the JSON Web Algorithms supported by the issuer for verifying the signed attachment. The list MUST contain at least one value. The values MUST be a valid algorithm identifier as defined in the [JSON Web Signature and Encryption Algorithms](https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms) registry.
-- `did_methods_supported` - Required. List of strings indicating which DID methods are supported by the issuer for binding the credential to the holder. The list MUST contain at least one value. Values should ONLY include the method identifier of the DID method (e.g. `key`, `jwk`, `web`).
+- `did_methods_supported` - Required. List of strings indicating which DID methods are supported by the issuer for binding the credential to the holder. The list MUST contain at least one value unless `jwk_supported` is `true`. Values should ONLY include the method identifier of the DID method (e.g. `key`, `jwk`, `web`).
+- `jwk_supported` - Optional. Boolean indicating whether the issuer accepts a signed attachment with a bare key in a `jwk` header instead of a DID URL in `kid`. Defaults to `false`.
 - `nonce` - Required. Nonce to be used in the request to prevent replay attacks of the signed attachment.
 
 ##### Binding Proof in Request
@@ -263,12 +265,34 @@ The attachment MUST be signed by including a signature in the `jws` field of the
 }
 ```
 
+With a bare key in `jwk` instead of `kid`:
+
+```json
+{
+  "alg": "ES256",
+  "jwk": {
+    "kty": "EC",
+    "crv": "P-256",
+    "x": "fyNYMN0976ci7xqiSdag3buk-ZCwgXU4kz9XNkBlNUI",
+    "y": "hW2ojTNfH7Jbi8--CJUo3OCbH3y5n91g-IMA9MLMbTU"
+  }
+}
+```
+
 - `alg` - Required. A digital signature algorithm identifier as per IANA "JSON Web Signature and Encryption Algorithms" registry. MUST NOT be `none` or an identifier for a symmetric algorithm (MAC). MUST match one of the `algs_supported` entries from the offer `binding_method` object.
-- `kid` - Required. JOSE Header containing the DID URL pointing to a specific key in a DID document. The DID method of the DID URL MUST match one of the `did_methods_supported` from the offer `binding_method` object.
+- `kid` - Required unless `jwk` is present. JOSE Header containing an absolute DID URL pointing to a specific key in a DID document. The DID method of the DID URL MUST match one of the `did_methods_supported` from the offer `binding_method` object. The verification method it dereferences to MUST be in the `authentication` relationship of the resolved DID document ([DID Core section 5.3.1, Authentication](https://www.w3.org/TR/did-1.0/#authentication)).
+- `jwk` - Required unless `kid` is present. JOSE Header containing the holder's public key ([RFC 7515 section 4.1.3, "jwk" (JSON Web Key) Header Parameter](https://www.rfc-editor.org/rfc/rfc7515.html#section-4.1.3)). It MUST NOT contain private key members or `x5u`. It MUST NOT be used unless the offer `binding_method` object has `jwk_supported` set to `true`.
+
+The header MUST NOT have both `kid` and `jwk`, as for the `jwt` proof type of [OpenID4VCI Appendix F.1](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-F.1).
+
+The issuer MUST verify the signature with the key named by `kid` or `jwk` and MUST check the `nonce`, `alg`, `kid` and `jwk` rules above before it issues a credential bound to that key.
 
 ##### Binding in Credential
 
-The issued SD-JWT MUST include a `cnf` (confirmation) claim containing the holder's public key material ([VC-JOSE-COSE section 4.1.3, cnf](https://www.w3.org/TR/vc-jose-cose/#cnf), [RFC 7800](https://www.rfc-editor.org/rfc/rfc7800.html)). When presenting the credential, the holder proves possession of the `cnf` key as the presentation format defines, for example by signing a `vp+sd-jwt` ([VC-JOSE-COSE section 3.2.2](https://www.w3.org/TR/vc-jose-cose/#securing-vps-sd-jwt)) with it. A Key Binding JWT ([RFC 9901 section 4.3](https://www.rfc-editor.org/rfc/rfc9901.html#section-4.3)) is not used for this.
+The issued SD-JWT MUST include a `cnf` (confirmation) claim ([VC-JOSE-COSE section 4.1.3, cnf](https://www.w3.org/TR/vc-jose-cose/#cnf), [RFC 7800](https://www.rfc-editor.org/rfc/rfc7800.html)) with exactly one member, taken from the protected header of the signed attachment:
+
+- `cnf.kid` - When the header has `kid`. It is the same DID URL string.
+- `cnf.jwk` - When the header has `jwk`. It is the same public key ([RFC 7800 section 3.2, Representation of an Asymmetric Proof-of-Possession Key](https://www.rfc-editor.org/rfc/rfc7800.html#section-3.2)). It MUST NOT contain private key members or `x5u`.
 
 ## Drawbacks
 
@@ -289,7 +313,6 @@ This attachment format is structurally based on [RFC 0809: W3C Data Integrity Cr
 ## Unresolved questions
 
 - Should the holder be able to propose specific claims as selectively disclosable?
-- Should the `cnf` binding format used (i.e. `jwk` vs `kid` key binding of the holder DID's VM) be negotiable? (currently at the issuer's discretion)
 
 ## Implementations
 
