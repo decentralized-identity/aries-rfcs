@@ -170,6 +170,7 @@ Presentation Format | Format Value | Link to Attachment Format | Comment |
 Hyperledger Indy Proof Req | `hlindy/proof-req@v2.0` | [proof request format](../0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs. |
 DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#propose-presentation-attachment-format) | |
 Hyperledger AnonCreds Proof Request | `anoncreds/proof-request@v1.0` | [`Proof Request` format](../0771-anoncreds-attachments/README.md#proof-request-format) | Used to propose as well as request proofs. |
+DCQL | `didcomm/dcql-request@v1.0` | [`propose-presentation` attachment format](../0882-dcql-presentation-attachment/README.md#propose-presentation-attachment-format) | Used to propose as well as request proofs. |
 
 ### Request Presentation
 
@@ -215,6 +216,7 @@ Presentation Format | Format Value | Link to Attachment Format | Comment |
 Hyperledger Indy Proof Req| `hlindy/proof-req@v2.0` | [proof request format](../0592-indy-attachments/README.md#proof-request-format) | Used to propose as well as request proofs. |
 DIF Presentation Exchange | `dif/presentation-exchange/definitions@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#request-presentation-attachment-format) | |
 Hyperledger AnonCreds Proof Request | `anoncreds/proof-request@v1.0` | [`Proof Request` format](../0771-anoncreds-attachments/README.md#proof-request-format) | Used to propose as well as request proofs. |
+DCQL | `didcomm/dcql-request@v1.0` | [`request-presentation` attachment format](../0882-dcql-presentation-attachment/README.md#request-presentation-attachment-format) | Used to propose as well as request proofs. |
 
 ### Presentation
 
@@ -261,6 +263,7 @@ Presentation Format | Format Value | Link to Attachment Format | Comment |
 Hyperledger Indy Proof | `hlindy/proof@v2.0` | [proof format](../0592-indy-attachments/README.md#proof-format) | |
 DIF Presentation Exchange | `dif/presentation-exchange/submission@v1.0` | [`propose-presentation` attachment format](../0510-dif-pres-exch-attach/README.md#presentation-attachment-format) | |
 Hyperledger AnonCreds Proof | `anoncreds/proof@v1.0` | [`Proof` format](../0771-anoncreds-attachments/README.md#proof-format) | |
+DCQL | `didcomm/dcql-presentation@v1.0` | [`presentation` attachment format](../0882-dcql-presentation-attachment/README.md#presentation-attachment-format) | |
 
 ### Ack Presentation
 
