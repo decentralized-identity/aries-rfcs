@@ -3935,6 +3935,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5139,18 +5160,18 @@ recipient.</p>
 <p>Only <code>description.code</code> is required, but a maximally verbose <code>problem-report</code> could contain all
 of the following:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  &quot;@type&quot;            : &quot;https://didcomm.org/report-problem/1.0/problem-report&quot;,
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  &quot;@id&quot;              : &quot;an identifier that can be used to discuss this error message&quot;,
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  &quot;~thread&quot;          : &quot;info about the threading context in which the error occurred (if any)&quot;,
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  &quot;description&quot;      : { &quot;en&quot;: &quot;localized message&quot;, &quot;code&quot;: &quot;symbolic-name-for-error&quot; },
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  &quot;problem_items&quot;    : [ {&quot;&lt;item descrip&gt;&quot;: &quot;value&quot;} ],
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  &quot;who_retries&quot;      : &quot;enum: you | me | both | none&quot;,
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  &quot;fix_hint&quot;         : { &quot;en&quot;: &quot;localized error-instance-specific hint of how to fix issue&quot;},
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  &quot;impact&quot;           : &quot;enum: message | thread | connection&quot;,
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  &quot;where&quot;            : &quot;enum: you | me | other - enum: cloud | edge | wire | agency | ..&quot;,
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  &quot;noticed_time&quot;     : &quot;&lt;time&gt;&quot;,
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  &quot;tracking_uri&quot;     : &quot;&quot;,
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  &quot;escalation_uri&quot;   : &quot;&quot;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  "@type"            : "https://didcomm.org/report-problem/1.0/problem-report",
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  "@id"              : "an identifier that can be used to discuss this error message",
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  "~thread"          : "info about the threading context in which the error occurred (if any)",
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  "description"      : { "en": "localized message", "code": "symbolic-name-for-error" },
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  "problem_items"    : [ {"&lt;item descrip&gt;": "value"} ],
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  "who_retries"      : "enum: you | me | both | none",
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  "fix_hint"         : { "en": "localized error-instance-specific hint of how to fix issue"},
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  "impact"           : "enum: message | thread | connection",
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  "where"            : "enum: you | me | other - enum: cloud | edge | wire | agency | ..",
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  "noticed_time"     : "&lt;time&gt;",
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  "tracking_uri"     : "",
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  "escalation_uri"   : ""
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>}
 </code></pre></div>
 <h3 id="field-reference">Field Reference<a class="headerlink" href="#field-reference" title="Permanent link">&para;</a></h3>
@@ -5175,8 +5196,8 @@ to a message, the thread decorator is mostly redundant, as <code>~thread.thid</c
 <p>All items should have in common the fact that they exemplify the problem described by the code (e.g., each is an invalid param, or each is an unresponsive URL, or each is an unrecognized crypto algorithm, etc).</p>
 <p>Each item in the list must be a tagged pair (a JSON {key:value}, where the key names the parameter or item, and the value is the actual problem text/number/value. For example, to report that two different endpoints listed in party B’s DID Doc failed to respond when they were contacted, the code might contain "endpoint-not-responding", and the problem_items property might contain:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  {&quot;endpoint1&quot;: &quot;http://agency.com/main/endpoint&quot;},
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  {&quot;endpoint2&quot;: &quot;http://failover.agency.com/main/endpoint&quot;}
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  {"endpoint1": "http://agency.com/main/endpoint"},
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  {"endpoint2": "http://failover.agency.com/main/endpoint"}
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>]
 </code></pre></div>
 <p><strong>who_retries</strong>: value is the string "you", the string "me", the string "both", or the string "none". This property tells whether a problem is considered permanent and who the sender of the problem report believes should have the responsibility to resolve it by retrying. Rules about how many times to retry, and who does the retry, and under what circumstances, are not enforceable and not expressed in the message text. This property is thus not a strong commitment to retry--only a recommendation of who should retry, with the assumption that retries will often occur if they make sense.</p>
@@ -5199,21 +5220,21 @@ to a message, the thread decorator is mostly redundant, as <code>~thread.thid</c
 <p><strong>escalation_uri</strong>: Provides a URI where additional help on the issue can be received. For example, this might be a "mailto" and email address for the Help Desk associated with a currently down service.</p>
 <h3 id="sample">Sample<a class="headerlink" href="#sample" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  &quot;@type&quot;: &quot;https://didcomm.org/notification/1.0/problem-report&quot;,
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  &quot;@id&quot;: &quot;7c9de639-c51c-4d60-ab95-103fa613c805&quot;,
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  &quot;~thread&quot;: {
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    &quot;pthid&quot;: &quot;1e513ad4-48c9-444e-9e7e-5b8b45c5e325&quot;,
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    &quot;sender_order&quot;: 1
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  "@type": "https://didcomm.org/notification/1.0/problem-report",
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  "@id": "7c9de639-c51c-4d60-ab95-103fa613c805",
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  "~thread": {
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    "pthid": "1e513ad4-48c9-444e-9e7e-5b8b45c5e325",
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    "sender_order": 1
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  },
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  &quot;~l10n&quot;            : {&quot;catalog&quot;: &quot;https://didcomm.org/error-codes&quot;},
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  &quot;description&quot;      : &quot;Unable to find a route to the specified recipient.&quot;,
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  &quot;description~l10n&quot; : {&quot;code&quot;: &quot;cant-find-route&quot; },
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>  &quot;problem_items&quot;    : [
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>      { &quot;recipient&quot;: &quot;did:sov:C805sNYhMrjHiqZDTUASHg&quot; }
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  "~l10n"            : {"catalog": "https://didcomm.org/error-codes"},
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  "description"      : "Unable to find a route to the specified recipient.",
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  "description~l10n" : {"code": "cant-find-route" },
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>  "problem_items"    : [
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>      { "recipient": "did:sov:C805sNYhMrjHiqZDTUASHg" }
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>  ],
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>  &quot;who_retries&quot;      : &quot;you&quot;,
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>  &quot;impact&quot;           : &quot;message&quot;,
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>  &quot;noticed_time&quot;     : &quot;2019-05-27 18:23:06Z&quot;
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>  "who_retries"      : "you",
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>  "impact"           : "message",
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>  "noticed_time"     : "2019-05-27 18:23:06Z"
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>}
 </code></pre></div>
 <h2 id="categorized-examples-of-errors-and-current-best-practice-handling">Categorized Examples of Errors and (current) Best Practice Handling<a class="headerlink" href="#categorized-examples-of-errors-and-current-best-practice-handling" title="Permanent link">&para;</a></h2>

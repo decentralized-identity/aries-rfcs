@@ -3821,6 +3821,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4819,15 +4840,15 @@ So far, proof requests were to be replied to with a proof response that containe
 One feature the above concept by the Decentralized Identity Foundation lacks is a way of assigning a weight to attributes within the category "one of". It is possible that future implementations using this concept will want to prefer certain attributes over others in the same group if both are given, so a way of assigning these different priorities to attributes should be possible. Below is an the above example of a proof request to which a rule "pick_weighted" and a group D were added. Furthermore, the categories "groups_required" and "groups_optional" were added to be able to differentiate between required and optional attributes which the credential manifest did not.</p>
 <p>Example of a proof presentation request (from verifier):</p>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@type&quot;: &quot;https://didcomm.org/present-proof/1.0/request-presentation&quot;,
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &quot;@id&quot;: &quot;98fd8d82-81a6-4409-acc2-c35ea39d0f28&quot;,
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    &quot;comment&quot;: &quot;some comment&quot;,
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    &quot;request_presentations~attach&quot;: [
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    "@type": "https://didcomm.org/present-proof/1.0/request-presentation",
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    "@id": "98fd8d82-81a6-4409-acc2-c35ea39d0f28",
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    "comment": "some comment",
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    "request_presentations~attach": [
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        {
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            &quot;@id&quot;: &quot;libindy-request-presentation-0&quot;,
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            &quot;mime-type&quot;: &quot;application/json&quot;,
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            &quot;data&quot;:  {
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                &quot;base64&quot;: &quot;&lt;yaml-formatted string describing attachments, base64url-encoded because of libindy&gt;&quot;
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            "@id": "libindy-request-presentation-0",
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            "mime-type": "application/json",
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            "data":  {
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                "base64": "&lt;yaml-formatted string describing attachments, base64url-encoded because of libindy&gt;"
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            }
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        }
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    ]
@@ -4835,135 +4856,135 @@ One feature the above concept by the Decentralized Identity Foundation lacks is 
 </code></pre></div>
 The base64url-encoded content above decodes to the following data structure, a presentation preview:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    &quot;@type&quot;: &quot;https://didcomm.org/present-proof/1.0/presentation-preview&quot;,
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    &quot;@context&quot;: &quot;https://path.to/schemas/credentials&quot;,
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    &quot;comment&quot;:&quot;some comment&quot;,
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    &quot;~thread&quot;: {
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        &quot;thid&quot;: &quot;98fd8d82-81a6-4409-acc2-c35ea39d0f28&quot;,
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        &quot;sender_order&quot;: 0
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    "@context": "https://path.to/schemas/credentials",
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    "comment":"some comment",
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    "~thread": {
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        "thid": "98fd8d82-81a6-4409-acc2-c35ea39d0f28",
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        "sender_order": 0
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    }
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    &quot;credential&quot;:&quot;proof_request&quot;, // verifiable claims elements
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    &quot;groups_required&quot;: [ // these groups are the key feature to this RFC
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    "credential":"proof_request", // verifiable claims elements
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    "groups_required": [ // these groups are the key feature to this RFC
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            {
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                &quot;rule&quot;:&quot;all&quot;,
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>                &quot;from&quot;: [&quot;A&quot;, &quot;B&quot;]
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                "rule":"all",
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>                "from": ["A", "B"]
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            },
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            {
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>                &quot;rule&quot;: &quot;pick&quot;,
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>                &quot;count&quot;: 1,
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>                &quot;from&quot;: [&quot;C&quot;]
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>                "rule": "pick",
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>                "count": 1,
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>                "from": ["C"]
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            },
 <a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>            {
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>                &quot;rule&quot;: &quot;pick_weighted&quot;,
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>                &quot;count&quot;: 1,
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>                &quot;from&quot;: [&quot;D&quot;]
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>                "rule": "pick_weighted",
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>                "count": 1,
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>                "from": ["D"]
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>            }
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>        ],
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        &quot;groups_optional&quot;: [
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        "groups_optional": [
 <a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>            {
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>                &quot;rule&quot;: &quot;all&quot;,
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>                &quot;from&quot;: [&quot;D&quot;]
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>                "rule": "all",
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>                "from": ["D"]
 <a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>            }
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>        ],
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    &quot;inputs&quot;: [
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    "inputs": [
 <a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>        {
-<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>            &quot;type&quot;: &quot;data&quot;,
-<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            &quot;name&quot;: &quot;routing_number&quot;,
-<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>            &quot;group&quot;: [&quot;A&quot;],
-<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>            &quot;cred_def_id&quot;: &quot;&lt;cred_def_id&gt;&quot;,
-<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>            // &quot;mime-type&quot;: &quot;&lt;mime-type&gt;&quot; is missing, so this defaults to a json-formatted string; if it was non-null, &#39;value&#39; would be interpreted as a base64url-encoded string representing a binary BLOB with mime-type telling how to interpret it after base64url-decoding
-<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>            &quot;value&quot;: {
-<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>                &quot;type&quot;: &quot;string&quot;,
-<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>                &quot;maxLength&quot;: 9
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>            "type": "data",
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            "name": "routing_number",
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>            "group": ["A"],
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>            "cred_def_id": "&lt;cred_def_id&gt;",
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>            // "mime-type": "&lt;mime-type&gt;" is missing, so this defaults to a json-formatted string; if it was non-null, 'value' would be interpreted as a base64url-encoded string representing a binary BLOB with mime-type telling how to interpret it after base64url-decoding
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>            "value": {
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>                "type": "string",
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>                "maxLength": 9
 <a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>            },
 <a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>        },
 <a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>        {
-<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>            &quot;type&quot;: &quot;data&quot;,
-<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>            &quot;name&quot;: &quot;account_number&quot;,
-<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>            &quot;group&quot;: [&quot;A&quot;], 
-<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>            &quot;cred_def_id&quot;: &quot;&lt;cred_def_id&gt;&quot;,
-<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>            &quot;value&quot;: {
-<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>                &quot;type&quot;: &quot;string&quot;,
-<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>                &quot;value&quot;: &quot;12345678&quot;
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>            "type": "data",
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>            "name": "account_number",
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>            "group": ["A"], 
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>            "cred_def_id": "&lt;cred_def_id&gt;",
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>            "value": {
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>                "type": "string",
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>                "value": "12345678"
 <a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>        },
 <a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>        {
-<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>            &quot;type&quot;: &quot;data&quot;,
-<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>            &quot;name&quot;: &quot;current_residence_duration&quot;,
-<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>            &quot;group&quot;: [&quot;A&quot;],
-<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>            &quot;cred_def_id&quot;: &quot;&lt;cred_def_id&gt;&quot;,
-<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>            &quot;value&quot;: {
-<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>                &quot;type&quot;: &quot;number&quot;,
-<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>                &quot;maximum&quot;: 150
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>            "type": "data",
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>            "name": "current_residence_duration",
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>            "group": ["A"],
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>            "cred_def_id": "&lt;cred_def_id&gt;",
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>            "value": {
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>                "type": "number",
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>                "maximum": 150
 <a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>            }
 <a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>        },
 <a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>        {
-<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>            &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>            &quot;group&quot;: [&quot;C&quot;],
-<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>            &quot;schema&quot;: &quot;https://eu.com/claims/IDCard&quot;,
-<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>            &quot;constraints&quot;: {
-<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>                &quot;subset&quot;: [&quot;prop1&quot;, &quot;prop2.foo.bar&quot;],
-<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>                &quot;issuers&quot;: [&quot;did:foo:gov1&quot;, &quot;did:bar:gov2&quot;]
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>            "type": "credential",
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>            "group": ["C"],
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>            "schema": "https://eu.com/claims/IDCard",
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>            "constraints": {
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>                "subset": ["prop1", "prop2.foo.bar"],
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>                "issuers": ["did:foo:gov1", "did:bar:gov2"]
 <a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>            }
 <a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>        },
 <a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>        {
-<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>            &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>            &quot;group&quot;: [&quot;C&quot;],
-<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>            &quot;schema&quot;: &quot;hub://did:foo:123/Collections/schema.us.gov/Passport&quot;,
-<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>            &quot;constraints&quot;: {
-<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>                &quot;issuers&quot;: [&quot;did:foo:gov1&quot;, &quot;did:bar:gov2&quot;]
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>            "type": "credential",
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>            "group": ["C"],
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>            "schema": "hub://did:foo:123/Collections/schema.us.gov/Passport",
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>            "constraints": {
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>                "issuers": ["did:foo:gov1", "did:bar:gov2"]
 <a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>            }
 <a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>
 <a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>        },
 <a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>        {
-<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>            &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>            &quot;group&quot;: [&quot;B&quot;],
-<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>            &quot;schema&quot;: [&quot;https://claims.linkedin.com/WorkHistory&quot;, &quot;https://about.me/WorkHistory&quot;],
-<a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a>            &quot;constraints&quot;: {
-<a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a>                &quot;issuers&quot;: [&quot;did:foo:auditor1&quot;, &quot;did:bar:auditor2&quot;]
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>            "type": "credential",
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>            "group": ["B"],
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>            "schema": ["https://claims.linkedin.com/WorkHistory", "https://about.me/WorkHistory"],
+<a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a>            "constraints": {
+<a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a>                "issuers": ["did:foo:auditor1", "did:bar:auditor2"]
 <a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a>            }
 <a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a>        },
 <a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a>        {
-<a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a>            &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a>            &quot;group&quot;: [&quot;B&quot;],
-<a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a>            &quot;schema&quot;: &quot;https://claims.fico.org/CreditHistory&quot;,
-<a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a>            &quot;constraints&quot;: {
-<a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a>                &quot;issuers&quot;: [&quot;did:foo:bank1&quot;, &quot;did:bar:bank2&quot;]
+<a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a>            "type": "credential",
+<a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a>            "group": ["B"],
+<a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a>            "schema": "https://claims.fico.org/CreditHistory",
+<a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a>            "constraints": {
+<a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a>                "issuers": ["did:foo:bank1", "did:bar:bank2"]
 <a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a>            }
 <a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a>        },
 <a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a>        {
-<a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a>            &quot;type&quot;: &quot;openid&quot;,
-<a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a>            &quot;group&quot;: [&quot;A&quot;],
-<a id="__codelineno-1-100" name="__codelineno-1-100" href="#__codelineno-1-100"></a>            &quot;redirect&quot;: &quot;https://login.microsoftonline.com/oauth/&quot;
-<a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a>            &quot;parameters&quot;: {
-<a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a>                &quot;client_id&quot;: &quot;dhfiuhsdre&quot;,
-<a id="__codelineno-1-103" name="__codelineno-1-103" href="#__codelineno-1-103"></a>                &quot;scope&quot;: &quot;openid+profile&quot;                    
+<a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a>            "type": "openid",
+<a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a>            "group": ["A"],
+<a id="__codelineno-1-100" name="__codelineno-1-100" href="#__codelineno-1-100"></a>            "redirect": "https://login.microsoftonline.com/oauth/"
+<a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a>            "parameters": {
+<a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a>                "client_id": "dhfiuhsdre",
+<a id="__codelineno-1-103" name="__codelineno-1-103" href="#__codelineno-1-103"></a>                "scope": "openid+profile"                    
 <a id="__codelineno-1-104" name="__codelineno-1-104" href="#__codelineno-1-104"></a>            }
 <a id="__codelineno-1-105" name="__codelineno-1-105" href="#__codelineno-1-105"></a>        },
 <a id="__codelineno-1-106" name="__codelineno-1-106" href="#__codelineno-1-106"></a>        {
-<a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a>            &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a>            &quot;group&quot;: [&quot;D&quot;],
-<a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a>            &quot;schema&quot;: &quot;https://some.login.com/someattribute&quot;,
-<a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a>            &quot;constraints&quot;: {
-<a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a>                &quot;issuers&quot;: [&quot;did:foo:iss1&quot;, &quot;did:foo:iss2&quot;]
+<a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a>            "type": "credential",
+<a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a>            "group": ["D"],
+<a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a>            "schema": "https://some.login.com/someattribute",
+<a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a>            "constraints": {
+<a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a>                "issuers": ["did:foo:iss1", "did:foo:iss2"]
 <a id="__codelineno-1-112" name="__codelineno-1-112" href="#__codelineno-1-112"></a>            },
-<a id="__codelineno-1-113" name="__codelineno-1-113" href="#__codelineno-1-113"></a>            &quot;weight&quot;: 0.8
+<a id="__codelineno-1-113" name="__codelineno-1-113" href="#__codelineno-1-113"></a>            "weight": 0.8
 <a id="__codelineno-1-114" name="__codelineno-1-114" href="#__codelineno-1-114"></a>        },
 <a id="__codelineno-1-115" name="__codelineno-1-115" href="#__codelineno-1-115"></a>        {
-<a id="__codelineno-1-116" name="__codelineno-1-116" href="#__codelineno-1-116"></a>            &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-1-117" name="__codelineno-1-117" href="#__codelineno-1-117"></a>            &quot;group&quot;: [&quot;D&quot;],
-<a id="__codelineno-1-118" name="__codelineno-1-118" href="#__codelineno-1-118"></a>            &quot;schema&quot;: &quot;https://some.otherlogin.com/someotherattribute&quot;,
-<a id="__codelineno-1-119" name="__codelineno-1-119" href="#__codelineno-1-119"></a>            &quot;constraints&quot;: {
-<a id="__codelineno-1-120" name="__codelineno-1-120" href="#__codelineno-1-120"></a>                &quot;issuers&quot;: [&quot;did:foox:iss1&quot;, &quot;did:foox:iss2&quot;]
+<a id="__codelineno-1-116" name="__codelineno-1-116" href="#__codelineno-1-116"></a>            "type": "credential",
+<a id="__codelineno-1-117" name="__codelineno-1-117" href="#__codelineno-1-117"></a>            "group": ["D"],
+<a id="__codelineno-1-118" name="__codelineno-1-118" href="#__codelineno-1-118"></a>            "schema": "https://some.otherlogin.com/someotherattribute",
+<a id="__codelineno-1-119" name="__codelineno-1-119" href="#__codelineno-1-119"></a>            "constraints": {
+<a id="__codelineno-1-120" name="__codelineno-1-120" href="#__codelineno-1-120"></a>                "issuers": ["did:foox:iss1", "did:foox:iss2"]
 <a id="__codelineno-1-121" name="__codelineno-1-121" href="#__codelineno-1-121"></a>            },
-<a id="__codelineno-1-122" name="__codelineno-1-122" href="#__codelineno-1-122"></a>            &quot;weight&quot;: 0.2
+<a id="__codelineno-1-122" name="__codelineno-1-122" href="#__codelineno-1-122"></a>            "weight": 0.2
 <a id="__codelineno-1-123" name="__codelineno-1-123" href="#__codelineno-1-123"></a>        }
 <a id="__codelineno-1-124" name="__codelineno-1-124" href="#__codelineno-1-124"></a>    ],
-<a id="__codelineno-1-125" name="__codelineno-1-125" href="#__codelineno-1-125"></a>    &quot;predicates&quot;: [
+<a id="__codelineno-1-125" name="__codelineno-1-125" href="#__codelineno-1-125"></a>    "predicates": [
 <a id="__codelineno-1-126" name="__codelineno-1-126" href="#__codelineno-1-126"></a>        {
-<a id="__codelineno-1-127" name="__codelineno-1-127" href="#__codelineno-1-127"></a>            &quot;name&quot;: &quot;&lt;attribute_name&gt;&quot;,
-<a id="__codelineno-1-128" name="__codelineno-1-128" href="#__codelineno-1-128"></a>            &quot;cred_def_id&quot;: &quot;&lt;cred_def_id&gt;&quot;,
-<a id="__codelineno-1-129" name="__codelineno-1-129" href="#__codelineno-1-129"></a>            &quot;predicate&quot;: &quot;&lt;predicate&gt;&quot;,
-<a id="__codelineno-1-130" name="__codelineno-1-130" href="#__codelineno-1-130"></a>            &quot;threshold&quot;: &lt;threshold&gt;
+<a id="__codelineno-1-127" name="__codelineno-1-127" href="#__codelineno-1-127"></a>            "name": "&lt;attribute_name&gt;",
+<a id="__codelineno-1-128" name="__codelineno-1-128" href="#__codelineno-1-128"></a>            "cred_def_id": "&lt;cred_def_id&gt;",
+<a id="__codelineno-1-129" name="__codelineno-1-129" href="#__codelineno-1-129"></a>            "predicate": "&lt;predicate&gt;",
+<a id="__codelineno-1-130" name="__codelineno-1-130" href="#__codelineno-1-130"></a>            "threshold": &lt;threshold&gt;
 <a id="__codelineno-1-131" name="__codelineno-1-131" href="#__codelineno-1-131"></a>        }
 <a id="__codelineno-1-132" name="__codelineno-1-132" href="#__codelineno-1-132"></a>    ]
 <a id="__codelineno-1-133" name="__codelineno-1-133" href="#__codelineno-1-133"></a>}
@@ -4972,15 +4993,15 @@ The base64url-encoded content above decodes to the following data structure, a p
 <p>The following data structure is an example for a valid answer to the above credential request. It contains all attributes from groups A and B as well as one credential from each C and D. Note that the provided credential from Group D is the one weighted 0.2 as the owner did not have or was not willing to provide the one weighted 0.8.</p>
 <p>Valid proof presentation:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    &quot;@type&quot;: &quot;https://didcomm.org/present-proof/1.0/proof-presentation&quot;,
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    &quot;@id&quot;: &quot;98fd8d82-81a6-4409-acc2-c35ea39d0f28&quot;,
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    &quot;comment&quot;: &quot;some comment&quot;,
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    &quot;presentations~attach&quot;: [
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    "@type": "https://didcomm.org/present-proof/1.0/proof-presentation",
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    "@id": "98fd8d82-81a6-4409-acc2-c35ea39d0f28",
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    "comment": "some comment",
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    "presentations~attach": [
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        {
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            &quot;@id&quot;: &quot;libindy-presentation-0&quot;,
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            &quot;mime-type&quot;: &quot;application/json&quot;,
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            &quot;data&quot;: {
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                &quot;base64&quot;: &quot;&lt;yaml-formatted string describing attachments, base64url-encoded because of libindy&gt;&quot;
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            "@id": "libindy-presentation-0",
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            "mime-type": "application/json",
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            "data": {
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                "base64": "&lt;yaml-formatted string describing attachments, base64url-encoded because of libindy&gt;"
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>            }
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        }
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    ]
@@ -4988,60 +5009,60 @@ The base64url-encoded content above decodes to the following data structure, a p
 </code></pre></div>
 The base64url-encoded content above would decode to this data:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    &quot;@type&quot;: &quot;https://didcomm.org/present-proof/1.0/presentation-preview&quot;,
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    &quot;@context&quot;: &quot;https://path.to/schemas/credentials&quot;
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    &quot;comment&quot;:&quot;some comment&quot;,
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    &quot;~thread&quot;: {
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        &quot;thid&quot;: &quot;98f38d22-71b6-4449-adc2-c33ea39d1f29&quot;,
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        &quot;sender_order&quot;: 1,
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        &quot;received_orders&quot;: {did:sov:abcxyz&quot;:1}
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    "@type": "https://didcomm.org/present-proof/1.0/presentation-preview",
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    "@context": "https://path.to/schemas/credentials"
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    "comment":"some comment",
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    "~thread": {
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        "thid": "98f38d22-71b6-4449-adc2-c33ea39d1f29",
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        "sender_order": 1,
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        "received_orders": {did:sov:abcxyz":1}
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    }
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    &quot;credential&quot;:&quot;proof_response&quot;, // verifiable claims elements
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    &quot;inputs_provided&quot;: [
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    "credential":"proof_response", // verifiable claims elements
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    "inputs_provided": [
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        {
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>            &quot;type&quot;: &quot;data&quot;,
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>            &quot;field&quot;: &quot;routing_number&quot;,
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>            &quot;value&quot;: &quot;123456&quot;
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>            "type": "data",
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>            "field": "routing_number",
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>            "value": "123456"
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        },
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>        {
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>            &quot;type&quot;: &quot;data&quot;,
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>            &quot;field&quot;: &quot;account_number&quot;,
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>            &quot;value&quot;: &quot;12345678&quot;
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>            "type": "data",
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>            "field": "account_number",
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>            "value": "12345678"
 <a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>        },
 <a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        {
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>            &quot;type&quot;: &quot;data&quot;,
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>            &quot;field&quot;: &quot;current_residence_duration&quot;,
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>            &quot;value&quot;: 8
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>            "type": "data",
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>            "field": "current_residence_duration",
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>            "value": 8
 <a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        },      
 <a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>        {
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>            &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>            &quot;schema&quot;: [&quot;https://claims.linkedin.com/WorkHistory&quot;, &quot;https://about.me/WorkHistory&quot;],
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>            &quot;issuer&quot;: &quot;did:foo:auditor1&quot;
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>            "type": "credential",
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>            "schema": ["https://claims.linkedin.com/WorkHistory", "https://about.me/WorkHistory"],
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>            "issuer": "did:foo:auditor1"
 <a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>        },
 <a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>        {
-<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>            &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>            &quot;schema&quot;: &quot;https://claims.fico.org/CreditHistory&quot;,
-<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>            &quot;issuer&quot;: &quot;did:foo:bank1&quot;
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>            "type": "credential",
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>            "schema": "https://claims.fico.org/CreditHistory",
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>            "issuer": "did:foo:bank1"
 <a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>        },
 <a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>        {
-<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>            &quot;type&quot;: &quot;openid&quot;,
-<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>            &quot;redirect&quot;: &quot;https://login.microsoftonline.com/oauth/&quot;
-<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>            &quot;client_id&quot;: &quot;dhfiuhsdre&quot;,
-<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>            &quot;profile&quot;: &quot;...&quot;
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>            "type": "openid",
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>            "redirect": "https://login.microsoftonline.com/oauth/"
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>            "client_id": "dhfiuhsdre",
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>            "profile": "..."
 <a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>        },
 <a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>        {
-<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>            &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>            &quot;schema&quot;: &quot;https://eu.com/claims/IDCard&quot;
-<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>            &quot;issuer&quot;: &quot;did:foo:gov1&quot;
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>            "type": "credential",
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>            "schema": "https://eu.com/claims/IDCard"
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>            "issuer": "did:foo:gov1"
 <a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>        },
 <a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>        {
-<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>        &quot;type&quot;: &quot;credential&quot;,
-<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>            &quot;group&quot;: [&quot;D&quot;],
-<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>            &quot;schema&quot;: &quot;https://some.otherlogin.com/someotherattribute&quot;,
-<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>            &quot;issuer&quot;: &quot;did:foox:iss1&quot;
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>        "type": "credential",
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>            "group": ["D"],
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>            "schema": "https://some.otherlogin.com/someotherattribute",
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>            "issuer": "did:foox:iss1"
 <a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>        }
 <a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>    ],
-<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>    &quot;predicates&quot;: [ // empty in this case
+<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>    "predicates": [ // empty in this case
 <a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>    ]
 <a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>}
 </code></pre></div></p>

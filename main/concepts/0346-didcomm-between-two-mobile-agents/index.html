@@ -3779,6 +3779,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4729,38 +4750,38 @@
 <p>A registration process is necessary for an edge agent to discover cloud agents that it can use to send a message through them. Cloud agents in the simplest form are routers hosted as a web application that solves the problem of availability by providing a persistent IP address. The Web server has a wallet of it's own storing its private key as a provisioning record, along with any information needed to forward messages to other agents. Alice wants to accept a connection invitation from Bob. But before doing so Alice needs to register herself with one or more cloud agents. The more cloud agents she registers with the more cloud agents she can use in transporting her message to Bob. To register herself with a cloud agent she visits the website of a cloud agent and simply scans a QR code.</p>
 <p>The cloud agent registration invite looks like below</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span><span class="err">​</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/didexchange/1.0/cloudagentregistrationinvitation&quot;</span><span class="p">,</span><span class="err">​</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900987654321&quot;</span><span class="p">,</span><span class="err">​</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CloudAgentA&quot;</span><span class="p">,</span><span class="err">​</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">&quot;recipientKeys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K&quot;</span><span class="p">],</span><span class="err">​</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://cloudagenta.com/endpoint&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">&quot;responseEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://cloudagenta.com/response&quot;</span><span class="p">,</span><span class="w"> </span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">&quot;consumer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;b1004443feff4f3cba25c45ef35b492c&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">&quot;consumerEndpoint&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://cloudagenta.com/consume&quot;</span><span class="err">​</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/didexchange/1.0/cloudagentregistrationinvitation"</span><span class="p">,</span><span class="err">​</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678900987654321"</span><span class="p">,</span><span class="err">​</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CloudAgentA"</span><span class="p">,</span><span class="err">​</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">"recipientKeys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"</span><span class="p">],</span><span class="err">​</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">"serviceEndpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloudagenta.com/endpoint"</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">"responseEndpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloudagenta.com/response"</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">"consumer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b1004443feff4f3cba25c45ef35b492c"</span><span class="p">,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">"consumerEndpoint"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloudagenta.com/consume"</span><span class="err">​</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span><span class="err">​</span>
 </code></pre></div>
 <p>The registration data is base64url-encoded and is added to alink as part of the c_a_r query param. The recipient key is the public key of "Cloud Agent A". The service endpoint is where the edge agent should send the message to. Response endpoint is where a response that is being sent to Alice should be sent to. For example, if Bob wants to send a message to Alice, then Bob should send the message to the response endpoint. Consumer endpoint is where Alice's edge agent should consume the messages that are sent to her. The "Consumer" is an identifier to identify Alice's edge agent by the cloud agent "A". This identifier is different with each cloud agent and hence provides low correlation risk. Each time an invitation QR code is generated, a new consumer id is generated. No acknowledgment is required to be sent to the cloud agent or vice versa as the consumer-generated is never repeated.</p>
 <p>All the endpoint data and the public key of the cloud agents are then stored as non secret records in Alice's wallet with a tag "cloud-agent"</p>
 <h2 id="how-connection-request-from-alice-flows-to-bob">How connection request from Alice flows to Bob<a class="headerlink" href="#how-connection-request-from-alice-flows-to-bob" title="Permanent link">&para;</a></h2>
 <p>When Alice scans Bob's QR code invitation. It starts preparing the connection request message. It first queries the wallet record service for records tagged with "cloud-agent" and puts them in a list. The edge agent now randomly chooses one from the list (say Cloud Agent "A") and creates a new list without the cloud agent that is already chosen. Alice's edge agent creates the connection request message json and adds the service endpoint as the chosen cloud agent's response endpoint together with its consumer id. </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://cloudagenta.com/response/b1004443feff4f3cba25c45ef35b492c&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">"serviceEndpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloudagenta.com/response/b1004443feff4f3cba25c45ef35b492c"</span>
 </code></pre></div>
 <p>It then packs this message by Bob's recipient key and then creates another json message structure like the below by ising the forward message type</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="err">​</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/routing/1.0/forward&quot;</span><span class="p">,</span><span class="err">​</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900987654321&quot;</span><span class="p">,</span><span class="err">​</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;Encrypted message for Bob here&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">&quot;to&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;Service endpoint of Bob&gt;&quot;</span><span class="err">​</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/routing/1.0/forward"</span><span class="p">,</span><span class="err">​</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678900987654321"</span><span class="p">,</span><span class="err">​</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Encrypted message for Bob here&gt;"</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Service endpoint of Bob&gt;"</span><span class="err">​</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span><span class="err">​</span>
 </code></pre></div>
 <p>It then packs it with the public key of cloud agent "A".</p>
 <p>Now it randomly chooses cloud agent from the new list and keeps on repeating the process of writing the message forwarding request.</p>
 <p>For example, say the next random cloud agent that it chooses is Cloud Agent "C". So now it creates another message forward json structure as below</p>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="err">​</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/routing/1.0/forward&quot;</span><span class="p">,</span><span class="err">​</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900987654321&quot;</span><span class="p">,</span><span class="err">​</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;Encrypted message for Cloud Agent A&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;to&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;Service endpoint of Cloud Agent A&gt;&quot;</span><span class="err">​</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/routing/1.0/forward"</span><span class="p">,</span><span class="err">​</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678900987654321"</span><span class="p">,</span><span class="err">​</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Encrypted message for Cloud Agent A&gt;"</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Service endpoint of Cloud Agent A&gt;"</span><span class="err">​</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span><span class="err">​</span>
 </code></pre></div>
 And then packs with Cloud Agent "C"'s public key.</p>
@@ -4772,7 +4793,7 @@ B-&gt;C-&gt;A where A is one of Bob's cloud agents that stores the message on th
 <p>Thus Cloud Agent "B" unpacks the message and forward the message to Cloud Agent "C" who then again unpacks and forwards it to Cloud Agent "A". Cloud Agent "A" ultimately unpacks and forwards it to Bob's edge agent (For simplicity sake we are not describing how the message reaches Bob through Bob's registered cloud agents)</p>
 <h2 id="bob-returns-a-response-back">Bob returns a response back<a class="headerlink" href="#bob-returns-a-response-back" title="Permanent link">&para;</a></h2>
 <p>Bob when recives the connection request message from Alice. It then creates a connection accept response and sends the response back to Alice at the service endpoint of Alice which is </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://cloudagenta.com/response/b1004443feff4f3cba25c45ef35b492c&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">"serviceEndpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloudagenta.com/response/b1004443feff4f3cba25c45ef35b492c"</span>
 </code></pre></div>
 <p>For simplicity sake, we are not describing how the message ends up at the above endpoint from Bob after multiple routing through Bob's cloud agents. When the message actually ends up at the service endpoint mentioned by Alice, which is the response endpoint of cloud agent "A", the cloud agent simply stores it in a <a href="https://">distributed log</a>(NEEDS A LINK TO KAFKA INBOX RFC) using the consumer id as a key</p>
 <h2 id="alice-consumes-connection-accepted-response-from-bob">Alice consumes connection accepted response from Bob<a class="headerlink" href="#alice-consumes-connection-accepted-response-from-bob" title="Permanent link">&para;</a></h2>

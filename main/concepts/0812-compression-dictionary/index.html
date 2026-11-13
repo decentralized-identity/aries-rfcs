@@ -3890,6 +3890,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4950,16 +4971,16 @@
 <h3 id="training">Training<a class="headerlink" href="#training" title="Permanent link">&para;</a></h3>
 <p>The first step is to determine the type of data that needs to be provided for training, and generating a number of requests that meets that criteria.</p>
 <p>An example of creating such an invite using Aca-py and curl</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl -X POST &quot;http://127.0.0.1:8150/out-of-band/create-invitation&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: application/json&quot; -d &quot;{ \&quot;alias\&quot;: \&quot;\&quot;, \&quot;attachments\&quot;: [ ], \&quot;handshake_protocols\&quot;: [ \&quot;did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0\&quot; ], \&quot;metadata\&quot;: {}, \&quot;my_label\&quot;: \&quot;\&quot;, \&quot;use_public_did\&quot;: false}&quot;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl -X POST "http://127.0.0.1:8150/out-of-band/create-invitation" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"alias\": \"\", \"attachments\": [ ], \"handshake_protocols\": [ \"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0\" ], \"metadata\": {}, \"my_label\": \"\", \"use_public_did\": false}"
 </code></pre></div>
 <p>Result:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{&quot;invitation_url&quot;: &quot;https://localhost:443?oob=eyJAdHlwZSI6ICJkaWQ6c292OkJ6Q2JzTlloTXJqSGlxWkRUVUFTSGc7c3BlYy9vdXQtb2YtYmFuZC8xLjAvaW52aXRhdGlvbiIsICJAaWQiOiAiYTYwZDhlYTAtZDg1Zi00NDJkLTk0NTktZTk2NWEyYjg3Nzg1IiwgInNlcnZpY2VzIjogW3siaWQiOiAiI2lubGluZSIsICJ0eXBlIjogImRpZC1jb21tdW5pY2F0aW9uIiwgInJlY2lwaWVudEtleXMiOiBbImRpZDprZXk6ejZNa296SGNjNzI0ajlGOFJBR214bTFOY3hpVlhtOE10c0NMQ0paWktacWRwd0Z3Il0sICJyb3V0aW5nS2V5cyI6IFsiZGlkOmtleTp6Nk1rcTNycDg1cm1qTjRwdnN5WUpWTlZoVXZBNUJwTWFlNkd5MlBUUzVZaHdVelIiLCAiZGlkOmtleTp6Nk1rbnZwTmEzQXdWOHl6SHJaM0s3WXVDdU1adXBiSEt0ZDJwVDN4U3NzODRqenEiXSwgInNlcnZpY2VFbmRwb2ludCI6ICJodHRwczovL21lZGlhdG9yNC50ZXN0LmluZGljaW90ZWNoLmlvOjQ0MyJ9XSwgImhhbmRzaGFrZV9wcm90b2NvbHMiOiBbImRpZDpzb3Y6QnpDYnNOWWhNcmpIaXFaRFRVQVNIZztzcGVjL2RpZGV4Y2hhbmdlLzEuMCJdLCAibGFiZWwiOiAiTGFiIn0=&quot;, &quot;invitation&quot;: {&quot;@type&quot;: &quot;did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.0/invitation&quot;, &quot;@id&quot;: &quot;a60d8ea0-d85f-442d-9459-e965a2b87785&quot;, &quot;services&quot;: [{&quot;id&quot;: &quot;#inline&quot;, &quot;type&quot;: &quot;did-communication&quot;, &quot;recipientKeys&quot;: [&quot;did:key:z6MkozHcc724j9F8RAGmxm1NcxiVXm8MtsCLCJZZKZqdpwFw&quot;], &quot;routingKeys&quot;: [&quot;did:key:z6Mkq3rp85rmjN4pvsyYJVNVhUvA5BpMae6Gy2PTS5YhwUzR&quot;, &quot;did:key:z6MknvpNa3AwV8yzHrZ3K7YuCuMZupbHKtd2pT3xSss84jzq&quot;], &quot;serviceEndpoint&quot;: &quot;https://localhost:443&quot;}], &quot;handshake_protocols&quot;: [&quot;did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0&quot;], &quot;label&quot;: &quot;Lab&quot;}, &quot;state&quot;: &quot;initial&quot;, &quot;trace&quot;: false, &quot;invi_msg_id&quot;: &quot;a60d8ea0-d85f-442d-9459-e965a2b87785&quot;}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{"invitation_url": "https://localhost:443?oob=eyJAdHlwZSI6ICJkaWQ6c292OkJ6Q2JzTlloTXJqSGlxWkRUVUFTSGc7c3BlYy9vdXQtb2YtYmFuZC8xLjAvaW52aXRhdGlvbiIsICJAaWQiOiAiYTYwZDhlYTAtZDg1Zi00NDJkLTk0NTktZTk2NWEyYjg3Nzg1IiwgInNlcnZpY2VzIjogW3siaWQiOiAiI2lubGluZSIsICJ0eXBlIjogImRpZC1jb21tdW5pY2F0aW9uIiwgInJlY2lwaWVudEtleXMiOiBbImRpZDprZXk6ejZNa296SGNjNzI0ajlGOFJBR214bTFOY3hpVlhtOE10c0NMQ0paWktacWRwd0Z3Il0sICJyb3V0aW5nS2V5cyI6IFsiZGlkOmtleTp6Nk1rcTNycDg1cm1qTjRwdnN5WUpWTlZoVXZBNUJwTWFlNkd5MlBUUzVZaHdVelIiLCAiZGlkOmtleTp6Nk1rbnZwTmEzQXdWOHl6SHJaM0s3WXVDdU1adXBiSEt0ZDJwVDN4U3NzODRqenEiXSwgInNlcnZpY2VFbmRwb2ludCI6ICJodHRwczovL21lZGlhdG9yNC50ZXN0LmluZGljaW90ZWNoLmlvOjQ0MyJ9XSwgImhhbmRzaGFrZV9wcm90b2NvbHMiOiBbImRpZDpzb3Y6QnpDYnNOWWhNcmpIaXFaRFRVQVNIZztzcGVjL2RpZGV4Y2hhbmdlLzEuMCJdLCAibGFiZWwiOiAiTGFiIn0=", "invitation": {"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.0/invitation", "@id": "a60d8ea0-d85f-442d-9459-e965a2b87785", "services": [{"id": "#inline", "type": "did-communication", "recipientKeys": ["did:key:z6MkozHcc724j9F8RAGmxm1NcxiVXm8MtsCLCJZZKZqdpwFw"], "routingKeys": ["did:key:z6Mkq3rp85rmjN4pvsyYJVNVhUvA5BpMae6Gy2PTS5YhwUzR", "did:key:z6MknvpNa3AwV8yzHrZ3K7YuCuMZupbHKtd2pT3xSss84jzq"], "serviceEndpoint": "https://localhost:443"}], "handshake_protocols": ["did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0"], "label": "Lab"}, "state": "initial", "trace": false, "invi_msg_id": "a60d8ea0-d85f-442d-9459-e965a2b87785"}
 </code></pre></div>
 <p>We then extract the data required for the invitation.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{&quot;@type&quot;: &quot;did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.0/invitation&quot;, &quot;@id&quot;: &quot;2dbf6f36-8dc0-4b35-9558-dab26e3ae3c3&quot;, &quot;services&quot;: [{&quot;id&quot;: &quot;#inline&quot;, &quot;type&quot;: &quot;did-communication&quot;, &quot;recipientKeys&quot;: [&quot;did:key:z6MkqfRyf4ycr6HFpo4XyhQp8gBwdBW51Z2yXnxg11AuFZT6&quot;], &quot;routingKeys&quot;: [&quot;did:key:z6Mkq3rp85rmjN4pvsyYJVNVhUvA5BpMae6Gy2PTS5YhwUzR&quot;, &quot;did:key:z6MknvpNa3AwV8yzHrZ3K7YuCuMZupbHKtd2pT3xSss84jzq&quot;], &quot;serviceEndpoint&quot;: &quot;https://localhost:443&quot;}], &quot;handshake_protocols&quot;: [&quot;did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0&quot;], &quot;label&quot;: &quot;Lab&quot;}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.0/invitation", "@id": "2dbf6f36-8dc0-4b35-9558-dab26e3ae3c3", "services": [{"id": "#inline", "type": "did-communication", "recipientKeys": ["did:key:z6MkqfRyf4ycr6HFpo4XyhQp8gBwdBW51Z2yXnxg11AuFZT6"], "routingKeys": ["did:key:z6Mkq3rp85rmjN4pvsyYJVNVhUvA5BpMae6Gy2PTS5YhwUzR", "did:key:z6MknvpNa3AwV8yzHrZ3K7YuCuMZupbHKtd2pT3xSss84jzq"], "serviceEndpoint": "https://localhost:443"}], "handshake_protocols": ["did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0"], "label": "Lab"}
 </code></pre></div>
 <p>Finally, we strip out the keys that are specific to the local agent, leaving content that can easily be compressed.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{&quot;@type&quot;: &quot;did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.0/invitation&quot;, &quot;@id:&quot;: &quot;&quot;, &quot;services&quot;: [{&quot;id&quot;: &quot;#inline&quot;, &quot;type&quot;: &quot;did-communication&quot;, &quot;recipientKeys&quot;: [&quot;did:key:&quot;], &quot;routingKeys&quot;: [&quot;did:key:&quot;, &quot;did:key:&quot;], &quot;serviceEndpoint&quot;: &quot;https://:443&quot;}], &quot;handshake_protocols&quot;: [&quot;did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0&quot;], &quot;label&quot;: &quot;Lab&quot;}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.0/invitation", "@id:": "", "services": [{"id": "#inline", "type": "did-communication", "recipientKeys": ["did:key:"], "routingKeys": ["did:key:", "did:key:"], "serviceEndpoint": "https://:443"}], "handshake_protocols": ["did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/didexchange/1.0"], "label": "Lab"}
 </code></pre></div>
 <p>We do this a hundred or so times, and include other configuration options of interest. ( Research into what should be included here could provide some value )</p>
 <p>We then create the dictionary.</p>

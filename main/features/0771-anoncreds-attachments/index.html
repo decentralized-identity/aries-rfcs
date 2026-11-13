@@ -3803,6 +3803,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4777,39 +4798,39 @@
 <p>The potential holder uses this format to propose criteria for a potential credential for the issuer to offer. The format defined here is not part of the AnonCreds spec, but is a Hyperledger Aries-specific message.</p>
 <p>The identifier for this format is <code>anoncreds/credential-filter@v1.0</code>. The data structure allows specifying zero or more criteria from the following structure:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  &quot;schema_issuer_id&quot;: &quot;&lt;schema_issuer_id&gt;&quot;,
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  &quot;schema_name&quot;: &quot;&lt;schema_name&gt;&quot;,
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  &quot;schema_version&quot;: &quot;&lt;schema_version&gt;&quot;,
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  &quot;schema_id&quot;: &quot;&lt;schema_identifier&gt;&quot;,
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  &quot;issuer_id&quot;: &quot;&lt;issuer_id&gt;&quot;,
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  &quot;cred_def_id&quot;: &quot;&lt;credential_definition_identifier&gt;&quot;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  "schema_issuer_id": "&lt;schema_issuer_id&gt;",
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  "schema_name": "&lt;schema_name&gt;",
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  "schema_version": "&lt;schema_version&gt;",
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  "schema_id": "&lt;schema_identifier&gt;",
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  "issuer_id": "&lt;issuer_id&gt;",
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  "cred_def_id": "&lt;credential_definition_identifier&gt;"
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>}
 </code></pre></div>
 <p>The potential holder may not know, and need not specify, all of these criteria. For example, the holder might only know the schema name and the (credential) issuer id. Recall that the potential holder may specify target attribute values and MIME types in the <a href="../0453-issue-credential-v2/#preview-credential">credential preview</a>.</p>
 <p>For example, the JSON structure might look like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;schema_issuer_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:sov:4RW6QK2HZhHxa2tg7t1jqt&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;schema_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bcgov-mines-act-permit.bcgov-mines-permitting&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">&quot;issuer_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:sov:4RW6QK2HZhHxa2tg7t1jqt&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"schema_issuer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did:sov:4RW6QK2HZhHxa2tg7t1jqt"</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"schema_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bcgov-mines-act-permit.bcgov-mines-permitting"</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">"issuer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did:sov:4RW6QK2HZhHxa2tg7t1jqt"</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </code></pre></div>
 <p>A complete <a href="../0453-issue-credential-v2/#propose-credential"><code>propose-credential</code> message from the Issue Credential protocol 2.0</a> embeds this format as an attachment in the <code>filters~attach</code> array:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;uuid of propose message&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/issue-credential/%VER/propose-credential&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;some comment&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;formats&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;uuid of propose message&gt;"</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/issue-credential/%VER/propose-credential"</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;some comment&gt;"</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">      </span><span class="nt">&quot;attach_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;attach@id value&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anoncreds/credential-filter@v1.0&quot;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">      </span><span class="nt">"attach_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;attach@id value&gt;"</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anoncreds/credential-filter@v1.0"</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="p">],</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="nt">&quot;filters~attach&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="nt">"filters~attach"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">      </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;attach@id value&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">      </span><span class="nt">&quot;mime-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">        </span><span class="nt">&quot;base64&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ewogICAgInNjaGVtYV9pc3N1ZXJfZGlkIjogImRpZDpzb3Y... (clipped)... LMkhaaEh4YTJ0Zzd0MWpxdCIKfQ==&quot;</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">      </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;attach@id value&gt;"</span><span class="p">,</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">      </span><span class="nt">"mime-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">,</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">        </span><span class="nt">"base64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ewogICAgInNjaGVtYV9pc3N1ZXJfZGlkIjogImRpZDpzb3Y... (clipped)... LMkhaaEh4YTJ0Zzd0MWpxdCIKfQ=="</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">      </span><span class="p">}</span>
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">  </span><span class="p">]</span>
@@ -4820,31 +4841,31 @@
 <p>The identifier for this format is <code>anoncreds/credential-offer@v1.0</code>. It must follow the <a href="https://hyperledger.github.io/anoncreds-spec/#credential-offer">structure of a Credential Offer</a> as defined in the AnonCreds specification.</p>
 <p>The JSON structure might look like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&quot;schema_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4RW6QK2HZhHxa2tg7t1jqt:2:bcgov-mines-act-permit.bcgov-mines-permitting:0.2.0&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;cred_def_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4RW6QK2HZhHxa2tg7t1jqt:3:CL:58160:default&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;nonce&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;57a62300-fbe2-4f08-ace0-6c329c5210e1&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;key_correctness_proof&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="err">&lt;key_correc</span><span class="kc">tness</span><span class="err">_proo</span><span class="kc">f</span><span class="err">&gt;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4RW6QK2HZhHxa2tg7t1jqt:2:bcgov-mines-act-permit.bcgov-mines-permitting:0.2.0"</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">"cred_def_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4RW6QK2HZhHxa2tg7t1jqt:3:CL:58160:default"</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57a62300-fbe2-4f08-ace0-6c329c5210e1"</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">"key_correctness_proof"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="err">&lt;key_correc</span><span class="kc">tness</span><span class="err">_proo</span><span class="kc">f</span><span class="err">&gt;</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
 </code></pre></div>
 <p>A complete <a href="../0453-issue-credential-v2/#offer-credential"><code>offer-credential</code> message from the Issue Credential protocol 2.0</a> embeds this format as an attachment in the <code>offers~attach</code> array:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/issue-credential/%VER/offer-credential&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;uuid of offer message&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">&quot;replacement_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;issuer unique id&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;some comment&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">&quot;credential_preview&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;jso</span><span class="kc">n</span><span class="mi">-</span><span class="err">ld</span><span class="w"> </span><span class="err">objec</span><span class="kc">t</span><span class="err">&gt;</span><span class="p">,</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">&quot;formats&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/issue-credential/%VER/offer-credential"</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;uuid of offer message&gt;"</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">"replacement_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;issuer unique id&gt;"</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;some comment&gt;"</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">"credential_preview"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;jso</span><span class="kc">n</span><span class="mi">-</span><span class="err">ld</span><span class="w"> </span><span class="err">objec</span><span class="kc">t</span><span class="err">&gt;</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">"formats"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="nt">&quot;attach_id&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;attach@id value&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">            </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anoncreds/credential-offer@v1.0&quot;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="nt">"attach_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;attach@id value&gt;"</span><span class="p">,</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">            </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anoncreds/credential-offer@v1.0"</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="p">],</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="nt">&quot;offers~attach&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="nt">"offers~attach"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">            </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;attach@id value&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">            </span><span class="nt">&quot;mime-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">            </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">                </span><span class="nt">&quot;base64&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ewogICAgInNjaGVtYV9pZCI6ICI0Ulc2UUsySFpoS... (clipped)... jb3JyZWN0bmVzc19wcm9vZj4KfQ==&quot;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">            </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;attach@id value&gt;"</span><span class="p">,</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">            </span><span class="nt">"mime-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">,</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">            </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">                </span><span class="nt">"base64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ewogICAgInNjaGVtYV9pZCI6ICI0Ulc2UUsySFpoS... (clipped)... jb3JyZWN0bmVzc19wcm9vZj4KfQ=="</span>
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">            </span><span class="p">}</span>
 <a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">        </span><span class="p">}</span>
 <a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">    </span><span class="p">]</span>
@@ -4855,31 +4876,31 @@
 <p>The identifier for this format is <code>anoncreds/credential-request@v1.0</code>. It must follow the <a href="https://hyperledger.github.io/anoncreds-spec/#credential-request">structure of a Credential Request</a> as defined in the AnonCreds specification.</p>
 <p>The JSON structure might look like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>{
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    &quot;entropy&quot; : &quot;e7bc23ad-1ac8-4dbc-92dd-292ec80c7b77&quot;,
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    &quot;cred_def_id&quot; : &quot;4RW6QK2HZhHxa2tg7t1jqt:3:CL:58160:default&quot;,
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    "entropy" : "e7bc23ad-1ac8-4dbc-92dd-292ec80c7b77",
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    "cred_def_id" : "4RW6QK2HZhHxa2tg7t1jqt:3:CL:58160:default",
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    // Fields below can depend on Cred Def type
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    &quot;blinded_ms&quot; : &lt;blinded_master_secret&gt;,
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    &quot;blinded_ms_correctness_proof&quot; : &lt;blinded_ms_correctness_proof&gt;,
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    &quot;nonce&quot;: &quot;fbe22300-57a6-4f08-ace0-9c5210e16c32&quot;
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    "blinded_ms" : &lt;blinded_master_secret&gt;,
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    "blinded_ms_correctness_proof" : &lt;blinded_ms_correctness_proof&gt;,
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    "nonce": "fbe22300-57a6-4f08-ace0-9c5210e16c32"
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>}
 </code></pre></div>
 <p>A complete <a href="../0453-issue-credential-v2/#request-credential"><code>request-credential</code> message from the Issue Credential protocol 2.0</a> embeds this format as an attachment in the <code>requests~attach</code> array:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cf3a9301-6d4a-430f-ae02-b4a79ddc9706&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/issue-credential/%VER/request-credential&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;some comment&gt;&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">&quot;formats&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cf3a9301-6d4a-430f-ae02-b4a79ddc9706"</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/issue-credential/%VER/request-credential"</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;some comment&gt;"</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="nt">&quot;attach_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7cd11894-838a-45c0-a9ec-13e2d9d125a1&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">      </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anoncreds/credential-request@v1.0&quot;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="nt">"attach_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7cd11894-838a-45c0-a9ec-13e2d9d125a1"</span><span class="p">,</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anoncreds/credential-request@v1.0"</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span><span class="p">],</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="nt">&quot;requests~attach&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="nt">"requests~attach"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">      </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7cd11894-838a-45c0-a9ec-13e2d9d125a1&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">      </span><span class="nt">&quot;mime-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span><span class="nt">&quot;base64&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ewogICAgInByb3Zlcl9kaWQiIDogImRpZDpzb3Y6YWJjeHl.. (clipped)... DAtNTdhNi00ZjA4LWFjZTAtOWM1MjEwZTE2YzMyIgp9&quot;</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">      </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7cd11894-838a-45c0-a9ec-13e2d9d125a1"</span><span class="p">,</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">      </span><span class="nt">"mime-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">,</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span><span class="nt">"base64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ewogICAgInByb3Zlcl9kaWQiIDogImRpZDpzb3Y6YWJjeHl.. (clipped)... DAtNTdhNi00ZjA4LWFjZTAtOWM1MjEwZTE2YzMyIgp9"</span>
 <a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">      </span><span class="p">}</span>
 <a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">  </span><span class="p">]</span>
@@ -4891,18 +4912,18 @@
 <p>The encoded values of the credential MUST follow the encoding algorithm as described in <a href="https://hyperledger.github.io/anoncreds-spec/#encoding-attribute-data">Encoding Attribute Data</a>. It must follow the <a href="https://hyperledger.github.io/anoncreds-spec/#constructing-a-credential">structure of a Credential</a> as defined in the AnonCreds specification.</p>
 <p>The JSON structure might look like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>{
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    &quot;schema_id&quot;: &quot;4RW6QK2HZhHxa2tg7t1jqt:2:bcgov-mines-act-permit.bcgov-mines-permitting:0.2.0&quot;,
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    &quot;cred_def_id&quot;: &quot;4RW6QK2HZhHxa2tg7t1jqt:3:CL:58160:default&quot;,
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    &quot;rev_reg_id&quot;, &quot;EyN78DDGHyok8qw6W96UBY:4:EyN78DDGHyok8qw6W96UBY:3:CL:56389:CardossierOrgPerson:CL_ACCUM:1-1000&quot;,
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    &quot;values&quot;: {
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        &quot;attr1&quot; : {&quot;raw&quot;: &quot;value1&quot;, &quot;encoded&quot;: &quot;value1_as_int&quot; },
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        &quot;attr2&quot; : {&quot;raw&quot;: &quot;value2&quot;, &quot;encoded&quot;: &quot;value2_as_int&quot; }
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    "schema_id": "4RW6QK2HZhHxa2tg7t1jqt:2:bcgov-mines-act-permit.bcgov-mines-permitting:0.2.0",
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    "cred_def_id": "4RW6QK2HZhHxa2tg7t1jqt:3:CL:58160:default",
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    "rev_reg_id", "EyN78DDGHyok8qw6W96UBY:4:EyN78DDGHyok8qw6W96UBY:3:CL:56389:CardossierOrgPerson:CL_ACCUM:1-1000",
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    "values": {
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        "attr1" : {"raw": "value1", "encoded": "value1_as_int" },
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        "attr2" : {"raw": "value2", "encoded": "value2_as_int" }
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    },
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    // Fields below can depend on Cred Def type
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    &quot;signature&quot;: &lt;signature&gt;,
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    &quot;signature_correctness_proof&quot;: &lt;signature_correctness_proof&gt;
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    &quot;rev_reg&quot;: &lt;revocation registry state&gt;
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    &quot;witness&quot;: &lt;witness&gt;
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    "signature": &lt;signature&gt;,
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    "signature_correctness_proof": &lt;signature_correctness_proof&gt;
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    "rev_reg": &lt;revocation registry state&gt;
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    "witness": &lt;witness&gt;
 <a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>}
 </code></pre></div>
 <p>An exhaustive description of the format is out of scope here; it is more completely documented in the <a href="https://hyperledger.github.io/anoncreds-spec">AnonCreds Specification</a>.</p>
@@ -4912,16 +4933,16 @@
 <p>The identifier for this format is <code>anoncreds/proof-request@v1.0</code>. It must follow the <a href="https://hyperledger.github.io/anoncreds-spec/#create-presentation-request">structure of a Proof</a> as defined in the AnonCreds specification.</p>
 <p>Here is a sample proof request that embodies the following: "Using a government-issued ID, disclose the credential holder’s name and height, hide the credential holder’s sex, get them to self-attest their phone number, and prove that their age is at least 18":</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>{
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    &quot;nonce&quot;: &quot;2934823091873049823740198370q23984710239847&quot;,
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    &quot;name&quot;:&quot;proof_req_1&quot;,
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    &quot;version&quot;:&quot;0.1&quot;,
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    &quot;requested_attributes&quot;:{
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        &quot;attr1_referent&quot;: {&quot;name&quot;:&quot;sex&quot;},
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        &quot;attr2_referent&quot;: {&quot;name&quot;:&quot;phone&quot;},
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        &quot;attr3_referent&quot;: {&quot;names&quot;: [&quot;name&quot;, &quot;height&quot;], &quot;restrictions&quot;: &lt;restrictions specifying government-issued ID&gt;}
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    "nonce": "2934823091873049823740198370q23984710239847",
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    "name":"proof_req_1",
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    "version":"0.1",
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    "requested_attributes":{
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        "attr1_referent": {"name":"sex"},
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        "attr2_referent": {"name":"phone"},
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        "attr3_referent": {"names": ["name", "height"], "restrictions": &lt;restrictions specifying government-issued ID&gt;}
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    },
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    &quot;requested_predicates&quot;:{
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        &quot;predicate1_referent&quot;:{&quot;name&quot;:&quot;age&quot;,&quot;p_type&quot;:&quot;&gt;=&quot;,&quot;p_value&quot;:18}
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    "requested_predicates":{
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        "predicate1_referent":{"name":"age","p_type":"&gt;=","p_value":18}
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    }
 <a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>}
 </code></pre></div>
@@ -4930,108 +4951,108 @@
 <p>The identifier for this format is <code>anoncreds/proof@v1.0</code>. It must follow the <a href="https://hyperledger.github.io/anoncreds-spec/#generate-presentation">structure of a Presentation</a> as defined in the AnonCreds specification.</p>
 <p>A proof that responds to the <a href="#proof-request-format">previous proof request sample</a> looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>{
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  &quot;proof&quot;:{
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    &quot;proofs&quot;:[
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  "proof":{
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    "proofs":[
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>      {
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        &quot;primary_proof&quot;:{
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>          &quot;eq_proof&quot;:{
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>            &quot;revealed_attrs&quot;:{
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>              &quot;height&quot;:&quot;175&quot;,
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>              &quot;name&quot;:&quot;1139481716457488690172217916278103335&quot;
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        "primary_proof":{
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>          "eq_proof":{
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>            "revealed_attrs":{
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>              "height":"175",
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>              "name":"1139481716457488690172217916278103335"
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>            },
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>            &quot;a_prime&quot;:&quot;5817705...096889&quot;,
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>            &quot;e&quot;:&quot;1270938...756380&quot;,
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>            &quot;v&quot;:&quot;1138...39984052&quot;,
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>            &quot;m&quot;:{
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>              &quot;master_secret&quot;:&quot;375275...0939395&quot;,
-<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>              &quot;sex&quot;:&quot;3511483...897083518&quot;,
-<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>              &quot;age&quot;:&quot;13430...63372249&quot;
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>            "a_prime":"5817705...096889",
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>            "e":"1270938...756380",
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>            "v":"1138...39984052",
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>            "m":{
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>              "master_secret":"375275...0939395",
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>              "sex":"3511483...897083518",
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>              "age":"13430...63372249"
 <a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>            },
-<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>            &quot;m2&quot;:&quot;1444497...2278453&quot;
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>            "m2":"1444497...2278453"
 <a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>          },
-<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>          &quot;ge_proofs&quot;:[
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>          "ge_proofs":[
 <a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>            {
-<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>              &quot;u&quot;:{
-<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>                &quot;1&quot;:&quot;152500...3999140&quot;,
-<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>                &quot;2&quot;:&quot;147748...2005753&quot;,
-<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>                &quot;0&quot;:&quot;8806...77968&quot;,
-<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>                &quot;3&quot;:&quot;10403...8538260&quot;
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>              "u":{
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>                "1":"152500...3999140",
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>                "2":"147748...2005753",
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>                "0":"8806...77968",
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>                "3":"10403...8538260"
 <a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>              },
-<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>              &quot;r&quot;:{
-<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>                &quot;2&quot;:&quot;15706...781609&quot;,
-<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>                &quot;3&quot;:&quot;343...4378642&quot;,
-<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>                &quot;0&quot;:&quot;59003...702140&quot;,
-<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>                &quot;DELTA&quot;:&quot;9607...28201020&quot;,
-<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>                &quot;1&quot;:&quot;180097...96766&quot;
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>              "r":{
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>                "2":"15706...781609",
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>                "3":"343...4378642",
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>                "0":"59003...702140",
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>                "DELTA":"9607...28201020",
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a>                "1":"180097...96766"
 <a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>              },
-<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>              &quot;mj&quot;:&quot;134300...249&quot;,
-<a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>              &quot;alpha&quot;:&quot;827896...52261&quot;,
-<a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>              &quot;t&quot;:{
-<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>                &quot;2&quot;:&quot;7132...47794&quot;,
-<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>                &quot;3&quot;:&quot;38051...27372&quot;,
-<a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a>                &quot;DELTA&quot;:&quot;68025...508719&quot;,
-<a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>                &quot;1&quot;:&quot;32924...41082&quot;,
-<a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>                &quot;0&quot;:&quot;74906...07857&quot;
+<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>              "mj":"134300...249",
+<a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>              "alpha":"827896...52261",
+<a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a>              "t":{
+<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>                "2":"7132...47794",
+<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>                "3":"38051...27372",
+<a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a>                "DELTA":"68025...508719",
+<a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a>                "1":"32924...41082",
+<a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a>                "0":"74906...07857"
 <a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>              },
-<a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a>              &quot;predicate&quot;:{
-<a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>                &quot;attr_name&quot;:&quot;age&quot;,
-<a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a>                &quot;p_type&quot;:&quot;GE&quot;,
-<a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>                &quot;value&quot;:18
+<a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a>              "predicate":{
+<a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a>                "attr_name":"age",
+<a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a>                "p_type":"GE",
+<a id="__codelineno-9-48" name="__codelineno-9-48" href="#__codelineno-9-48"></a>                "value":18
 <a id="__codelineno-9-49" name="__codelineno-9-49" href="#__codelineno-9-49"></a>              }
 <a id="__codelineno-9-50" name="__codelineno-9-50" href="#__codelineno-9-50"></a>            }
 <a id="__codelineno-9-51" name="__codelineno-9-51" href="#__codelineno-9-51"></a>          ]
 <a id="__codelineno-9-52" name="__codelineno-9-52" href="#__codelineno-9-52"></a>        },
-<a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a>        &quot;non_revoc_proof&quot;:null
+<a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a>        "non_revoc_proof":null
 <a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a>      }
 <a id="__codelineno-9-55" name="__codelineno-9-55" href="#__codelineno-9-55"></a>    ],
-<a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a>    &quot;aggregated_proof&quot;:{
-<a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a>      &quot;c_hash&quot;:&quot;108743...92564&quot;,
-<a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a>      &quot;c_list&quot;:[ 6 arrays of 257 numbers between 0 and 255]
+<a id="__codelineno-9-56" name="__codelineno-9-56" href="#__codelineno-9-56"></a>    "aggregated_proof":{
+<a id="__codelineno-9-57" name="__codelineno-9-57" href="#__codelineno-9-57"></a>      "c_hash":"108743...92564",
+<a id="__codelineno-9-58" name="__codelineno-9-58" href="#__codelineno-9-58"></a>      "c_list":[ 6 arrays of 257 numbers between 0 and 255]
 <a id="__codelineno-9-59" name="__codelineno-9-59" href="#__codelineno-9-59"></a>    }
 <a id="__codelineno-9-60" name="__codelineno-9-60" href="#__codelineno-9-60"></a>  },
-<a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a>  &quot;requested_proof&quot;:{
-<a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a>    &quot;revealed_attrs&quot;:{
-<a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a>      &quot;attr1_referent&quot;:{
-<a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a>        &quot;sub_proof_index&quot;:0,
-<a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a>        &quot;raw&quot;:&quot;Alex&quot;,
-<a id="__codelineno-9-66" name="__codelineno-9-66" href="#__codelineno-9-66"></a>        &quot;encoded&quot;:&quot;1139481716457488690172217916278103335&quot;
+<a id="__codelineno-9-61" name="__codelineno-9-61" href="#__codelineno-9-61"></a>  "requested_proof":{
+<a id="__codelineno-9-62" name="__codelineno-9-62" href="#__codelineno-9-62"></a>    "revealed_attrs":{
+<a id="__codelineno-9-63" name="__codelineno-9-63" href="#__codelineno-9-63"></a>      "attr1_referent":{
+<a id="__codelineno-9-64" name="__codelineno-9-64" href="#__codelineno-9-64"></a>        "sub_proof_index":0,
+<a id="__codelineno-9-65" name="__codelineno-9-65" href="#__codelineno-9-65"></a>        "raw":"Alex",
+<a id="__codelineno-9-66" name="__codelineno-9-66" href="#__codelineno-9-66"></a>        "encoded":"1139481716457488690172217916278103335"
 <a id="__codelineno-9-67" name="__codelineno-9-67" href="#__codelineno-9-67"></a>      }
 <a id="__codelineno-9-68" name="__codelineno-9-68" href="#__codelineno-9-68"></a>    },
-<a id="__codelineno-9-69" name="__codelineno-9-69" href="#__codelineno-9-69"></a>    &quot;revealed_attr_groups&quot;:{
-<a id="__codelineno-9-70" name="__codelineno-9-70" href="#__codelineno-9-70"></a>      &quot;attr4_referent&quot;:{
-<a id="__codelineno-9-71" name="__codelineno-9-71" href="#__codelineno-9-71"></a>        &quot;sub_proof_index&quot;:0,
-<a id="__codelineno-9-72" name="__codelineno-9-72" href="#__codelineno-9-72"></a>        &quot;values&quot;:{
-<a id="__codelineno-9-73" name="__codelineno-9-73" href="#__codelineno-9-73"></a>          &quot;name&quot;:{
-<a id="__codelineno-9-74" name="__codelineno-9-74" href="#__codelineno-9-74"></a>            &quot;raw&quot;:&quot;Alex&quot;,
-<a id="__codelineno-9-75" name="__codelineno-9-75" href="#__codelineno-9-75"></a>            &quot;encoded&quot;:&quot;1139481716457488690172217916278103335&quot;
+<a id="__codelineno-9-69" name="__codelineno-9-69" href="#__codelineno-9-69"></a>    "revealed_attr_groups":{
+<a id="__codelineno-9-70" name="__codelineno-9-70" href="#__codelineno-9-70"></a>      "attr4_referent":{
+<a id="__codelineno-9-71" name="__codelineno-9-71" href="#__codelineno-9-71"></a>        "sub_proof_index":0,
+<a id="__codelineno-9-72" name="__codelineno-9-72" href="#__codelineno-9-72"></a>        "values":{
+<a id="__codelineno-9-73" name="__codelineno-9-73" href="#__codelineno-9-73"></a>          "name":{
+<a id="__codelineno-9-74" name="__codelineno-9-74" href="#__codelineno-9-74"></a>            "raw":"Alex",
+<a id="__codelineno-9-75" name="__codelineno-9-75" href="#__codelineno-9-75"></a>            "encoded":"1139481716457488690172217916278103335"
 <a id="__codelineno-9-76" name="__codelineno-9-76" href="#__codelineno-9-76"></a>          },
-<a id="__codelineno-9-77" name="__codelineno-9-77" href="#__codelineno-9-77"></a>          &quot;height&quot;:{
-<a id="__codelineno-9-78" name="__codelineno-9-78" href="#__codelineno-9-78"></a>            &quot;raw&quot;:&quot;175&quot;,
-<a id="__codelineno-9-79" name="__codelineno-9-79" href="#__codelineno-9-79"></a>            &quot;encoded&quot;:&quot;175&quot;
+<a id="__codelineno-9-77" name="__codelineno-9-77" href="#__codelineno-9-77"></a>          "height":{
+<a id="__codelineno-9-78" name="__codelineno-9-78" href="#__codelineno-9-78"></a>            "raw":"175",
+<a id="__codelineno-9-79" name="__codelineno-9-79" href="#__codelineno-9-79"></a>            "encoded":"175"
 <a id="__codelineno-9-80" name="__codelineno-9-80" href="#__codelineno-9-80"></a>          }
 <a id="__codelineno-9-81" name="__codelineno-9-81" href="#__codelineno-9-81"></a>        }
 <a id="__codelineno-9-82" name="__codelineno-9-82" href="#__codelineno-9-82"></a>      }
 <a id="__codelineno-9-83" name="__codelineno-9-83" href="#__codelineno-9-83"></a>    },
-<a id="__codelineno-9-84" name="__codelineno-9-84" href="#__codelineno-9-84"></a>    &quot;self_attested_attrs&quot;:{
-<a id="__codelineno-9-85" name="__codelineno-9-85" href="#__codelineno-9-85"></a>      &quot;attr3_referent&quot;:&quot;8-800-300&quot;
+<a id="__codelineno-9-84" name="__codelineno-9-84" href="#__codelineno-9-84"></a>    "self_attested_attrs":{
+<a id="__codelineno-9-85" name="__codelineno-9-85" href="#__codelineno-9-85"></a>      "attr3_referent":"8-800-300"
 <a id="__codelineno-9-86" name="__codelineno-9-86" href="#__codelineno-9-86"></a>    },
-<a id="__codelineno-9-87" name="__codelineno-9-87" href="#__codelineno-9-87"></a>    &quot;unrevealed_attrs&quot;:{
-<a id="__codelineno-9-88" name="__codelineno-9-88" href="#__codelineno-9-88"></a>      &quot;attr2_referent&quot;:{
-<a id="__codelineno-9-89" name="__codelineno-9-89" href="#__codelineno-9-89"></a>        &quot;sub_proof_index&quot;:0
+<a id="__codelineno-9-87" name="__codelineno-9-87" href="#__codelineno-9-87"></a>    "unrevealed_attrs":{
+<a id="__codelineno-9-88" name="__codelineno-9-88" href="#__codelineno-9-88"></a>      "attr2_referent":{
+<a id="__codelineno-9-89" name="__codelineno-9-89" href="#__codelineno-9-89"></a>        "sub_proof_index":0
 <a id="__codelineno-9-90" name="__codelineno-9-90" href="#__codelineno-9-90"></a>      }
 <a id="__codelineno-9-91" name="__codelineno-9-91" href="#__codelineno-9-91"></a>    },
-<a id="__codelineno-9-92" name="__codelineno-9-92" href="#__codelineno-9-92"></a>    &quot;predicates&quot;:{
-<a id="__codelineno-9-93" name="__codelineno-9-93" href="#__codelineno-9-93"></a>      &quot;predicate1_referent&quot;:{
-<a id="__codelineno-9-94" name="__codelineno-9-94" href="#__codelineno-9-94"></a>        &quot;sub_proof_index&quot;:0
+<a id="__codelineno-9-92" name="__codelineno-9-92" href="#__codelineno-9-92"></a>    "predicates":{
+<a id="__codelineno-9-93" name="__codelineno-9-93" href="#__codelineno-9-93"></a>      "predicate1_referent":{
+<a id="__codelineno-9-94" name="__codelineno-9-94" href="#__codelineno-9-94"></a>        "sub_proof_index":0
 <a id="__codelineno-9-95" name="__codelineno-9-95" href="#__codelineno-9-95"></a>      }
 <a id="__codelineno-9-96" name="__codelineno-9-96" href="#__codelineno-9-96"></a>    }
 <a id="__codelineno-9-97" name="__codelineno-9-97" href="#__codelineno-9-97"></a>  },
-<a id="__codelineno-9-98" name="__codelineno-9-98" href="#__codelineno-9-98"></a>  &quot;identifiers&quot;:[
+<a id="__codelineno-9-98" name="__codelineno-9-98" href="#__codelineno-9-98"></a>  "identifiers":[
 <a id="__codelineno-9-99" name="__codelineno-9-99" href="#__codelineno-9-99"></a>    {
-<a id="__codelineno-9-100" name="__codelineno-9-100" href="#__codelineno-9-100"></a>      &quot;schema_id&quot;:&quot;NcYxiDXkpYi6ov5FcYDi1e:2:gvt:1.0&quot;,
-<a id="__codelineno-9-101" name="__codelineno-9-101" href="#__codelineno-9-101"></a>      &quot;cred_def_id&quot;:&quot;NcYxi...cYDi1e:2:gvt:1.0:TAG_1&quot;,
-<a id="__codelineno-9-102" name="__codelineno-9-102" href="#__codelineno-9-102"></a>      &quot;rev_reg_id&quot;:null,
-<a id="__codelineno-9-103" name="__codelineno-9-103" href="#__codelineno-9-103"></a>      &quot;timestamp&quot;:null
+<a id="__codelineno-9-100" name="__codelineno-9-100" href="#__codelineno-9-100"></a>      "schema_id":"NcYxiDXkpYi6ov5FcYDi1e:2:gvt:1.0",
+<a id="__codelineno-9-101" name="__codelineno-9-101" href="#__codelineno-9-101"></a>      "cred_def_id":"NcYxi...cYDi1e:2:gvt:1.0:TAG_1",
+<a id="__codelineno-9-102" name="__codelineno-9-102" href="#__codelineno-9-102"></a>      "rev_reg_id":null,
+<a id="__codelineno-9-103" name="__codelineno-9-103" href="#__codelineno-9-103"></a>      "timestamp":null
 <a id="__codelineno-9-104" name="__codelineno-9-104" href="#__codelineno-9-104"></a>    }
 <a id="__codelineno-9-105" name="__codelineno-9-105" href="#__codelineno-9-105"></a>  ]
 <a id="__codelineno-9-106" name="__codelineno-9-106" href="#__codelineno-9-106"></a>}

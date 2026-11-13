@@ -3658,6 +3658,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4660,10 +4681,10 @@ This message adds the following fields</p>
 <li>ADMIN_AUTHZ: The trustee is an administrator of agents</li>
 </ol>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  &quot;version&quot;: &quot;0.1&quot;,
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  &quot;type&quot;: &quot;CAPABILITY_OFFER&quot;,
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  &quot;capabilities&quot;: [&quot;RECOVERY_SHARE&quot;, &quot;REVOKE_AUTHZ&quot;, &quot;PROVISION_AUTHZ&quot;]
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  &quot;expires&quot;: 1517428815
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  "version": "0.1",
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  "type": "CAPABILITY_OFFER",
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  "capabilities": ["RECOVERY_SHARE", "REVOKE_AUTHZ", "PROVISION_AUTHZ"]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  "expires": 1517428815
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>}
 </code></pre></div>
 <h3 id="capabilty_request">CAPABILTY_REQUEST<a class="headerlink" href="#capabilty_request" title="Permanent link">&para;</a></h3>
@@ -4673,10 +4694,10 @@ for which capabilities the trustee has agreed. This message adds the following f
 <em>capabilities</em> \&lt;object[string,string]&gt;: A name value object that contains the trustee's response for each privilege.\
 <em>authorizationKeys</em> \&lt;list[string]&gt;: The public keys that the trustee will use to verify her actions with the authz policy registry on behalf of the identity owner.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  &quot;version&quot;: &quot;0.1&quot;,
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  &quot;type&quot;: &quot;CAPABILITY_REQUEST&quot;,
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  &quot;authorizationKeys&quot;: [&quot;Rtna123KPuQWEcxzbNMjkb&quot;]
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  &quot;capabilities&quot;: [&quot;RECOVERY_SHARE&quot;, &quot;REVOKE_AUTHZ&quot;]
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  "version": "0.1",
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  "type": "CAPABILITY_REQUEST",
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  "authorizationKeys": ["Rtna123KPuQWEcxzbNMjkb"]
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  "capabilities": ["RECOVERY_SHARE", "REVOKE_AUTHZ"]
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>}
 </code></pre></div>
 <h3 id="capability_response">CAPABILITY_RESPONSE<a class="headerlink" href="#capability_response" title="Permanent link">&para;</a></h3>
@@ -4684,10 +4705,10 @@ for which capabilities the trustee has agreed. This message adds the following f
 <p><em>address</em> \&lt;string&gt;: The identity owner's policy address. Only required if the trustee has a key in the authz policy registry.\
 <em>share</em> \&lt;object&gt;: The actual recovery share data in the format given in the next section. Only required if the trustee has the RECOVERY_SHARE privilege.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  &quot;version&quot;: &quot;0.1&quot;,
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  &quot;type&quot;: &quot;CAPABILITY_RESPONSE&quot;,
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  &quot;address&quot;: &quot;b3AFkei98bf3R2s&quot;
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  &quot;share&quot;: {
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  "version": "0.1",
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  "type": "CAPABILITY_RESPONSE",
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  "address": "b3AFkei98bf3R2s"
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  "share": {
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    ...
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  }
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>}
@@ -4697,9 +4718,9 @@ for which capabilities the trustee has agreed. This message adds the following f
 <p><em>challenge</em> \&lt;object&gt;: A message that a party should respond to so the identity owner can be authenticated. Contains a <em>question</em> field for the other party to answer
 and a list of <em>valid_responses</em>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  &quot;version&quot;: &quot;0.1&quot;,
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  &quot;type&quot;: &quot;TRUST_PING&quot;,
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  &quot;challenge&quot;: {
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  "version": "0.1",
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  "type": "TRUST_PING",
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  "challenge": {
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    ...
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  }
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>}
@@ -4708,25 +4729,25 @@ and a list of <em>valid_responses</em>.</p>
 <em>question</em> \&lt;string&gt;: The question for the other party to answer.\
 <em>valid_responses</em> \&lt;list[string]&gt;: A list of valid responses that the party can give in return.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    &quot;question&quot;: &quot;Are you on a call with CULedger?&quot;,
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    &quot;valid_responses&quot;: [&quot;Yes&quot;, &quot;No&quot;]
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    "question": "Are you on a call with CULedger?",
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    "valid_responses": ["Yes", "No"]
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>}
 </code></pre></div>
 <h3 id="trust_pong">TRUST_PONG<a class="headerlink" href="#trust_pong" title="Permanent link">&para;</a></h3>
 <p>The response message for the TRUST_PING message.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>  &quot;version&quot;: &quot;0.1&quot;,
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  &quot;type&quot;: &quot;TRUST_PONG&quot;,
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  &quot;answer&quot;: {
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    &quot;answerValue&quot;: &quot;Yes&quot;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>  "version": "0.1",
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  "type": "TRUST_PONG",
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  "answer": {
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    "answerValue": "Yes"
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  }
 </code></pre></div>
 <h3 id="key_heartbeat_request">KEY_HEARTBEAT_REQUEST<a class="headerlink" href="#key_heartbeat_request" title="Permanent link">&para;</a></h3>
 <p>Future_Work: Verifies a trustee/agent has and is using the public keys that were given to the identity owner. These keys</p>
 <p><em>authorizationKeys</em> \&lt;list[string]&gt;: Public keys the identity owner knows that belong to the trustee/agent.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>{
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  &quot;version&quot;: &quot;0.1&quot;,
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  &quot;type&quot;: &quot;KEY_HEARTBEAT_REQUEST&quot;,
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  &quot;authorizationKeys&quot;: [&quot;Rtna123KPuQWEcxzbNMjkb&quot;]
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  "version": "0.1",
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  "type": "KEY_HEARTBEAT_REQUEST",
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  "authorizationKeys": ["Rtna123KPuQWEcxzbNMjkb"]
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>}
 </code></pre></div>
 <h3 id="key_heartbeat_response">KEY_HEARTBEAT_RESPONSE<a class="headerlink" href="#key_heartbeat_response" title="Permanent link">&para;</a></h3>
@@ -4736,16 +4757,16 @@ and a list of <em>valid_responses</em>.</p>
 <p><em>for_id</em> \&lt;string&gt;: The nonce sent in the RECOVERY_SHARE_CHALLENGE message.\
 <em>response</em> \&lt;object&gt;: The response from the identity owner.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>{
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  &quot;version&quot;: &quot;0.1&quot;,
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  &quot;type&quot;: &quot;RECOVERY_SHARE_RESPONSE&quot;,
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  &quot;response&quot;: {
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  "version": "0.1",
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  "type": "RECOVERY_SHARE_RESPONSE",
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  "response": {
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    ...
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>  }
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>}
 </code></pre></div>
 <p><em>response</em> will look like the example below but allows for future changes as needed.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>{
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  &quot;pin&quot;: &quot;3qA5h7&quot;
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  "pin": "3qA5h7"
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>}
 </code></pre></div>
 <h2 id="recovery-share-data-structure">Recovery Share Data Structure<a class="headerlink" href="#recovery-share-data-structure" title="Permanent link">&para;</a></h2>
@@ -4762,13 +4783,13 @@ and a list of <em>valid_responses</em>.</p>
 </li>
 </ol>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>{
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  &quot;version&quot;: &quot;0.1&quot;,
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  &quot;source_did&quot;: &quot;did:sov:asbdfa32135&quot;
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  &quot;tag&quot;: &quot;ze4152Bsxo90&quot;,
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  &quot;shareValue&quot;: &quot;abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789&quot;
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  &quot;hint&quot;: {
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    &quot;theshold&quot;: 3,
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    &quot;trustees&quot;: [&quot;Mike L&quot;, &quot;Lovesh&quot;, &quot;Corin&quot;, &quot;Devin&quot;, &quot;Drummond&quot;]
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  "version": "0.1",
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  "source_did": "did:sov:asbdfa32135"
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  "tag": "ze4152Bsxo90",
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  "shareValue": "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789"
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  "hint": {
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    "theshold": 3,
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    "trustees": ["Mike L", "Lovesh", "Corin", "Devin", "Drummond"]
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  }
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>}
 </code></pre></div>

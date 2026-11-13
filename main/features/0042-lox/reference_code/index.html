@@ -3658,6 +3658,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4702,8 +4723,8 @@ When storing a secret, an additional parameter is needed. If omitted (the prefer
 of all the values in the keyring without retrieving their actual values.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>lox<span class="w"> </span>list
 </code></pre></div></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{&quot;application&quot;: &quot;lox&quot;, &quot;id&quot;: &quot;apikey&quot;, &quot;service&quot;: &quot;aws&quot;, &quot;username&quot;: &quot;mike&quot;, &quot;xdg:schema&quot;: &quot;org.freedesktop.Secret.Generic&quot;}
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>{&quot;application&quot;: &quot;lox&quot;, &quot;id&quot;: &quot;walletkey&quot;, &quot;service&quot;: &quot;indy&quot;, &quot;username&quot;: &quot;mike&quot;, &quot;xdg:schema&quot;: &quot;org.freedesktop.Secret.Generic&quot;}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{"application": "lox", "id": "apikey", "service": "aws", "username": "mike", "xdg:schema": "org.freedesktop.Secret.Generic"}
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>{"application": "lox", "id": "walletkey", "service": "indy", "username": "mike", "xdg:schema": "org.freedesktop.Secret.Generic"}
 </code></pre></div>
 <h3 id="peek-secrets">Peek secrets<a class="headerlink" href="#peek-secrets" title="Permanent link">&para;</a></h3>
 <p><em>Lox</em> can retrieve all or a subset of secrets in the keyring. Peek without
@@ -4719,8 +4740,8 @@ Filters are supplied as name value pairs separated by = and multiple pairs separ
 </code></pre></div></p>
 <p>For Linux, filtering is based on a subset of name value pairs of the attributes that match.
 For example, if the attributes in the keyring were like this
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>{&quot;application&quot;: &quot;lox&quot;, &quot;id&quot;: &quot;apikey&quot;, &quot;service&quot;: &quot;aws&quot;, &quot;username&quot;: &quot;mike&quot;, &quot;xdg:schema&quot;: &quot;org.freedesktop.Secret.Generic&quot;}
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>{&quot;application&quot;: &quot;lox&quot;, &quot;id&quot;: &quot;walletkey&quot;, &quot;service&quot;: &quot;indy&quot;, &quot;username&quot;: &quot;mike&quot;, &quot;xdg:schema&quot;: &quot;org.freedesktop.Secret.Generic&quot;}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>{"application": "lox", "id": "apikey", "service": "aws", "username": "mike", "xdg:schema": "org.freedesktop.Secret.Generic"}
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>{"application": "lox", "id": "walletkey", "service": "indy", "username": "mike", "xdg:schema": "org.freedesktop.Secret.Generic"}
 </code></pre></div>
 To filter based on <em>id</em>, run
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>lox<span class="w"> </span>peek<span class="w"> </span><span class="nv">id</span><span class="o">=</span>apikey
@@ -4730,9 +4751,9 @@ To filter based on <em>username</em> AND <em>service</em>, run
 </code></pre></div></p>
 <p>For Windows, filtering is based on the credentials targetname and globbing.
 For example, if <em>list</em> returned
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>{&quot;targetname&quot;: &quot;MicrosoftAccount:target=SSO_POP_Device&quot;}
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>{&quot;targetname&quot;: &quot;WindowsLive:target=virtualapp/didlogical&quot;}
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>{&quot;targetname&quot;: &quot;LegacyGeneric:target=IEUser:aws:apikey&quot;}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>{"targetname": "MicrosoftAccount:target=SSO_POP_Device"}
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>{"targetname": "WindowsLive:target=virtualapp/didlogical"}
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>{"targetname": "LegacyGeneric:target=IEUser:aws:apikey"}
 </code></pre></div>
 then filtering searches everything after ":target=". In this case, if the value
 to be peeked is IEUser:aws:apikey, the following will return just that result

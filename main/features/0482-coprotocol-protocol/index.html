@@ -3664,6 +3664,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4928,38 +4949,38 @@
 <p>The protocol consists of 5 messages: <code>bind</code>, <code>attach</code>, <code>input</code>, <code>output</code>, <code>detach</code> and the adopted <code>problem-report</code> (for propagating errors).</p>
 <p>The protocol begins with a <code>bind</code> message sent from <code>caller</code> to <code>called</code>. This message basically says, "I would like to interact with a new coprotocol instance having the following characteristics and the following mapping of identifiers to roles." It might look like this: </p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@id&quot;: &quot;4d116a88-1314-4af5-9b3c-848456b8b3dd&quot;,
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &quot;@type&quot;: &quot;https://didcomm.org/coprotocol/1.0/bind&quot;,
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    &quot;goal_code&quot;: &quot;aries.buy.make-payment&quot;,
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    &quot;co_binding_id&quot;: null,
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    &quot;cast&quot;: [
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    "@id": "4d116a88-1314-4af5-9b3c-848456b8b3dd",
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    "@type": "https://didcomm.org/coprotocol/1.0/bind",
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    "goal_code": "aries.buy.make-payment",
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    "co_binding_id": null,
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    "cast": [
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        // Recipient of the bind message (id = null) should be payee.
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        {&quot;role&quot;: &quot;payee&quot;, &quot;id&quot;: null},
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        {"role": "payee", "id": null},
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        // The payer will be did:peer:abc123.
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        {&quot;role&quot;: &quot;payer&quot;, &quot;id&quot;: &quot;did:peer:abc123&quot; }
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        {"role": "payer", "id": "did:peer:abc123" }
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    ]
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>}
 </code></pre></div>
 <p>When a <code>called</code> agent receives this message, it should discover what protocol implementations are available that match the criteria, and sort the candidates by preference. (Note that additional criteria can be added besides those shown here; see the <a href="#reference">Reference section</a>.) This could involve enumerating not-yet-loaded plugins. It could also involve negotiating a protocol with the remote party (e.g., the DID playing the role of <code>payer</code> in the example above) by querying its capabilities using the <a href="../0031-discover-features/">Discover Features Protocol</a>. Of course, the capabilities of remote parties could also be cached to avoid this delay, or they could be predicted without confirmation, if circumstances suggest that's the best tradeoff. Once the candidates are sorted by preference, the best match should be selected. The coprotocol is NOT launched, but it is awaiting launch. The <code>called</code> agent should now generate an <code>attach</code> message that acknowledges the request to bind and tells the <code>caller</code> how to interact:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    &quot;@id&quot;: &quot;b3dd4d11-6a88-9b3c-4af5-848456b81314&quot;,
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    &quot;@type&quot;: &quot;https://didcomm.org/coprotocol/1.0/attach&quot;,
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    &quot;~thread&quot;: { &quot;pthid&quot;: &quot;4d116a88-1314-4af5-9b3c-848456b8b3dd&quot;},
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    "@id": "b3dd4d11-6a88-9b3c-4af5-848456b81314",
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    "@type": "https://didcomm.org/coprotocol/1.0/attach",
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    "~thread": { "pthid": "4d116a88-1314-4af5-9b3c-848456b8b3dd"},
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    // This is the best match.
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    &quot;piuri&quot;: &quot;https://didcomm.org/pay-with-venmo/1.3&quot;
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    "piuri": "https://didcomm.org/pay-with-venmo/1.3"
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>}
 </code></pre></div>
 <p>The <code>@id</code> of the <code>bind</code> message (also the <code>~thread.pthid</code> of the <code>attach</code> response) becomes a permanent identifier for the <strong>coprotocol binding</strong>. Both the caller and the coprotocol instance code can use it to lookup state as needed. The <code>caller</code> can now kick off/invoke the protocol with an <code>input</code> message:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    &quot;@id&quot;: &quot;56b81314-6a88-9b3c-4af5-b3dd4d118484&quot;,
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    &quot;@type&quot;: &quot;https://didcomm.org/coprotocol/1.0/input&quot;,
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    &quot;~thread&quot;: { &quot;pthid&quot;: &quot;4d116a88-1314-4af5-9b3c-848456b8b3dd&quot;},
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    &quot;interaction_point&quot;: &quot;invoke&quot;,
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    &quot;data&quot;: [
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        &quot;amount&quot;: 1.23,
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        &quot;currency&quot;: &quot;INR&quot;,
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        &quot;bill_of_sale&quot;: {
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            // describes what&#39;s being purchased
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    "@id": "56b81314-6a88-9b3c-4af5-b3dd4d118484",
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    "@type": "https://didcomm.org/coprotocol/1.0/input",
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    "~thread": { "pthid": "4d116a88-1314-4af5-9b3c-848456b8b3dd"},
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    "interaction_point": "invoke",
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    "data": [
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        "amount": 1.23,
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        "currency": "INR",
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        "bill_of_sale": {
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            // describes what's being purchased
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        }
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    ]
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>}
@@ -4967,68 +4988,68 @@
 <p>This allows the <code>caller</code> to invoke the bound coprotocol instance, and to pass it any number of named inputs.</p>
 <p>Later, when the coprotocol instance wants to emit an output from <code>called</code> to <code>caller</code>, it uses an <code>output</code> message (in this case, one matching the <code>preauth</code> interaction point declared in the <a href="../../concepts/0478-coprotocols/#example">sample coprotocol definition in RFC 0478</a>):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    &quot;@id&quot;: &quot;9b3c56b8-6a88-f513-4a14-4d118484b3dd&quot;,
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    &quot;@type&quot;: &quot;https://didcomm.org/coprotocol/1.0/output&quot;,
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    &quot;~thread&quot;: { &quot;pthid&quot;: &quot;4d116a88-1314-4af5-9b3c-848456b8b3dd&quot;},
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    &quot;interaction_point&quot;: &quot;preauth&quot;,
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    &quot;data&quot;: [
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        &quot;code&quot;: &quot;6a884d11-13149b3c&quot;,
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    "@id": "9b3c56b8-6a88-f513-4a14-4d118484b3dd",
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    "@type": "https://didcomm.org/coprotocol/1.0/output",
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    "~thread": { "pthid": "4d116a88-1314-4af5-9b3c-848456b8b3dd"},
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    "interaction_point": "preauth",
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    "data": [
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        "code": "6a884d11-13149b3c",
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    ]
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>}
 </code></pre></div>
 <p>If a <code>caller</code> wants to detach, it uses a <code>detach</code> message. This leaves the coprotocol running on <code>called</code>; all inputs that it emits are sent to the bitbucket, and it advances on its normal state trajectory as if it were a wholly independent protocol:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    &quot;@id&quot;: &quot;7a3c56b8-5b88-d413-4a14-ca118484b3ee&quot;,
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    &quot;@type&quot;: &quot;https://didcomm.org/coprotocol/1.0/detach&quot;,
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    &quot;~thread&quot;: { &quot;pthid&quot;: &quot;4d116a88-1314-4af5-9b3c-848456b8b3dd&quot;}
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    "@id": "7a3c56b8-5b88-d413-4a14-ca118484b3ee",
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    "@type": "https://didcomm.org/coprotocol/1.0/detach",
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    "~thread": { "pthid": "4d116a88-1314-4af5-9b3c-848456b8b3dd"}
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>}
 </code></pre></div>
 <p>A <code>caller</code> can re-attach by sending a new <code>bind</code> message; this time, the <code>co_binding_id</code> field should have the coprotocol binding id from the original <code>attach</code> message. Other fields in the message are optional; if present, they constitute a check that the binding in question has the properties the caller expects. The reattachment is confrimed by a new <code>attach</code> message.</p>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <h3 id="bind"><code>bind</code><a class="headerlink" href="#bind" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>{
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    &quot;@id&quot;: &quot;4d116a88-1314-4af5-9b3c-848456b8b3dd&quot;,
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    &quot;@type&quot;: &quot;https://didcomm.org/coprotocol/1.0/bind&quot;,
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    // I&#39;d like to be bound to a coprotocol that achieves this goal.
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    &quot;goal_code&quot;: &quot;aries.buy.make-payment&quot;,
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    &quot;co_binding_id&quot;: 
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    "@id": "4d116a88-1314-4af5-9b3c-848456b8b3dd",
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    "@type": "https://didcomm.org/coprotocol/1.0/bind",
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    // I'd like to be bound to a coprotocol that achieves this goal.
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    "goal_code": "aries.buy.make-payment",
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    "co_binding_id": 
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    // What is the intent about who plays which roles?
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    &quot;cast&quot;: [
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    "cast": [
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        // Recipient of the bind message (id = null) should be payee.
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        {&quot;role&quot;: &quot;payee&quot;, &quot;id&quot;: null},
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        {"role": "payee", "id": null},
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        // The payer will be did:peer:abc123.
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        {&quot;role&quot;: &quot;payer&quot;, &quot;id&quot;: &quot;did:peer:abc123&quot; }
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        {"role": "payer", "id": "did:peer:abc123" }
 <a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    ],
 <a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    // Optional and preferably omitted as it creates tight coupling;
 <a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    // constrains bound coprotocol to just those that have a PIURI
 <a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    // matching this wildcarded expression. 
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    &quot;piuri_pat&quot;: &quot;*/pay*&quot;,
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    "piuri_pat": "*/pay*",
 <a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    // If multiple matches are found, tells how to sort them to pick
 <a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    // best match. 
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    &quot;prefer&quot;: [
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>        // First prefer to bind a protocol that&#39;s often successful.
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>        { &quot;attribute&quot;: &quot;success_ratio&quot;, &quot;direction&quot;: &quot;d&quot; },
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        // Tie break by binding a protocol that&#39;s been run recently.
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>        { &quot;attribute&quot;: &quot;last_run_date&quot;, &quot;direction&quot;: &quot;d&quot; },
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>        // Tie break by binding a protocol that&#39;s newer.
-<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>        { &quot;attribute&quot;: &quot;release_date&quot;, &quot;direction&quot;: &quot;d&quot; }
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    "prefer": [
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>        // First prefer to bind a protocol that's often successful.
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>        { "attribute": "success_ratio", "direction": "d" },
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        // Tie break by binding a protocol that's been run recently.
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>        { "attribute": "last_run_date", "direction": "d" },
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>        // Tie break by binding a protocol that's newer.
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>        { "attribute": "release_date", "direction": "d" }
 <a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>        // Tie break by selecting protocols already running (false
 <a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>        // sorts before true).
-<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        { &quot;attribute&quot;: &quot;running&quot;, &quot;direction&quot;: &quot;d&quot; }
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        { "attribute": "running", "direction": "d" }
 <a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>    ]
 <a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>}
 </code></pre></div>
 <h3 id="attach"><code>attach</code><a class="headerlink" href="#attach" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>{
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    &quot;@id&quot;: &quot;b3dd4d11-6a88-9b3c-4af5-848456b81314&quot;,
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    &quot;@type&quot;: &quot;https://didcomm.org/coprotocol/1.0/attach&quot;,
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    &quot;~thread&quot;: { &quot;pthid&quot;: &quot;4d116a88-1314-4af5-9b3c-848456b8b3dd&quot;},
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    "@id": "b3dd4d11-6a88-9b3c-4af5-848456b81314",
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    "@type": "https://didcomm.org/coprotocol/1.0/attach",
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    "~thread": { "pthid": "4d116a88-1314-4af5-9b3c-848456b8b3dd"},
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    // This is the best match.
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    &quot;piuri&quot;: &quot;https://didcomm.org/pay-with-venmo/1.3&quot;,
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    "piuri": "https://didcomm.org/pay-with-venmo/1.3",
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    // Optional. Tells how long the caller has to take the next
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    // step binding will be held in an
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    // inactive state before being abandoned.
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    &quot;~timing.expires_time&quot;: &quot;2020-06-23T18:42:07.124&quot;
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    "~timing.expires_time": "2020-06-23T18:42:07.124"
 <a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>}
 </code></pre></div>
 <h3 id="collateral">Collateral<a class="headerlink" href="#collateral" title="Permanent link">&para;</a></h3>

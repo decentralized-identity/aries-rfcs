@@ -3658,6 +3658,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4681,47 +4702,47 @@
 <p>A guardian's ability to control the dependent may be constrained in the following formal ways by guardian credentials that use this trust framework:</p>
 <h4 id="boundary">Boundary<a class="headerlink" href="#boundary" title="Permanent link">&para;</a></h4>
 <p>Guardian can only operate within named boundaries, such as the boundaries of a country, province, city, military command, river, etc. Boundaries are specified as a localized, comma-separated list of strings, where each locale section begins with a <code>|</code> (pipe) character followed by an ISO639 language code followed by a <code>:</code> (colon) character, followed by data. All localized values must describe the same constraints; if one locale's description is more permissive than another's, the most restrictive interpretation must be used. An example might be:</p>
-<div class="highlight"><pre><span></span><code>&quot;constraints.boundaries&quot;: &quot;|en: West side of Euphrates river, within Baghdad city limits
+<div class="highlight"><pre><span></span><code>"constraints.boundaries": "|en: West side of Euphrates river, within Baghdad city limits
     |es: lado oeste del río Eufrates, dentro del centro de Bagdad
-    |fr: côté ouest de l&#39;Euphrate, dans les limites de la ville de Bagdad
-    |ar: الجانب الغربي من نهر الفرات ، داخل حدود مدينة بغداد&quot;
+    |fr: côté ouest de l'Euphrate, dans les limites de la ville de Bagdad
+    |ar: الجانب الغربي من نهر الفرات ، داخل حدود مدينة بغداد"
 </code></pre></div>
 <h4 id="point-of-origin-and-radius">Point of Origin and Radius<a class="headerlink" href="#point-of-origin-and-radius" title="Permanent link">&para;</a></h4>
 <p>The <code>constraints.point_of_origin</code> and <code>radius</code> fields are an additional or alternative way to specify a geographical constraint. They must be used together. Point of origin is a string that may use latitude/longitude notation (e.g., "<a class="magiclink magiclink-github magiclink-mention" href="https://github.com/40" title="GitHub User: 40">@40</a>.4043328,-111.7761829,15z"), or a landmark. Landmarks must be localized as described previously. Radius is an integer measured in kilometers.</p>
-<div class="highlight"><pre><span></span><code>&quot;constraints.point_of_origin&quot;: &quot;|en: Red Crescent Sunrise Camp&quot;
-&quot;constraints.radius_km&quot;: 10
+<div class="highlight"><pre><span></span><code>"constraints.point_of_origin": "|en: Red Crescent Sunrise Camp"
+"constraints.radius_km": 10
 </code></pre></div>
 <h4 id="jurisdictions">Jurisdictions<a class="headerlink" href="#jurisdictions" title="Permanent link">&para;</a></h4>
 <p>This is a comma-separated list of legal jurisdictions where the guardianship applies. It is also localized:</p>
-<div class="highlight"><pre><span></span><code>&quot;constraints.jurisdictions&quot;: &quot;|en: EU, India, Bangladesh&quot;
+<div class="highlight"><pre><span></span><code>"constraints.jurisdictions": "|en: EU, India, Bangladesh"
 </code></pre></div>
 <h4 id="trigger-and-circumstances">Trigger and Circumstances<a class="headerlink" href="#trigger-and-circumstances" title="Permanent link">&para;</a></h4>
 <p>These are human-friendly description of circumstances that must apply in order to make the guardian's status active. It may be used in conjunction with a trigger (see next). It is vital that the wording of these fields be carefully chosen to minimize ambiguity; carelessness could invite abuse. Note that each of these fields could be used separately. A trigger by itself would unconditionally confer guardianship status; circumstances without a trigger would require re-evaluation with every guardianship challenge and might be used as long as an adult is unconscious or diagnosed with dementia, or while traveling with a child, for example.</p>
-<div class="highlight"><pre><span></span><code>&quot;constraints.trigger&quot;: &quot;|en: Death of parent&quot;
-&quot;constraints.circumstances&quot;: &quot;|en: While a parent or adult sibling is unavailable, and no
+<div class="highlight"><pre><span></span><code>"constraints.trigger": "|en: Death of parent"
+"constraints.circumstances": "|en: While a parent or adult sibling is unavailable, and no
     new guardian has been adjudicated.
     |ar: في حين أن أحد الوالدين أو الأشقاء البالغين غير متوفر ، وليس
-                  الوصي الجديد تم الفصل فيه.&quot;
+                  الوصي الجديد تم الفصل فيه."
 </code></pre></div>
 <h4 id="timing">Timing<a class="headerlink" href="#timing" title="Permanent link">&para;</a></h4>
 <p>These allow calendar restrictions. Both start time and end time are expressed as ISO8601 timestamps in UTC timezone, but can be limited to day- instead of hour-and-minute-precision (in which case timezone is irrelevant). Start time is inclusive, whereas end time is exclusive (as soon as the date and time equals or exceeds end time, the guardianship becomes invalid). Either value can be used by itself, in addition to being used in combination.</p>
-<div class="highlight"><pre><span></span><code>&quot;constraints.startTime&quot;: &quot;2019-07-01T18:00&quot;
-&quot;constraints.endTime&quot;: &quot;2019-08-01&quot;
+<div class="highlight"><pre><span></span><code>"constraints.startTime": "2019-07-01T18:00"
+"constraints.endTime": "2019-08-01"
 </code></pre></div>
 <h3 id="auditing">Auditing<a class="headerlink" href="#auditing" title="Permanent link">&para;</a></h3>
 <p>It is strongly recommended that an audit trail be produced any time a guardian performs any action on behalf of the dependent, except for <code>school</code> and <code>necessaries</code>. Reports of auditable events are accomplished by generating a JSON document in the following format:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@type&quot;: &quot;SIVPGTF audit/1.0&quot;,
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &quot;event_time&quot;: &quot;2019-07-25T18:03:26&quot;,
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    &quot;event_place&quot;: &quot;@40.4043328,-111.7761829,15z&quot;,
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    &quot;challenger&quot;: &quot;amy.smith@redcross.org&quot;,
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    &quot;witness&quot;: &quot;fred.jones@redcross.org&quot;,
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    &quot;guardian&quot;: &quot;Farooq Abdul Sami&quot;,
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    &quot;rationale&quot;: &quot;natural parent&quot;,
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    &quot;dependent&quot;: &quot;Isabel Sami, DOB 2009-05-21&quot;,
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    &quot;event&quot;: &quot;enroll in class, receive books&quot;,
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    &quot;justifying_permissions&quot;: &quot;school, necessaries&quot;
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    &quot;evidence&quot;: // base64-encoded photo of Farooq and Isabel
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    "@type": "SIVPGTF audit/1.0",
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    "event_time": "2019-07-25T18:03:26",
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    "event_place": "@40.4043328,-111.7761829,15z",
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    "challenger": "amy.smith@redcross.org",
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    "witness": "fred.jones@redcross.org",
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    "guardian": "Farooq Abdul Sami",
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    "rationale": "natural parent",
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    "dependent": "Isabel Sami, DOB 2009-05-21",
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    "event": "enroll in class, receive books",
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    "justifying_permissions": "school, necessaries"
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    "evidence": // base64-encoded photo of Farooq and Isabel
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>}
 </code></pre></div>
 <h3 id="appeal">Appeal<a class="headerlink" href="#appeal" title="Permanent link">&para;</a></h3>

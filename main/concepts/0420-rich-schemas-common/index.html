@@ -3664,6 +3664,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4994,12 +5015,12 @@ in multiple ways). A mapping may map only a subset of the attributes of a schema
 <p>More details about JSON-LD usage may be found in the RFCs for specific rich schema objects.</p>
 <h3 id="how-rich-schema-objects-are-stored-in-the-data-registry">How Rich Schema objects are stored in the Data Registry<a class="headerlink" href="#how-rich-schema-objects-are-stored-in-the-data-registry" title="Permanent link">&para;</a></h3>
 <p>Any write request for Rich Schema object has the same fields:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&#39;id&#39;: &lt;Rich Schema object&#39;s ID&gt;                # DID string 
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>&#39;content&#39;: &lt;Rich Schema object as JSON&gt;        # JSON-serialized string
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>&#39;rs_name&#39;: &lt;rich schema object name&gt;           # string
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>&#39;rs_version&#39;: &lt;rich schema object version&gt;     # string
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>&#39;rs_type&#39;: &lt;rich schema object type&gt;           # string enum (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`)
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>&#39;ver&#39;: &lt;format version&gt;                        # string                              
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>'id': &lt;Rich Schema object's ID&gt;                # DID string 
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>'content': &lt;Rich Schema object as JSON&gt;        # JSON-serialized string
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>'rs_name': &lt;rich schema object name&gt;           # string
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>'rs_version': &lt;rich schema object version&gt;     # string
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>'rs_type': &lt;rich schema object type&gt;           # string enum (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>'ver': &lt;format version&gt;                        # string                              
 </code></pre></div>
 - <code>id</code> is a unique ID (for example a DID with a id-string being base58 representation of the SHA2-256 hash of the <code>content</code> field)
 - The <code>content</code> field here contains a Rich Schema object in JSON-LD format (see <a href="https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0250-rich-schemas">0250: Rich Schema Objects</a>).
@@ -5020,14 +5041,14 @@ to get, query and cache all dependent Rich Schema objects.</li>
 aries-vdr interface for DID resolving is defined and DID DOC specification is finalized.</li>
 </ul>
 <p>The following information is returned from the Ledger in a reply for any get request of a Rich Schema object:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&#39;id&#39;: &lt;Rich Schema object&#39;s ID&gt;              # DID string 
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>&#39;content&#39;: &lt;Rich Schema object as JSON&gt;      # JSON-serialized string
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>&#39;rs_name&#39;: &lt;rich schema object name&gt;         # string
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>&#39;rs_version&#39;: &lt;rich schema object version&gt;   # string
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>&#39;rs_type&#39;: &lt;rich schema object type&gt;         # string enum (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`)
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>&#39;ver&#39;: &lt;format version&gt;                      # string
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>&#39;from&#39;: &lt;author DID&gt;,                        # DID string
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>&#39;endorser&#39;: &lt;endorser DID&gt;,                  # DID string
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>'id': &lt;Rich Schema object's ID&gt;              # DID string 
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>'content': &lt;Rich Schema object as JSON&gt;      # JSON-serialized string
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>'rs_name': &lt;rich schema object name&gt;         # string
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>'rs_version': &lt;rich schema object version&gt;   # string
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>'rs_type': &lt;rich schema object type&gt;         # string enum (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>'ver': &lt;format version&gt;                      # string
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>'from': &lt;author DID&gt;,                        # DID string
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>'endorser': &lt;endorser DID&gt;,                  # DID string
 </code></pre></div></p>
 <p>Common fields specific to a Ledger are also returned. </p>
 <h3 id="aries-data-registry-interface">Aries Data Registry Interface<a class="headerlink" href="#aries-data-registry-interface" title="Permanent link">&para;</a></h3>
@@ -5041,12 +5062,12 @@ Just two methods are sufficient to handle all Rich Schema types:
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>#Params
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>submitter: information about submitter
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>data: {
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    id: Rich Schema object&#39;s unique ID for example a DID with an id-string being
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    id: Rich Schema object's unique ID for example a DID with an id-string being
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        base58 representation of the SHA2-256 hash of the `content` field),
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    content: Rich Schema object as a JSON or JSON-LD string,
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    rs_name: Rich Schema object name,
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    rs_version: Rich Schema object version,
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    rs_type: Rich schema object type&#39;s enum string (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`),
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    rs_type: Rich schema object type's enum string (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`),
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    ver: the version of the generic object template
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>},
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>registry: identifier for the registry
@@ -5065,7 +5086,7 @@ The combination of <code>rs_type</code>, <code>rs_name</code>, and <code>rs_vers
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>#Params
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>submitter (optional): information about submitter
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>data: {
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    id: Rich Schema object&#39;s ID (as a DID for example),
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    id: Rich Schema object's ID (as a DID for example),
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    ver: the version of the generic object template
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>},
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>registry: identifier for the registry
@@ -5085,7 +5106,7 @@ The combination of <code>rs_type</code>, <code>rs_name</code>, and <code>rs_vers
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>data: {
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    rs_name: Rich Schema object name,
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    rs_version: Rich Schema object version,
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    rs_type: Rich schema object type&#39;s enum string (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`),
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    rs_type: Rich schema object type's enum string (currently one of `ctx`, `sch`, `map`, `enc`, `cdf`, `pdf`),
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    ver: the version of the generic object template
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>},
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>registry: identifier for the registry

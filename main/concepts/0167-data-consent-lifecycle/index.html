@@ -3968,6 +3968,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5441,10 +5462,10 @@ encrypted</p>
 <p>When defining a schema there will be a consent schema associated with
 it.</p>
 <div class="highlight"><pre><span></span><code>SCHEMA = {
-      did: &quot;did:sov:3214abcd&quot;,
-    name: &#39;Demographics&#39;,
-    description: &quot;Created by Faber&quot;,
-    version: &#39;1.0&#39;,
+      did: "did:sov:3214abcd",
+    name: 'Demographics',
+    description: "Created by Faber",
+    version: '1.0',
     # MANDATORY KEYS
     attr_names: {
       brthd: Date,
@@ -5454,15 +5475,15 @@ it.</p>
     # Attributes flagged according to the Blinding Identity Taxonomy
     # by the issuer of the schema
     # OPTIONAL KEYS
-    frmsrc: &quot;DEM&quot;
+    frmsrc: "DEM"
 }
 </code></pre></div>
 <p>The original schema will have a consent schema reference.</p>
 <div class="highlight"><pre><span></span><code>CONSENT_SCHEMA = {
-    did: &quot;did:schema:27312381238123&quot;,
-    name: &#39;Consent schema for consumer behaviour data&#39;,
-    description: &quot;Created by Faber&quot;,
-    version: &#39;1.0&#39;,
+    did: "did:schema:27312381238123",
+    name: 'Consent schema for consumer behaviour data',
+    description: "Created by Faber",
+    version: '1.0',
     # MANDATORY KEYS
     attr_names: {
       expiration: Date,
@@ -5507,13 +5528,13 @@ it.</p>
 <p>The issuer may optionally define an overlay that sets the consent schema
 values without input from the data subject.</p>
 <div class="highlight"><pre><span></span><code>CONSENT_RECEIPT_OVERLAY = {
-  did: &quot;did:sov:5678abcd&quot;,
-  type: &quot;spec/overlay/1.0/consent_entry&quot;,
-  name: &quot;Consent receipt entry overlay for clinical trial&quot;,
+  did: "did:sov:5678abcd",
+  type: "spec/overlay/1.0/consent_entry",
+  name: "Consent receipt entry overlay for clinical trial",
   default_values: [
     :expiration =&gt; 3 years,
     :limitation =&gt; 2 years,
-    :dictatedBy = &lt;reference to issuer&gt; # ??? Should the DID of the issuer&#39;s DID be used?
+    :dictatedBy = &lt;reference to issuer&gt; # ??? Should the DID of the issuer's DID be used?
     :validityTTL =&gt; 1 month
     ]
 }
@@ -5521,9 +5542,9 @@ values without input from the data subject.</p>
 <p>If some attributes are identified as sensitive based on the Blinding
 Identity Taxonomy when a sensitivity overlay is created.</p>
 <div class="highlight"><pre><span></span><code>SENSITIVE_OVERLAY = {
-    did: &quot;did:sov:12idksjabcd&quot;,
-  type: &quot;spec/overlay/1.0/bit&quot;,
-  name: &quot;Sensitive data for private entity&quot;,
+    did: "did:sov:12idksjabcd",
+  type: "spec/overlay/1.0/bit",
+  name: "Sensitive data for private entity",
   attributes: [
       :ageic
   ]
@@ -5533,16 +5554,16 @@ Identity Taxonomy when a sensitivity overlay is created.</p>
 schemas and overlays applied and values. The proof is kept off ledger in
 the wallet.</p>
 <div class="highlight"><pre><span></span><code>PROOF_SCHEMA = {
-    did: &quot;did:schema:12341dasd&quot;,
-    name: &#39;Credential Proof schema&#39;,
-    description: &quot;Created by Rosche&quot;,
-    version: &#39;1.0&#39;,
+    did: "did:schema:12341dasd",
+    name: 'Credential Proof schema',
+    description: "Created by Rosche",
+    version: '1.0',
     # MANDATORY KEYS
     attr_names: {
       createdAt: DateTime,           # How long consent valid for.
-      proof_key: &quot;&lt;crypto asset&gt;&quot;,   # How long data is kept.
+      proof_key: "&lt;crypto asset&gt;",   # How long data is kept.
       # Include all the schema did that were agreed upon
-      proof_of: [ &quot;did:sov:3214abcd&quot;, &quot;did:sov:1234abcd&quot;]
+      proof_of: [ "did:sov:3214abcd", "did:sov:1234abcd"]
     }
 }
 </code></pre></div>

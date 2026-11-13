@@ -3863,6 +3863,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5084,12 +5105,12 @@ family uniquely identified by this DID reference: <code>https://didcomm.org/did_
 <p>The protocol begins when the <code>requester</code> sends a <code>resolve</code> message
 to the <code>resolver</code>. It looks like this:</p>
 <div class="highlight"><pre><span></span><code>{
-    &quot;@type&quot;: &quot;https://didcomm.org/did_resolution/0.1/resolve&quot;,
-    &quot;@id&quot;: &quot;xhqMoTXfqhvAgtYxUSfaxbSiqWke9t&quot;,
-    &quot;did&quot;: &quot;did:sov:WRfXPg8dantKVubE3HX8pw&quot;,
-    &quot;input_options&quot;: {
-        &quot;result_type&quot;: &quot;did-document&quot;,
-        &quot;no_cache&quot;: false
+    "@type": "https://didcomm.org/did_resolution/0.1/resolve",
+    "@id": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t",
+    "did": "did:sov:WRfXPg8dantKVubE3HX8pw",
+    "input_options": {
+        "result_type": "did-document",
+        "no_cache": false
     }
 }
 </code></pre></div>
@@ -5104,21 +5125,21 @@ that makes it possible to connect a subsequent response to this request.</p>
 It represents the result of the <a href="https://w3c-ccg.github.io/did-resolution/#resolving">DID Resolution</a> function and contains a DID Document.</p>
 <p>It looks like this:</p>
 <div class="highlight"><pre><span></span><code>{
-    &quot;@type&quot;: &quot;https://didcomm.org/did_resolution/0.1/resolve_result&quot;,
-    &quot;~thread&quot;: { &quot;thid&quot;: &quot;xhqMoTXfqhvAgtYxUSfaxbSiqWke9t&quot; },
-    &quot;did_document&quot;: {
-        &quot;@context&quot;: &quot;https://w3id.org/did/v0.11&quot;,
-        &quot;id&quot;: &quot;did:sov:WRfXPg8dantKVubE3HX8pw&quot;,
-        &quot;service&quot;: [{
-            &quot;type&quot;: &quot;did-communication&quot;,
-            &quot;serviceEndpoint&quot;: &quot;https://agent.example.com/&quot;
+    "@type": "https://didcomm.org/did_resolution/0.1/resolve_result",
+    "~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
+    "did_document": {
+        "@context": "https://w3id.org/did/v0.11",
+        "id": "did:sov:WRfXPg8dantKVubE3HX8pw",
+        "service": [{
+            "type": "did-communication",
+            "serviceEndpoint": "https://agent.example.com/"
         }],
-        &quot;publicKey&quot;: [{
-            &quot;id&quot;: &quot;did:sov:WRfXPg8dantKVubE3HX8pw#key-1&quot;,
-            &quot;type&quot;: &quot;Ed25519VerificationKey2018&quot;,
-            &quot;publicKeyBase58&quot;: &quot;~P7F3BNs5VmQ6eVpwkNKJ5D&quot;
+        "publicKey": [{
+            "id": "did:sov:WRfXPg8dantKVubE3HX8pw#key-1",
+            "type": "Ed25519VerificationKey2018",
+            "publicKeyBase58": "~P7F3BNs5VmQ6eVpwkNKJ5D"
         }],
-        &quot;authentication&quot;: [&quot;did:sov:WRfXPg8dantKVubE3HX8pw#key-1&quot;]
+        "authentication": ["did:sov:WRfXPg8dantKVubE3HX8pw#key-1"]
     }
 }
 </code></pre></div>
@@ -5126,31 +5147,31 @@ It represents the result of the <a href="https://w3c-ccg.github.io/did-resolutio
 <code>resolve_result</code> message contains a more extensive <a href="https://w3c-ccg.github.io/did-resolution/#did-resolution-result">DID Resolution Result</a>,
 which includes a DID Document plus additional metadata:</p>
 <div class="highlight"><pre><span></span><code>{
-    &quot;@type&quot;: &quot;https://didcomm.org/did_resolution/0.1/resolve_result&quot;,
-    &quot;~thread&quot;: { &quot;thid&quot;: &quot;xhqMoTXfqhvAgtYxUSfaxbSiqWke9t&quot; },
-    &quot;did_document&quot;: {
-        &quot;@context&quot;: &quot;https://w3id.org/did/v0.11&quot;,
-        &quot;id&quot;: &quot;did:sov:WRfXPg8dantKVubE3HX8pw&quot;,
-        &quot;service&quot;: [{
-            &quot;type&quot;: &quot;did-communication&quot;,
-            &quot;serviceEndpoint&quot;: &quot;https://agent.example.com/&quot;
+    "@type": "https://didcomm.org/did_resolution/0.1/resolve_result",
+    "~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
+    "did_document": {
+        "@context": "https://w3id.org/did/v0.11",
+        "id": "did:sov:WRfXPg8dantKVubE3HX8pw",
+        "service": [{
+            "type": "did-communication",
+            "serviceEndpoint": "https://agent.example.com/"
         }],
-        &quot;publicKey&quot;: [{
-            &quot;id&quot;: &quot;did:sov:WRfXPg8dantKVubE3HX8pw#key-1&quot;,
-            &quot;type&quot;: &quot;Ed25519VerificationKey2018&quot;,
-            &quot;publicKeyBase58&quot;: &quot;~P7F3BNs5VmQ6eVpwkNKJ5D&quot;
+        "publicKey": [{
+            "id": "did:sov:WRfXPg8dantKVubE3HX8pw#key-1",
+            "type": "Ed25519VerificationKey2018",
+            "publicKeyBase58": "~P7F3BNs5VmQ6eVpwkNKJ5D"
         }],
-        &quot;authentication&quot;: [&quot;did:sov:WRfXPg8dantKVubE3HX8pw#key-1&quot;]
+        "authentication": ["did:sov:WRfXPg8dantKVubE3HX8pw#key-1"]
     },
-    &quot;resolver_metadata&quot;: {
-        &quot;driverId&quot;: &quot;did:sov&quot;,
-        &quot;driver&quot;: &quot;HttpDriver&quot;,
-        &quot;retrieved&quot;: &quot;2019-07-09T19:73:24Z&quot;,
-        &quot;duration&quot;: 1015
+    "resolver_metadata": {
+        "driverId": "did:sov",
+        "driver": "HttpDriver",
+        "retrieved": "2019-07-09T19:73:24Z",
+        "duration": 1015
     },
-    &quot;method_metadata&quot;: {
-        &quot;nymResponse&quot;: { ... },
-        &quot;attrResponse&quot;: { ... }
+    "method_metadata": {
+        "nymResponse": { ... },
+        "attrResponse": { ... }
     }
 }
 </code></pre></div>
@@ -5159,9 +5180,9 @@ which includes a DID Document plus additional metadata:</p>
 It represents the problem report indicating that the resolver could not resolve the DID, and the reason of the failure.
 It looks like this:</p>
 <div class="highlight"><pre><span></span><code>{
-    &quot;@type&quot;: &quot;https://didcomm.org/did_resolution/0.1/resolve_result&quot;,
-    &quot;~thread&quot;: { &quot;thid&quot;: &quot;xhqMoTXfqhvAgtYxUSfaxbSiqWke9t&quot; },
-    &quot;explain_ltxt&quot;: &quot;Could not resolve DID did:sov:WRfXPg8dantKVubE3HX8pw not found by resolver xxx&quot;,
+    "@type": "https://didcomm.org/did_resolution/0.1/resolve_result",
+    "~thread": { "thid": "xhqMoTXfqhvAgtYxUSfaxbSiqWke9t" },
+    "explain_ltxt": "Could not resolve DID did:sov:WRfXPg8dantKVubE3HX8pw not found by resolver xxx",
         ...
 }
 </code></pre></div>

@@ -3854,6 +3854,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4897,30 +4918,30 @@
 <h4 id="request"><code>request</code><a class="headerlink" href="#request" title="Permanent link">&para;</a></h4>
 <p>A simple request message looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@type&quot;: &quot;https://didcomm.org/help-me-discover/1.0/request&quot;,
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &quot;@id&quot;: &quot;a2248fb5-d46e-4898-a781-2f03e5f23964&quot;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    "@type": "https://didcomm.org/help-me-discover/1.0/request",
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    "@id": "a2248fb5-d46e-4898-a781-2f03e5f23964"
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    // human-readable, localizable, optional
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    &quot;comment&quot;: &quot;any ideas?&quot;,
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    "comment": "any ideas?",
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    // please help me discover match for this
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    &quot;desired&quot;: { 
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        &quot;all&quot;: [ // equivalent of boolean AND -- please match this list
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            // first criterion: profession must equal &quot;mechanic&quot;
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            {&quot;profession&quot;: &quot;mechanic&quot;, &quot;id&quot;: &quot;prof&quot;},
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            // second criterion in &quot;all&quot; list: any of the following (boolean OR)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    "desired": { 
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        "all": [ // equivalent of boolean AND -- please match this list
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            // first criterion: profession must equal "mechanic"
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            {"profession": "mechanic", "id": "prof"},
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            // second criterion in "all" list: any of the following (boolean OR)
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            {
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>                &quot;any&quot;: [
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>                "any": [
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>                    // average rating &gt; 3.5
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                    {&quot;averageRating&quot;: 3.5, &quot;op&quot;: &quot;&gt;&quot;, &quot;id&quot;: &quot;rating&quot;},
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                    // list of certifications contains &quot;ASE&quot;
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>                    {&quot;certifications&quot;: &quot;ASE&quot;, &quot;op&quot;: &quot;CONTAINS&quot;, &quot;id&quot;: &quot;cert&quot;},
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                    {"averageRating": 3.5, "op": "&gt;", "id": "rating"},
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                    // list of certifications contains "ASE"
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>                    {"certifications": "ASE", "op": "CONTAINS", "id": "cert"},
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>                    // zipCode must be in this list
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                    {&quot;zipCode&quot;: [&quot;12345&quot;, &quot;12346&quot;], &quot;op&quot;: &quot;IN&quot;, &quot;id&quot;: &quot;where&quot;}
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                ], // end of &quot;any&quot; list
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                &quot;n&quot;: 2, // match at least 2 from the list
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>                &quot;id&quot;: &quot;2-of-3&quot;
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                    {"zipCode": ["12345", "12346"], "op": "IN", "id": "where"}
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                ], // end of "any" list
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                "n": 2, // match at least 2 from the list
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>                "id": "2-of-3"
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            }
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        ],
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        &quot;id&quot;: &quot;everything&quot;
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        "id": "everything"
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    }
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>}
 </code></pre></div>
@@ -4935,25 +4956,25 @@
 <h4 id="response"><code>response</code><a class="headerlink" href="#response" title="Permanent link">&para;</a></h4>
 <p>A <code>response</code> message looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    &quot;@type&quot;: &quot;https://didcomm.org/help-me-discover/1.0/response&quot;,
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    &quot;@id&quot;: &quot;5f2396b5-d84e-689e-78a1-2fa2248f03e4&quot;
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    &quot;~thread&quot;: { &quot;thid&quot;: &quot;a2248fb5-d46e-4898-a781-2f03e5f23964&quot; }
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    "@type": "https://didcomm.org/help-me-discover/1.0/response",
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    "@id": "5f2396b5-d84e-689e-78a1-2fa2248f03e4"
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    "~thread": { "thid": "a2248fb5-d46e-4898-a781-2f03e5f23964" }
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    // human-readable, localizable, optional
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    &quot;comment&quot;: &quot;here&#39;s the best I&#39;ve got&quot;, 
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    &quot;candidates&quot;: [
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    "comment": "here's the best I've got", 
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    "candidates": [
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        {
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            &quot;id&quot;: &quot;Alice&quot;,
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            &quot;@type&quot;: &quot;person&quot;,
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            &quot;matches&quot;: [&quot;prof&quot;,&quot;rating&quot;,&quot;cert&quot;,&quot;2-of-3&quot;,&quot;everything&quot;]
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            "id": "Alice",
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            "@type": "person",
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            "matches": ["prof","rating","cert","2-of-3","everything"]
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        },
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        {
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            &quot;id&quot;: &quot;Bob&quot;,
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            &quot;@type&quot;: &quot;drone&quot;,
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            &quot;matches&quot;: [&quot;prof&quot;,&quot;cert&quot;,&quot;where&quot;,&quot;2-of-3&quot;,&quot;everything&quot;]
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            "id": "Bob",
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            "@type": "drone",
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            "matches": ["prof","cert","where","2-of-3","everything"]
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        },
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        {
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            &quot;id&quot;: &quot;Carol&quot;,
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>            &quot;matches&quot;: [&quot;rating&quot;,&quot;cert&quot;,&quot;where&quot;]
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            "id": "Carol",
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>            "matches": ["rating","cert","where"]
 <a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        }
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    ]
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>}
@@ -4965,10 +4986,10 @@
 <h3 id="using-a-help-me-discover-response-in-subsequent-interactions">Using a "Help me discover" response in subsequent interactions<a class="headerlink" href="#using-a-help-me-discover-response-in-subsequent-interactions" title="Permanent link">&para;</a></h3>
 <p>A <code>candidate</code> in a response message like the one shown above can be referenced in a subsequent interactions by using the <a href="https://hackmd.io/e0goViUMQBmwcfoze2j6rA">RFC 0xxx: Linkable DIDComm Message Paths</a> mechanism. For example, if Fred wanted to ask for an introduction to Bob after engaging in the sample request-response sequence shown above, he could send a <code>request</code> message in the Introduce Protocol, where <code>to</code> (the party to whom he'd like to be introduced) included a <code>discovered</code> property that referenced the <code>candidate</code> with <code>id</code> equal to <code>"Bob"</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  &quot;@type&quot;: &quot;https://didcomm.org/introduce/1.0/request&quot;,
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  &quot;@id&quot;: &quot;df3b699d-3aa9-4fd0-bb67-49594da545bd&quot;,
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  &quot;to&quot;: {
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    &quot;discovered&quot;: &quot;didcomm:///5f2396b5-d84e-689e-78a1-2fa2248f03e4/.candidates%7B.id+%3D%3D%3D+%22Bob%22%7D&quot;
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  "@type": "https://didcomm.org/introduce/1.0/request",
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  "@id": "df3b699d-3aa9-4fd0-bb67-49594da545bd",
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  "to": {
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    "discovered": "didcomm:///5f2396b5-d84e-689e-78a1-2fa2248f03e4/.candidates%7B.id+%3D%3D%3D+%22Bob%22%7D"
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  }
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>}
 </code></pre></div>
@@ -4987,17 +5008,17 @@
 <h3 id="discover-someone-who-can-prove">Discover someone who can prove<a class="headerlink" href="#discover-someone-who-can-prove" title="Permanent link">&para;</a></h3>
 <p>A <code>request</code> message can ask for someone that is capable of proving using verifiable credentials, as per <a href="../0037-present-proof/">RFC 0037</a>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    &quot;@type&quot;: &quot;https://didcomm.org/help-me-discover/1.0/request&quot;,
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    &quot;@id&quot;: &quot;248fb52a-4898-a781-d46e-e5f239642f03&quot;
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    &quot;desired&quot;: { 
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    "@type": "https://didcomm.org/help-me-discover/1.0/request",
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    "@id": "248fb52a-4898-a781-d46e-e5f239642f03"
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    "desired": { 
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        // either subjectRole or subjectDid:
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        //   - subjectRole has value of role in protocol
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        //   - subjectDid has value of a DID (useful in N-Wise settings)
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        &quot;verb&quot;: &quot;prove&quot;, 
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        &quot;subjectRole&quot;: &quot;introducer&quot;, 
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        &quot;car.engine.rating&quot;: &quot;4&quot;, 
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        &quot;op&quot;: &quot;&gt;&quot;, 
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        &quot;id&quot;: &quot;engineRating&quot;
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        "verb": "prove", 
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        "subjectRole": "introducer", 
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        "car.engine.rating": "4", 
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        "op": "&gt;", 
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        "id": "engineRating"
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    }
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>}
 </code></pre></div>
@@ -5007,27 +5028,27 @@
 </blockquote>
 <p>Another example might be:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    &quot;@id&quot;: &quot;a2248fb5-d46e-4898-a781-2f03e5f23964&quot;,
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    &quot;@type&quot;: &quot;https://didcomm.org/help-me-discover/1.0/request&quot;,
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    &quot;comment&quot;: &quot;blood glucose&quot;,
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    &quot;desired&quot;: {
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        &quot;all&quot;: [
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    "@id": "a2248fb5-d46e-4898-a781-2f03e5f23964",
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    "@type": "https://didcomm.org/help-me-discover/1.0/request",
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    "comment": "blood glucose",
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    "desired": {
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        "all": [
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            {
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                &quot;id&quot;: &quot;prof&quot;,
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                &quot;profession&quot;: &quot;medical-lab&quot;
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                "id": "prof",
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                "profession": "medical-lab"
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            },
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            {
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>                &quot;id&quot;: &quot;glucose&quot;,
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>                &quot;provides&quot;: {
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>                    &quot;from&quot;: &quot;bloodtests&quot;,
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>                    &quot;just&quot;: [
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>                        &quot;glucose&quot;
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>                "id": "glucose",
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>                "provides": {
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>                    "from": "bloodtests",
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>                    "just": [
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>                        "glucose"
 <a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>                    ],
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>                    &quot;subject&quot;: &quot;did:peer:introducer&quot;
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>                    "subject": "did:peer:introducer"
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>                }
 <a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>            }
 <a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        ],
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        &quot;id&quot;: &quot;everything&quot;
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        "id": "everything"
 <a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    }
 <a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>}
 </code></pre></div>

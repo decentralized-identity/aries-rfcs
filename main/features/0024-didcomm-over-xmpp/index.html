@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../0881-w3c-vc-sd-jwt-credential-attachment/">
+        <link rel="prev" href="../0882-dcql-presentation-attachment/">
       
       
         <link rel="next" href="../../concepts/0029-message-trust-contexts/">
@@ -3664,6 +3664,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4954,19 +4975,19 @@
 <li>shall not have a resource part (i.e. "/...resource...")</li>
 <li>shall comply to the following <a href="https://tools.ietf.org/html/rfc5234">ABNF</a>.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>xmpp-service-endpoint = &quot;xmpp:&quot; userpart &quot;@did.&quot; domainpart
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>xmpp-service-endpoint = "xmpp:" userpart "@did." domainpart
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  userpart = 1\*CHAR
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  domainpart = 1\*CHAR 1\*(&quot;.&quot; 1\*char)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  domainpart = 1\*CHAR 1\*("." 1\*char)
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  CHAR = %x01-7F
 </code></pre></div>
 <p>The reason for not allowing a resources part is that DIDComm messages are addressed to the person/entity associated with the DID, and not to any particular device.</p>
 <p>A receiving XMPP client shall identify an incoming XMPP message as a DIDComm message, if the serviceEndpoint complies to the above. It shall pass any DIDComm message to its DIDComm agent.</p>
 <p>The following is an example of a complient DIDComm-over-XMPP service endpoint.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  &quot;service&quot;: [{
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    &quot;id&quot;: &quot;did:example:123456789abcdefghi#xmpp&quot;,
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    &quot;type&quot;: &quot;XmppService&quot;,
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    &quot;serviceEndpoint&quot;: &quot;xmpp:bob@did.bar.com&quot;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  "service": [{
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    "id": "did:example:123456789abcdefghi#xmpp",
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    "type": "XmppService",
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    "serviceEndpoint": "xmpp:bob@did.bar.com"
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  }]
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>}
 </code></pre></div>
@@ -5058,7 +5079,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../0881-w3c-vc-sd-jwt-credential-attachment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 0881 W3C SD-JWT Verifiable Credential (`vc+sd-jwt`) Attachment format for requesting and issuing credentials">
+          <a href="../0882-dcql-presentation-attachment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 0882 DCQL Attachment format for requesting and presenting proofs">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5068,7 +5089,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                0881 W3C SD-JWT Verifiable Credential (`vc+sd-jwt`) Attachment format for requesting and issuing credentials
+                0882 DCQL Attachment format for requesting and presenting proofs
               </div>
             </div>
           </a>

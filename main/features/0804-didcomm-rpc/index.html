@@ -3887,6 +3887,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5004,7 +5025,7 @@ customizations or plugins by using DRPC.</p>
 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <h3 id="name-and-version">Name and Version<a class="headerlink" href="#name-and-version" title="Permanent link">&para;</a></h3>
 <p>This is the DRPC protocol. It is uniquely identified by the URI:</p>
-<div class="highlight"><pre><span></span><code>&quot;https://didcomm.org/drpc/1.0&quot;
+<div class="highlight"><pre><span></span><code>"https://didcomm.org/drpc/1.0"
 </code></pre></div>
 <h3 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h3>
 <blockquote>
@@ -5034,8 +5055,8 @@ request response protocol using JSON where the only data shared is:</p>
 <li>the <code>id</code> from the request.</li>
 </ul>
 <p>An example of a simple <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> request/response pair from the specification is:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="mi">--</span><span class="err">&gt;</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;subtract&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="err">&lt;</span><span class="mi">--</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;jsonrpc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="mi">--</span><span class="err">&gt;</span><span class="w"> </span><span class="p">{</span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subtract"</span><span class="p">,</span><span class="w"> </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">],</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="err">&lt;</span><span class="mi">--</span><span class="w"> </span><span class="p">{</span><span class="nt">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span>
 </code></pre></div>
 <p>A <a href="https://www.jsonrpc.org/specification">JSON-RPC</a> request may be a batch of requests, each with a different <code>id</code> value,
 and the response a similar array, with an entry for each of the requests.</p>
@@ -5158,9 +5179,9 @@ to process the error, <a href="https://www.jsonrpc.org/specification">JSON-RPC</
 <p>The <code>request</code> message uses the same JSON items as <a href="https://www.jsonrpc.org/specification">JSON-RPC</a>, skipping the
 <code>id</code> in favor of the existing DIDComm <code>@id</code> and thread handling.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  {
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    &quot;@type&quot;: &quot;https://didcomm.org/drpc/1.0/request&quot;,
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    &quot;@id&quot;: &quot;2a0ec6db-471d-42ed-84ee-f9544db9da4b&quot;,
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    &quot;request&quot; : {&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;subtract&quot;, &quot;params&quot;: [42, 23], &quot;id&quot;: 1}
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    "@type": "https://didcomm.org/drpc/1.0/request",
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    "@id": "2a0ec6db-471d-42ed-84ee-f9544db9da4b",
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    "request" : {"jsonrpc": "2.0", "method": "subtract", "params": [42, 23], "id": 1}
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  }
 </code></pre></div>
 <p>The items in the message are as follows:</p>
@@ -5192,9 +5213,9 @@ Report Problem</a> message to the <code>client</code>.</p>
 <code>client</code> and <code>server</code> coordinate that understanding is out of scope of this
 protocol.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  {
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    &quot;@type&quot;: &quot;https://didcomm.org/drpc/1.0/response&quot;,
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    &quot;@id&quot;: &quot;63d6f6cf-b723-4eaf-874b-ae13f3e3e5c5&quot;,
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    &quot;response&quot;: {&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;result&quot;: 19, &quot;id&quot;: 1}
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    "@type": "https://didcomm.org/drpc/1.0/response",
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    "@id": "63d6f6cf-b723-4eaf-874b-ae13f3e3e5c5",
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    "response": {"jsonrpc": "2.0", "result": 19, "id": 1}
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  }
 </code></pre></div>
 <p>The items in the message are as follows:</p>

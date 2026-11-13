@@ -3785,6 +3785,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4755,11 +4776,11 @@
 <h5 id="queries-message-type"><code>queries</code> Message Type<a class="headerlink" href="#queries-message-type" title="Permanent link">&para;</a></h5>
 <p>A <code>discover-features/queries</code> message looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  &quot;@type&quot;: &quot;https://didcomm.org/discover-features/2.0/queries&quot;,
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  &quot;@id&quot;: &quot;yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU&quot;,
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  &quot;queries&quot;: [
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    { &quot;feature-type&quot;: &quot;protocol&quot;, &quot;match&quot;: &quot;https://didcomm.org/tictactoe/1.*&quot; },
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    { &quot;feature-type&quot;: &quot;goal-code&quot;, &quot;match&quot;: &quot;aries.*&quot; }
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  "@type": "https://didcomm.org/discover-features/2.0/queries",
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  "@id": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU",
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  "queries": [
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    { "feature-type": "protocol", "match": "https://didcomm.org/tictactoe/1.*" },
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    { "feature-type": "goal-code", "match": "aries.*" }
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  ]
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>}
 </code></pre></div>
@@ -4771,17 +4792,17 @@
 <h5 id="disclosures-message-type"><code>disclosures</code> Message Type<a class="headerlink" href="#disclosures-message-type" title="Permanent link">&para;</a></h5>
 <p>A <code>discover-features/disclosures</code> message looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  &quot;@type&quot;: &quot;https://didcomm.org/discover-features/2.0/disclosures&quot;,
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  &quot;~thread&quot;: { &quot;thid&quot;: &quot;yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU&quot; },
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  &quot;disclosures&quot;: [
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  "@type": "https://didcomm.org/discover-features/2.0/disclosures",
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  "~thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  "disclosures": [
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    {
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>      &quot;feature-type&quot;: &quot;protocol&quot;,
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>      &quot;id&quot;: &quot;https://didcomm.org/tictactoe/1.0&quot;,
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>      &quot;roles&quot;: [&quot;player&quot;]
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>      "feature-type": "protocol",
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>      "id": "https://didcomm.org/tictactoe/1.0",
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>      "roles": ["player"]
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    },
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    {
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>      &quot;feature-type&quot;: &quot;goal-code&quot;,
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>      &quot;id&quot;: &quot;aries.sell.goods.consumer&quot;
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>      "feature-type": "goal-code",
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>      "id": "aries.sell.goods.consumer"
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    }
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>  ]
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>}
@@ -4791,10 +4812,10 @@
 <h5 id="sparse-disclosures">Sparse Disclosures<a class="headerlink" href="#sparse-disclosures" title="Permanent link">&para;</a></h5>
 <p>Disclosures do not have to contain exhaustive detail. For example, the following response omits the optional <code>roles</code> field but may be just as useful as one that includes it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  &quot;@type&quot;: &quot;https://didcomm.org/discover-features/2.0/disclosures&quot;,
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  &quot;~thread&quot;: { &quot;thid&quot;: &quot;yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU&quot; },
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  &quot;disclosures&quot;: [
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    {&quot;feature-type&quot;: &quot;protocol&quot;, &quot;id&quot;: &quot;https://didcomm.org/tictactoe/1.0&quot;}
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  "@type": "https://didcomm.org/discover-features/2.0/disclosures",
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  "~thread": { "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" },
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  "disclosures": [
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    {"feature-type": "protocol", "id": "https://didcomm.org/tictactoe/1.0"}
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  ]
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>}
 </code></pre></div>

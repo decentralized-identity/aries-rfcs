@@ -3881,6 +3881,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5040,77 +5061,77 @@
 <p>Here is JSON that might embody credentials C1, C2, and C3 from our use case. Note that these examples suppress a few details that seem uninteresting, and they also introduce some new ../../concepts that are described more fully in the <a href="#reference">Reference</a> section.</p>
 <h5 id="c1-delegates-management-of-car-to-ur-wheelz-houston">C1 (delegates management of car to Ur Wheelz Houston)<a class="headerlink" href="#c1-delegates-management-of-car-to-ur-wheelz-houston" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@context&quot;: [&quot;https://w3.org/2018/credentials/v1&quot;, &quot;https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0104-delegatable-credentials&quot;],
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    &quot;type&quot;: [&quot;VerifiableCredential&quot;, &quot;Proxy.D/CarRentalTF/1.0/subsidiary&quot;],
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    &quot;schema&quot;: &quot;WwogICJAY29udGV4dCIsIC8vSlN... (clipped for brevity) ...ob2x&quot;,
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    &quot;provenanceProofs&quot;: [
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        [[&quot;authorization&quot;], {
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    "@context": ["https://w3.org/2018/credentials/v1", "https://github.com/hyperledger/aries-rfcs/tree/main../../concepts/0104-delegatable-credentials"],
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    "type": ["VerifiableCredential", "Proxy.D/CarRentalTF/1.0/subsidiary"],
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    "schema": "WwogICJAY29udGV4dCIsIC8vSlN... (clipped for brevity) ...ob2x",
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    "provenanceProofs": [
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        [["authorization"], {
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            // proof that Ur Wheelz National owns the car
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            }]
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    ],
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    // Optional. Might be used to identify the car in question.
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    &quot;credentialSubject.car.VIN&quot;: &quot;1HGES26721L024785&quot;,
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    &quot;credentialSubject.proxied.permissions&quot;: {
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        &quot;grant&quot;: [&quot;rent&quot;, &quot;maintain&quot;, &quot;sell&quot;, &quot;drive&quot;, &quot;delegate&quot;], 
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        &quot;when&quot;: { &quot;role&quot;: &quot;regional_office&quot; } 
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    "credentialSubject.car.VIN": "1HGES26721L024785",
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    "credentialSubject.proxied.permissions": {
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        "grant": ["rent", "maintain", "sell", "drive", "delegate"], 
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        "when": { "role": "regional_office" } 
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    }
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    // Optional. Binds the credential to a business name.
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    &quot;credentialSubject.holder.name&quot;: &quot;Ur Wheelz Houston&quot;,
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    "credentialSubject.holder.name": "Ur Wheelz Houston",
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    // Optional. Binds the credential to the public DID of Houston office.
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    &quot;credentialSubject.holder.id&quot;: &quot;did:example:12345&quot;,
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    &quot;credentialSubject.holder.role&quot;: &quot;regional_office&quot;,
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    "credentialSubject.holder.id": "did:example:12345",
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    "credentialSubject.holder.role": "regional_office",
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>}
 </code></pre></div>
 <h5 id="c2-delegates-permission-to-alice-to-drive-subdelegate">C2 (delegates permission to Alice to drive, subdelegate)<a class="headerlink" href="#c2-delegates-permission-to-alice-to-drive-subdelegate" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    // @context, type, schema are similar to previous
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    &quot;provenanceProofs&quot;: {
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        [[&quot;authorization&quot;], {
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    "provenanceProofs": {
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        [["authorization"], {
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            // proof that Ur Wheelz Houston could delegate
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>            }]
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    },
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    // Optional. Might be used to identify the car in question.
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    &quot;credentialSubject.car.VIN&quot;: &quot;1HGES26721L024785&quot;,
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    &quot;credentialSubject.proxied.permissions&quot;: {
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        &quot;grant&quot;: [&quot;drive&quot;, &quot;delegate&quot;], 
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        &quot;when&quot;: { &quot;role&quot;: &quot;renter&quot; } 
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    "credentialSubject.car.VIN": "1HGES26721L024785",
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    "credentialSubject.proxied.permissions": {
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        "grant": ["drive", "delegate"], 
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        "when": { "role": "renter" } 
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    }
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    // Optional. Binds the credential to a business name.
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    &quot;credentialSubject.holder.name&quot;: &quot;Alice Jones&quot;,
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    "credentialSubject.holder.name": "Alice Jones",
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    // Optional. Binds the credential to the public DID of Houston office.
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    &quot;credentialSubject.holder.id&quot;: &quot;did:example:12345&quot;,
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    &quot;credentialSubject.holder.role&quot;: &quot;renter&quot;,
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    "credentialSubject.holder.id": "did:example:12345",
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    "credentialSubject.holder.role": "renter",
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    // Limit dates when delegation is active
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    &quot;credentialSubject.holder.constraints.startTime&quot;: &quot;2020-05-20T14:00Z&quot;,
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    &quot;credentialSubject.holder.constraints.endTime&quot;: &quot;2020-05-27T14:00Z&quot;,
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    "credentialSubject.holder.constraints.startTime": "2020-05-20T14:00Z",
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    "credentialSubject.holder.constraints.endTime": "2020-05-27T14:00Z",
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    // Provide a boundary within which delegation is active
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    &quot;credentialSubject.holder.constraints.boundary&quot;: &quot;USA:TX&quot;
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    "credentialSubject.holder.constraints.boundary": "USA:TX"
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>}
 </code></pre></div>
 <h5 id="c3-delegates-permission-to-valet-to-drive">C3 (delegates permission to valet to drive)<a class="headerlink" href="#c3-delegates-permission-to-valet-to-drive" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    // @context, type, schema are similar to previous
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    &quot;delegationProof&quot;: {
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        [[&quot;authorization&quot;], {
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    "delegationProof": {
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        [["authorization"], {
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            // proof that Alice could delegate
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>            }]
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    },
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    // Optional. Might be used to identify the car in question.
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    &quot;credentialSubject.car.VIN&quot;: &quot;1HGES26721L024785&quot;,
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    &quot;credentialSubject.proxied.permissions&quot;: {
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        &quot;grant&quot;: [&quot;drive&quot;], 
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        &quot;when&quot;: { &quot;role&quot;: &quot;valet&quot; } 
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    "credentialSubject.car.VIN": "1HGES26721L024785",
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    "credentialSubject.proxied.permissions": {
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        "grant": ["drive"], 
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        "when": { "role": "valet" } 
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    }
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    // Optional. Binds the credential to a business name.
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    &quot;credentialSubject.holder.name&quot;: &quot;Alice Jones&quot;,
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    "credentialSubject.holder.name": "Alice Jones",
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    // Optional. Binds the credential to the public DID of Houston office.
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    &quot;credentialSubject.holder.id&quot;: &quot;did:example:12345&quot;,
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    &quot;credentialSubject.holder.role&quot;: &quot;valet&quot;,
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    &quot;credentialSubject.holder.constraints.startTime&quot;: &quot;2020-05-25T04:00Z&quot;,
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    &quot;credentialSubject.holder.constraints.endTime&quot;: &quot;2020-05-25T06:00Z&quot;,
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    "credentialSubject.holder.id": "did:example:12345",
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    "credentialSubject.holder.role": "valet",
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    "credentialSubject.holder.constraints.startTime": "2020-05-25T04:00Z",
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    "credentialSubject.holder.constraints.endTime": "2020-05-25T06:00Z",
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    // Give a place where delegation is active.
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    &quot;credentialSubject.holder.constraints.pointOfOrigin&quot;: &quot;@29.7690295,-95.5293445,12z&quot;,
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    &quot;credentialSubject.holder.constraints.radiusKm&quot;: 0.1,
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    "credentialSubject.holder.constraints.pointOfOrigin": "@29.7690295,-95.5293445,12z",
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    "credentialSubject.holder.constraints.radiusKm": 0.1,
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>}
 </code></pre></div>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
@@ -5119,7 +5140,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    // ... rest of credential fields ...
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    &quot;permissions&quot;: [&quot;drive&quot;, &quot;delegate&quot;]
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    "permissions": ["drive", "delegate"]
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>}
 </code></pre></div>
 <p>Such a technique is adequate for many delegation use cases, and is more or less how ZCAP-LD works. However, it has two important limitations:</p>
@@ -5136,11 +5157,11 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    // ... rest of credential fields ...
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    &quot;credentialSubject.proxied.permissions&quot;: { 
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        &quot;grant&quot;: [&quot;drive&quot;], 
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        &quot;when&quot;: { &quot;role&quot;: &quot;renter&quot; } 
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    "credentialSubject.proxied.permissions": { 
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        "grant": ["drive"], 
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        "when": { "role": "renter" } 
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    }
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    &quot;credentialSubject.holder.role&quot;: [&quot;renter&quot;]
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    "credentialSubject.holder.role": ["renter"]
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>}
 </code></pre></div>
 <p>Since <code>credentialSubject.holder.role</code> says that Alice has the <code>renter</code> role, the grant of <code>drive</code> applies to her. We expect permissions to always apply directly to the holder in simple cases like this.</p>
@@ -5148,11 +5169,11 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>{
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    // ... rest of credential fields ...
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    &quot;credentialSubject.proxied.permissions&quot;: { 
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        &quot;grant&quot;: [&quot;sign&quot;], 
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        &quot;when&quot;: { &quot;role&quot;: &quot;board&quot;, &quot;n&quot;: 3 } 
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    "credentialSubject.proxied.permissions": { 
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        "grant": ["sign"], 
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        "when": { "role": "board", "n": 3 } 
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    }
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    &quot;credentialSubject.holder.role&quot;: [&quot;board&quot;]
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    "credentialSubject.holder.role": ["board"]
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>}
 </code></pre></div>
 <p>Now a verifier can say to one credential-holding board member, "I see that you have <em>part</em> of the signing privilege. Can you find me two other board members who agree with this action?"</p>

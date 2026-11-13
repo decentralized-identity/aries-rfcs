@@ -3863,6 +3863,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4925,12 +4946,12 @@ Strive to guarantee that:</p>
 <h3 id="connect-protocol-example">Connect protocol example<a class="headerlink" href="#connect-protocol-example" title="Permanent link">&para;</a></h3>
 <p>Starting with an initial <code>connections/1.0/invitation</code> message like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/connections/1.0/invitation&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678900987654321&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">&quot;recipientKeys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K&quot;</span><span class="p">],</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/endpoint&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">&quot;routingKeys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K&quot;</span><span class="p">]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/connections/1.0/invitation"</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678900987654321"</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alice"</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">"recipientKeys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"</span><span class="p">],</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">"serviceEndpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/endpoint"</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">"routingKeys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"8HH5gYEeNc3z7PYXmd54d4x6qAfCNrqQqEB3nS7Zfu7K"</span><span class="p">]</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
 </code></pre></div>
 <p>We would then bas64URL encode this message like this:</p>
@@ -4939,8 +4960,8 @@ Strive to guarantee that:</p>
 <p>This base64URL encoded string would then become the payload in the JWS.</p>
 <p>Using the compact serialization format, our JOSE Header would look like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&quot;alg&quot;</span><span class="p">:</span><span class="s2">&quot;EdDSA&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&quot;kid&quot;</span><span class="p">:</span><span class="s2">&quot;FYmoFw55GeQH7SRFa37dkx1d2dZ3zUF8ckg7wmL7ofN4&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">"alg"</span><span class="p">:</span><span class="s2">"EdDSA"</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"kid"</span><span class="p">:</span><span class="s2">"FYmoFw55GeQH7SRFa37dkx1d2dZ3zUF8ckg7wmL7ofN4"</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
 </code></pre></div>
 <p><code>alg</code>: specifies the signature algorithm used
@@ -4959,8 +4980,8 @@ Strive to guarantee that:</p>
 <p>Next is an example that showcases what a basic message would look like. Since this message would utilize a connection to encrypt the message, we will produce a JWS first, and then encrypt the outputted compact JWS.</p>
 <p>We would first encode our JOSE Header which looks like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">&quot;alg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;edDSA&quot;</span><span class="p">,</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">&quot;kid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7XVZJUuKtfYeN1W4Dq2Tw2ameG6gC1amxL7xZSsZxQCK&quot;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"edDSA"</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7XVZJUuKtfYeN1W4Dq2Tw2ameG6gC1amxL7xZSsZxQCK"</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
 </code></pre></div>
 <p>and when base64url encoded it would be converted to this:</p>
@@ -4968,11 +4989,11 @@ Strive to guarantee that:</p>
 </code></pre></div>
 <p>Next we'll take our content layer message which as an example is the JSON provided:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456780&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/basicmessage/1.0/message&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">&quot;~l10n&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;locale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en&quot;</span><span class="w"> </span><span class="p">},</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">&quot;sent_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-15 18:42:01Z&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your hovercraft is full of eels.&quot;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456780"</span><span class="p">,</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/basicmessage/1.0/message"</span><span class="p">,</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">"~l10n"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">"sent_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15 18:42:01Z"</span><span class="p">,</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your hovercraft is full of eels."</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">}</span>
 </code></pre></div>
 <p>and now we'll base64url encode this message which results in this output:</p>
@@ -4989,14 +5010,14 @@ Strive to guarantee that:</p>
 </code></pre></div>
 <p>The last step is to encrypt this base64URL encoded string as the message in pack which will complete the cryptographic envelope.</p>
 <p>The output of this message then becomes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>{&quot;protected&quot;:&quot;eyJlbmMiOiJ4Y2hhY2hhMjBwb2x5MTMwNV9pZXRmIiwidHlwIjoiSldNLzEuMCIsImFsZyI6IkF1dGhjcnlwdCIsInJlY2lwaWVudHMiOlt7ImVuY3J5cHRlZF9rZXkiOiJac2dYVWdNVGowUk9lbFBTT09lRGxtaE9sbngwMkVVYjZCbml4QjBESGtEZFRLaGc3ZlE1Tk1zcjU3bzA5WDZxIiwiaGVhZGVyIjp7ImtpZCI6IjRXenZOWjJjQUt6TXM4Nmo2S1c5WGZjMmhLdTNoaFd4V1RydkRNbWFSTEFiIiwiaXYiOiJsOWJHVnlyUnRseUNMX244UmNEakJVb1I3eU5sdEZqMCIsInNlbmRlciI6Imh4alZMRWpXcmY0RFplUGFsRGJnYzVfNmFMN2ltOGs1WElQWnBqTURlUzZaUS1jcEFUaGNzNVdiT25uaVFBM2Z0ZnlYWDJkVUc0dVZ3WHhOTHdMTXRqV3lxNkNKeDdUWEdBQW9ZY0RMMW1aaTJxd2xZMGlDQ2N0dHdNVT0ifX1dfQ==&quot;,&quot;iv&quot;:&quot;puCgKCfsOb5gRG81&quot;,&quot;ciphertext&quot;:&quot;EpHaC0ZMXQakM4n8Fxbedq_3UhiJHq6vd_I4NNz3N7aDbq7-0F6OXi--VaR7xoTqAyJjrOTYmy1SqivSkGmKaCcpFwC9Shdo_vcMFzIxu90_m3MG1xKNsvDmQBFnD0qgjPPXxmxTlmmYLSdA3JaHpEx1K9gYgGqv4X5bgWZqzFCoevyOlD5a2bDZBY5Mn__IT1pVzjbMbDeSgM2nOztWyF0baXwrqczBW-Msx-uP5HNlLdz02FPbMnRP6MYyw6q0wI0EqwzzwH81bZzHKrTVHT2-M_aIEQp9lKGLhnSW3-aIOpSzonGOriyDukfTpvsCUZEd_X1u0G3iZKxYCbIKaj_ARLbb6idlRngVGW9LYYaw7Xay83exp22gflvLmmN25Xzo1vLlaDaFr9h-J_QAvFebCHgWjl1kcodBRc2jhoMVSpEXJHoI5qMrlVvh45PLTEjxy7y5FHQ1L8klwWZN5EIwui3ExIOA8RwYDlp8-HLib_uqB7hNzVUYC0iPd1KTiNIcidYVdAoPpdtLDOh-KCmPB9RkjVUqSlwNYUAAnfY8OJXuBLHP2nWiYUDA6VDbvrv4npW88VMdsFDk_QzvDRvg7gkW8x8jNd8=&quot;,&quot;tag&quot;:&quot;B4UilbBNSUr3QcALtVxTEw==&quot;}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>{"protected":"eyJlbmMiOiJ4Y2hhY2hhMjBwb2x5MTMwNV9pZXRmIiwidHlwIjoiSldNLzEuMCIsImFsZyI6IkF1dGhjcnlwdCIsInJlY2lwaWVudHMiOlt7ImVuY3J5cHRlZF9rZXkiOiJac2dYVWdNVGowUk9lbFBTT09lRGxtaE9sbngwMkVVYjZCbml4QjBESGtEZFRLaGc3ZlE1Tk1zcjU3bzA5WDZxIiwiaGVhZGVyIjp7ImtpZCI6IjRXenZOWjJjQUt6TXM4Nmo2S1c5WGZjMmhLdTNoaFd4V1RydkRNbWFSTEFiIiwiaXYiOiJsOWJHVnlyUnRseUNMX244UmNEakJVb1I3eU5sdEZqMCIsInNlbmRlciI6Imh4alZMRWpXcmY0RFplUGFsRGJnYzVfNmFMN2ltOGs1WElQWnBqTURlUzZaUS1jcEFUaGNzNVdiT25uaVFBM2Z0ZnlYWDJkVUc0dVZ3WHhOTHdMTXRqV3lxNkNKeDdUWEdBQW9ZY0RMMW1aaTJxd2xZMGlDQ2N0dHdNVT0ifX1dfQ==","iv":"puCgKCfsOb5gRG81","ciphertext":"EpHaC0ZMXQakM4n8Fxbedq_3UhiJHq6vd_I4NNz3N7aDbq7-0F6OXi--VaR7xoTqAyJjrOTYmy1SqivSkGmKaCcpFwC9Shdo_vcMFzIxu90_m3MG1xKNsvDmQBFnD0qgjPPXxmxTlmmYLSdA3JaHpEx1K9gYgGqv4X5bgWZqzFCoevyOlD5a2bDZBY5Mn__IT1pVzjbMbDeSgM2nOztWyF0baXwrqczBW-Msx-uP5HNlLdz02FPbMnRP6MYyw6q0wI0EqwzzwH81bZzHKrTVHT2-M_aIEQp9lKGLhnSW3-aIOpSzonGOriyDukfTpvsCUZEd_X1u0G3iZKxYCbIKaj_ARLbb6idlRngVGW9LYYaw7Xay83exp22gflvLmmN25Xzo1vLlaDaFr9h-J_QAvFebCHgWjl1kcodBRc2jhoMVSpEXJHoI5qMrlVvh45PLTEjxy7y5FHQ1L8klwWZN5EIwui3ExIOA8RwYDlp8-HLib_uqB7hNzVUYC0iPd1KTiNIcidYVdAoPpdtLDOh-KCmPB9RkjVUqSlwNYUAAnfY8OJXuBLHP2nWiYUDA6VDbvrv4npW88VMdsFDk_QzvDRvg7gkW8x8jNd8=","tag":"B4UilbBNSUr3QcALtVxTEw=="}
 </code></pre></div>
 <h3 id="decrypt-and-verify-process">Decrypt and Verify process<a class="headerlink" href="#decrypt-and-verify-process" title="Permanent link">&para;</a></h3>
 <p>To Decrypt and verify the JWS first unpack the message, which provides this result:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;eyJhbGciOiAiZWREU0EiLCAia2lkIjogIjdYVlpKVXVLdGZZZU4xVzREcTJUdzJhbWVHNmdDMWFteEw3eFpTc1p4UUNLIn0=.eyJjb250ZW50IjogIllvdXIgaG92ZXJjcmFmdCBpcyBmdWxsIG9mIGVlbHMuIiwgInNlbnRfdGltZSI6ICIyMDE5LTAxLTE1IDE4OjQyOjAxWiIsICJAdHlwZSI6ICJkaWQ6c292OkJ6Q2JzTlloTXJqSGlxWkRUVUFTSGc7c3BlYy9iYXNpY21lc3NhZ2UvMS4wL21lc3NhZ2UiLCAiQGlkIjogIjEyMzQ1Njc4MCIsICJ-bDEwbiI6IHsibG9jYWxlIjogImVuIn19.FV7Yyz7i31EKoqS_cycQRr2pN59Q5Ojoxnr7uf6yZBqylnUZW2jCk_LesgWy5ZEux2K6dkrZh7q9pUs9dEsJBQ==&quot;</span><span class="p">,</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">&quot;recipient_verkey&quot;</span><span class="p">:</span><span class="s2">&quot;4WzvNZ2cAKzMs86j6KW9Xfc2hKu3hhWxWTrvDMmaRLAb&quot;</span><span class="p">,</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">&quot;sender_verkey&quot;</span><span class="p">:</span><span class="s2">&quot;7XVZJUuKtfYeN1W4Dq2Tw2ameG6gC1amxL7xZSsZxQCK&quot;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"eyJhbGciOiAiZWREU0EiLCAia2lkIjogIjdYVlpKVXVLdGZZZU4xVzREcTJUdzJhbWVHNmdDMWFteEw3eFpTc1p4UUNLIn0=.eyJjb250ZW50IjogIllvdXIgaG92ZXJjcmFmdCBpcyBmdWxsIG9mIGVlbHMuIiwgInNlbnRfdGltZSI6ICIyMDE5LTAxLTE1IDE4OjQyOjAxWiIsICJAdHlwZSI6ICJkaWQ6c292OkJ6Q2JzTlloTXJqSGlxWkRUVUFTSGc7c3BlYy9iYXNpY21lc3NhZ2UvMS4wL21lc3NhZ2UiLCAiQGlkIjogIjEyMzQ1Njc4MCIsICJ-bDEwbiI6IHsibG9jYWxlIjogImVuIn19.FV7Yyz7i31EKoqS_cycQRr2pN59Q5Ojoxnr7uf6yZBqylnUZW2jCk_LesgWy5ZEux2K6dkrZh7q9pUs9dEsJBQ=="</span><span class="p">,</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">"recipient_verkey"</span><span class="p">:</span><span class="s2">"4WzvNZ2cAKzMs86j6KW9Xfc2hKu3hhWxWTrvDMmaRLAb"</span><span class="p">,</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">"sender_verkey"</span><span class="p">:</span><span class="s2">"7XVZJUuKtfYeN1W4Dq2Tw2ameG6gC1amxL7xZSsZxQCK"</span>
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">}</span>
 </code></pre></div>
 <p>Parse the <code>message</code> field splitting on the second period <code>.</code> You should then have this as the payload:</p>
@@ -5012,11 +5033,11 @@ Strive to guarantee that:</p>
 </code></pre></div>
 <p>Now Base64URL decode that section and you'll get the original message:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">{</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your hovercraft is full of eels.&quot;</span><span class="p">,</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="nt">&quot;sent_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-15 18:42:01Z&quot;</span><span class="p">,</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="nt">&quot;@type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://didcomm.org/basicmessage/1.0/message&quot;</span><span class="p">,</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nt">&quot;@id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456780&quot;</span><span class="p">,</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="nt">&quot;~l10n&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;locale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en&quot;</span><span class="p">}</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your hovercraft is full of eels."</span><span class="p">,</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="nt">"sent_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-15 18:42:01Z"</span><span class="p">,</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/basicmessage/1.0/message"</span><span class="p">,</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456780"</span><span class="p">,</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="nt">"~l10n"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">}</span>
 <a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="modifications-to-packunpack-api">Modifications to pack()/unpack() API<a class="headerlink" href="#modifications-to-packunpack-api" title="Permanent link">&para;</a></h3>

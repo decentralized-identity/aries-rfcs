@@ -3803,6 +3803,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4880,17 +4901,17 @@ transformation of RDF.</p>
 general knowledge of JSON, DIDComm messages reverse this default, making arrays
 an ordered construct, as if all DIDComm message <code>@context</code>s contained something
 like:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&quot;each field&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;@container&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;@list&quot;</span><span class="p">}</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">"each field"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"@container"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@list"</span><span class="p">}</span>
 </code></pre></div>
 To contravene the default, use a JSON-LD construction like this in <code>@context</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&quot;myfield&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;@container&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;@set&quot;</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">"myfield"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"@container"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@set"</span><span class="p">}</span>
 </code></pre></div>
 <h4 id="decorators">Decorators<a class="headerlink" href="#decorators" title="Permanent link">&para;</a></h4>
 <p>Decorators are JSON fragments that can be included in any DIDComm message. They
 enter the formally defined JSON-LD namespace via a JSON-LD fragment that
 is automatically imputed to every DIDComm message:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&quot;@context&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;@vocab&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://github.com/hyperledger/aries-rfcs/&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">"@context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"@vocab"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/hyperledger/aries-rfcs/"</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
 </code></pre></div>
 <p>All decorators use the reserved prefix char <code>~</code> (tilde). For more on

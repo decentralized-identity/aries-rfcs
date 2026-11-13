@@ -3803,6 +3803,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4802,52 +4823,52 @@
 <p>[TODO: The following blurb of JSON is one way to embody what we're after. I can imagine other approaches but haven't thought them through in detail. I'm less interested in the details of the JSON, for now, than in the ../../concepts we're trying to communicate and automate. So have a conversation about whether this format works for us, or should be tweaked/replaced.]</p>
 <p>Each problem domain will probably have unique requirements. Therefore, we start with a general governance framework recipe, but plan for extension. We use JSON-LD for this purpose. Here we present a simple example for the problem domain of university credentials in Germany. It manifests just the components of a governance framework that are common across all contexts; additional JSON-LD <code>@context</code> values can be added to introduce more structure as needed. (See <a href="#field-details">Field Details</a> for explanatory comments.)</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    &quot;@context&quot;: [
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        // The first context must be this RFC&#39;s context. It defines core properties.
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        &quot;https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0430-machine-readable-governance-frameworks/context.jsonld&quot;, 
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    "@context": [
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        // The first context must be this RFC's context. It defines core properties.
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        "https://github.com/hyperledger/aries-rfcs/blob/main../../concepts/0430-machine-readable-governance-frameworks/context.jsonld", 
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        // Additional contexts can be added to extend.
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        &quot;https://kmk.org/uni-accred-trust-fw&quot;
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        "https://kmk.org/uni-accred-trust-fw"
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    ],
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    &quot;name&quot;: &quot;Universitätsakkreditierung&quot;
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    &quot;version&quot;: &quot;1.0&quot;,
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    &quot;logo&quot;: &quot;http://kmk.org/uni-accred-trust-fw/logo.png&quot;,
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    &quot;description&quot;: &quot;Governs accredited colleges and universities in Germany.&quot;,
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    &quot;docs_uri&quot;: &quot;http://https://kmk.org/uni-accred-trust-fw/v1&quot;,
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    &quot;data_uri&quot;: &quot;http://https://kmk.org/uni-accred-trust-fw/v1/tf.json&quot;,
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    &quot;topics&quot;: [&quot;education&quot;],
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    &quot;jurisdictions&quot;: [&quot;de&quot;, &quot;eu&quot;],
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    &quot;geos&quot;: [&quot;Deutschland&quot;],
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    &quot;roles&quot;: [&quot;accreditor&quot;, &quot;school&quot;, &quot;graduate&quot;, &quot;safe-verifier&quot;],
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    &quot;privileges&quot;: [
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        {&quot;name&quot;: &quot;accredit&quot;, &quot;uri&quot;: &quot;http://kmk.org/tf/accredit&quot;},
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        {&quot;name&quot;: &quot;issue-edu&quot;, &quot;uri&quot;: &quot;http://kmk.org/tf/issue-edu&quot;},
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        {&quot;name&quot;: &quot;hold-edu&quot;, &quot;uri&quot;: &quot;http://kmk.org/tf/hold-edu&quot;},
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        {&quot;name&quot;: &quot;request-proof&quot;, &quot;uri&quot;, &quot;http://kmk.org/tf/request-proof&quot;
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    "name": "Universitätsakkreditierung"
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    "version": "1.0",
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    "logo": "http://kmk.org/uni-accred-trust-fw/logo.png",
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    "description": "Governs accredited colleges and universities in Germany.",
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    "docs_uri": "http://https://kmk.org/uni-accred-trust-fw/v1",
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    "data_uri": "http://https://kmk.org/uni-accred-trust-fw/v1/tf.json",
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    "topics": ["education"],
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    "jurisdictions": ["de", "eu"],
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    "geos": ["Deutschland"],
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    "roles": ["accreditor", "school", "graduate", "safe-verifier"],
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    "privileges": [
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        {"name": "accredit", "uri": "http://kmk.org/tf/accredit"},
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        {"name": "issue-edu", "uri": "http://kmk.org/tf/issue-edu"},
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        {"name": "hold-edu", "uri": "http://kmk.org/tf/hold-edu"},
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        {"name": "request-proof", "uri", "http://kmk.org/tf/request-proof"
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    ],
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    &quot;duties&quot;: [
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        {&quot;name&quot;: &quot;safe-accredit&quot;, &quot;uri&quot;: &quot;http://kmk.org/tf/responsible-accredit&quot;},
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        {&quot;name&quot;: &quot;GDPR-dat-control&quot;, &quot;uri&quot;: &quot;http://europa.eu/gdpr/trust-fw/gdpr-data-controller&quot;}
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        {&quot;name&quot;: &quot;GDPR-edu-verif&quot;, &quot;uri&quot;: &quot;http://kmk.org/tf/gdpr-verif&quot;}
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        {&quot;name&quot;: &quot;accept-kmk-tos&quot;, &quot;uri&quot;: &quot;http://kmk.org/tf/tos&quot;}
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    "duties": [
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        {"name": "safe-accredit", "uri": "http://kmk.org/tf/responsible-accredit"},
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        {"name": "GDPR-dat-control", "uri": "http://europa.eu/gdpr/trust-fw/gdpr-data-controller"}
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        {"name": "GDPR-edu-verif", "uri": "http://kmk.org/tf/gdpr-verif"}
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        {"name": "accept-kmk-tos", "uri": "http://kmk.org/tf/tos"}
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    ],
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    &quot;define&quot;: [
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        {&quot;name&quot;: &quot;KMK&quot;: &quot;id&quot;: &quot;did:example:abc123&quot;},
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        {&quot;name&quot;: &quot;KMK&quot;: &quot;id&quot;: &quot;did:anotherexample:def456&quot;},
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    "define": [
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        {"name": "KMK": "id": "did:example:abc123"},
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        {"name": "KMK": "id": "did:anotherexample:def456"},
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    ], 
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    &quot;rules&quot;: [
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        {&quot;grant&quot;: [&quot;accredit&quot;], &quot;when&quot;: {&quot;name&quot;: &quot;KMK&quot;},
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>            &quot;duties&quot;: [&quot;safe-accredit&quot;]},
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>        {&quot;grant&quot;: [&quot;issue-edu&quot;], &quot;when&quot;: {
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    "rules": [
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        {"grant": ["accredit"], "when": {"name": "KMK"},
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>            "duties": ["safe-accredit"]},
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>        {"grant": ["issue-edu"], "when": {
 <a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>                // Proof request (see RFC 0037) specifying that
 <a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>                // institution is accredited by KMK.
 <a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>            },
 <a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>            // Any party who fulfills these criteria is considered
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>            // to have the &quot;school&quot; role.
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>            &quot;thus&quot;: [&quot;school&quot;],
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>            // And is considered to have the &quot;GDPR-dat-control&quot; duty.
-<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>            &quot;duties&quot;: [&quot;GDPR-dat-control&quot;, &quot;accept-kmk-tos&quot;]
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>            // to have the "school" role.
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>            "thus": ["school"],
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>            // And is considered to have the "GDPR-dat-control" duty.
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>            "duties": ["GDPR-dat-control", "accept-kmk-tos"]
 <a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        },
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        {&quot;grant&quot;: &quot;hold-edu&quot;, &quot;when&quot;: {
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        {"grant": "hold-edu", "when": {
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>                // Proof request specifying that holder is a human.
 <a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>                // The presence of this item in the GF means that
 <a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>                // conforming issuers are supposed to verify
@@ -4856,15 +4877,15 @@
 <a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>                // requirement.
 <a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>            },
 <a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>            // Any party who fulfills these criteria is considered
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>            // to qualify for the &quot;graduate&quot; role.
-<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>            &quot;thus&quot;: &quot;graduate&quot;,
-<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>            &quot;duties&quot;: [&quot;accept-kmk-tos&quot;]
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>            // to qualify for the "graduate" role.
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>            "thus": "graduate",
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>            "duties": ["accept-kmk-tos"]
 <a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>        },
 <a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>        // In this governance framework, anyone can request proof based
 <a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>        // on credentials, as long as they demonstrate that they possess
-<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>        // an &quot;approved verifier&quot; credential.
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>        // an "approved verifier" credential.
 <a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>        {
-<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>            &quot;grant&quot;: &quot;request-proof&quot;, &quot;when&quot;: {
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>            "grant": "request-proof", "when": {
 <a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>                // Proof request specifying that the party must possess
 <a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>                // a credential that makes them an approved verifier.
 <a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>                // The presence of this item in the GF means that
@@ -4872,24 +4893,24 @@
 <a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>                // in this way before sharing proof. Provers can impose
 <a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>                // additional criteria of their own; this is just the
 <a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>                // base requirement.
-<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>            }, &quot;thus&quot;: &quot;safe-verifier&quot;,
-<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>            &quot;duties&quot;: [&quot;GDPR-edu-verif&quot;, &quot;accept-kmk-tos&quot;]
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>            }, "thus": "safe-verifier",
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>            "duties": ["GDPR-edu-verif", "accept-kmk-tos"]
 <a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>        },
 <a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>        // Is there an authority that audits interactions?
-<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>        &quot;audit&quot;: {
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>        "audit": {
 <a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>            // Where should reports be submitted via http POST?
-<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>            &quot;uri&quot;: &quot;http://kmk.org/audit&quot;,
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>            "uri": "http://kmk.org/audit",
 <a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>            // How likely is it that a given interaction needs to
 <a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>            // be audited? Each party in the interaction picks a
 <a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>            // random number between 0 and 1, inclusive; if the number
 <a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>            // is &lt;= this number, then that party submits a report about it.
-<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>            &quot;probability&quot;: &quot;0.01&quot;
+<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>            "probability": "0.01"
 <a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>        },
 <a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>        // Is there an authority to whom requests for redress can
 <a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>        // be made, if one party feels like another violates
 <a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>        // the governance framework? 
-<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>        &quot;redress&quot;: {
-<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>            &quot;uri&quot;: &quot;http://kmk.org/redress&quot;
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>        "redress": {
+<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>            "uri": "http://kmk.org/redress"
 <a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>        }
 <a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>    }    
 <a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>}

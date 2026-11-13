@@ -3794,6 +3794,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4769,20 +4790,20 @@
 <p>### query Message Type</p>
 <p>A trust-input-protocol/query message looks like this:</p>
 <div class="highlight"><pre><span></span><code>{
-&quot;@type&quot;: &quot;https://didcomm.org/trust-input/1.0/query&quot;,
-    &quot;@id&quot;: &quot;yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU&quot;,
-    &quot;query&quot;: {
-            &quot;trust-task&quot;:&quot;issuance&quot;,
-            &quot;include-governance&quot;:&quot;yes&quot;,
-            &quot;credentialmetadata&quot;:[
+"@type": "https://didcomm.org/trust-input/1.0/query",
+    "@id": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU",
+    "query": {
+            "trust-task":"issuance",
+            "include-governance":"yes",
+            "credentialmetadata":[
                 {
-                &quot;credential-id&quot;: &quot;http://university.example/credentials/1872&quot;,
-            &quot;credential-format&quot;: &quot;1&quot;,
-                &quot;issuer-did&quot;: &quot;did:example:123456abcdef&quot;
+                "credential-id": "http://university.example/credentials/1872",
+            "credential-format": "1",
+                "issuer-did": "did:example:123456abcdef"
                 }
             ]
         },
-    &quot;comment&quot;: &quot;Please tell me if this issuer is authoritative to issue this credential type...&quot;
+    "comment": "Please tell me if this issuer is authoritative to issue this credential type..."
 }
 </code></pre></div>
 <p>The query message says, “ Please tell me if the issuer: ‘did:example:123456abcdef’ is authorized to issue the credential: ‘<a href="http://university.example/credentials/1872">http://university.example/credentials/1872</a>’. And please give me information about the governance framework that governs the trust registry operation.” Please refer to the Localisation section below for further details.</p>
@@ -4797,16 +4818,16 @@
 <h3 id="response-message-type">response Message Type<a class="headerlink" href="#response-message-type" title="Permanent link">&para;</a></h3>
 <p>A trust-input/response message looks like this:</p>
 <div class="highlight"><pre><span></span><code>{ 
-&quot;@type&quot;: &quot;https://didcomm.org/trust-input/1.0/response&quot;,
-&quot;~thread&quot;: {
-        &quot;thid&quot;: &quot;yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU&quot; 
+"@type": "https://didcomm.org/trust-input/1.0/response",
+"~thread": {
+        "thid": "yWd8wfYzhmuXX3hmLNaV5bVbAjbWaU" 
     },
-    &quot;governance&quot;:&quot;http://university.example/governanceframework&quot;,
-    &quot;response&quot;:[    
+    "governance":"http://university.example/governanceframework",
+    "response":[    
 {
-            &quot;credential-id&quot;: &quot;http://university.example/credentials/1872&quot;,
-            &quot;status&quot;: &quot;2&quot;,
-            &quot;status_date&quot;:&quot;yyyy&#39;-&#39;MM&#39;-&#39;dd&#39;T&#39;HH&#39;:&#39;mm&#39;:&#39;ss&#39;.&#39;fff&#39;Z&#39;&quot;
+            "credential-id": "http://university.example/credentials/1872",
+            "status": "2",
+            "status_date":"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"
             }
     ]
 }
@@ -4837,9 +4858,9 @@ The date format returned in the response is a web UTC format. The date represent
 <p>All message types in this family thus have the following implicit decorator:</p>
 <div class="highlight"><pre><span></span><code>{
 
-&quot;~l10n&quot;: {
-    &quot;locales&quot;: { &quot;en&quot;: [&quot;comment&quot;] },
-    &quot;catalogs&quot;: [&quot;https://github.com/hyperledger/aries-rfcs../../features/trust-input/requestor/catalog.json&quot;]
+"~l10n": {
+    "locales": { "en": ["comment"] },
+    "catalogs": ["https://github.com/hyperledger/aries-rfcs../../features/trust-input/requestor/catalog.json"]
 
         }
 }
