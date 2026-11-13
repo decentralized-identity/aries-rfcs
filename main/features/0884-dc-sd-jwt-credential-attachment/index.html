@@ -1,0 +1,5386 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../0882-dcql-presentation-attachment/">
+      
+      
+        <link rel="next" href="../0024-didcomm-over-xmpp/">
+      
+      
+      <link rel="icon" href="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>0884 IETF SD-JWT VC (`dc+sd-jwt`) Attachment format for requesting and issuing credentials - Hyperledger Aries Interoperability Profiles / RFCs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aries-rfc-0884-ietf-sd-jwt-vc-dcsd-jwt-attachment-format-for-requesting-and-issuing-credentials" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-header__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hyperledger Aries Interoperability Profiles / RFCs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              0884 IETF SD-JWT VC (`dc+sd-jwt`) Attachment format for requesting and issuing credentials
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Welcome
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../MAINTAINERS/" class="md-tabs__link">
+          
+  
+  Governance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aip2/0003-protocols/" class="md-tabs__link">
+          
+  
+  AIP 2.0
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0003-protocols/" class="md-tabs__link">
+          
+  
+  ADOPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0004-agents/" class="md-tabs__link">
+          
+  
+  ACCEPTED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0032-message-timing/" class="md-tabs__link">
+          
+  
+  DEMONSTRATED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../0028-introduce/" class="md-tabs__link">
+          
+  
+  PROPOSED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0024-didcomm-over-xmpp/" class="md-tabs__link">
+          
+  
+  STALLED
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../concepts/0013-overlays/" class="md-tabs__link">
+          
+  
+  RETIRED
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Hyperledger Aries Interoperability Profiles / RFCs" class="md-nav__button md-logo" aria-label="Hyperledger Aries Interoperability Profiles / RFCs" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/hyperledger/aries-rfcs/main/collateral/Hyperledger_Aries_Logo_White.png" alt="logo">
+
+    </a>
+    Hyperledger Aries Interoperability Profiles / RFCs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hyperledger/aries-rfcs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hyperledger/aries-rfcs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Welcome
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../RFCindex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    All RFCs by Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../0000-template-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protocol RFC Template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Governance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MAINTAINERS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Maintainers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../github-issues/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Submitting Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../LICENSE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SECURITY/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AIP 2.0
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AIP 2.0
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0023 DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aip2/0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ADOPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ADOPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0003-protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0003 Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0005-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0005 DID Communication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0008-message-id-and-threading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0008 Message ID and Threading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0011-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0011 Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0015-acks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0015 ACKs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0017-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0017 Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0019-encryption-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0019 Encryption Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0020-message-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0020 Message Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0021-didcomm-message-anatomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0021 DIDComm Message Anatomy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0023-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0023 DID Exchange v1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0025-didcomm-transports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0025 DIDComm Transports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0031-discover-features/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0031 Discover Features Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0035-report-problem/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0035 Report Problem Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0036-issue-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0036 Issue Credential Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0037-present-proof/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0037 Present Proof Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0048-trust-ping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0048 Trust Ping Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0092-transport-return-route/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0092 Transports Return Route
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0094-cross-domain-messaging/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0094 Cross-Domain Messaging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0095-basic-message/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0095 Basic Message Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0160-connection-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0160 Connection Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0211-route-coordination/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0211 Mediator Coordination Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0302-aries-interop-profile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0302 Aries Interop Profile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0360-use-did-key/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0360 did:key Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0434-outofband/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0434 Out-of-Band Protocol 1.1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0441-present-proof-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0441 Prover and Verifier Best Practices for Proof Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0453-issue-credential-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0453 Issue Credential Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0454-present-proof-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0454 Present Proof Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0496-transition-to-oob-and-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0496 Transition to the Out of Band Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0510-dif-pres-exch-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0510 Presentation-Exchange Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0557-discover-features-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0557 Discover Features Protocol v2.x
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0592-indy-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0592 Indy Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0593-json-ld-cred-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0593 JSON-LD Credential Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ACCEPTED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ACCEPTED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0004-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0004 Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0006-ssi-notation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0006 SSI Notation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0044-didcomm-file-and-mime-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0044 DIDComm File and MIME Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0046-mediators-and-relays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0046 Mediators and Relays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0047-json-ld-compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0047 JSON-LD Compatibility
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0049-repudiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0049 Repudiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0050-wallets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0050 Wallets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0183-revocation-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0183 Revocation Notification 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0519-goal-codes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0519 Goal Codes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0587-encryption-envelope-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0587 Encryption Envelope v2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0646-bbs-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0646 W3C Credential Exchange using BBS+ Signatures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0685-pickup-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0685 Pickup Protocol 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0721-revocation-notification-v2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0721 Revocation Notification 2.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0793-unqualfied-dids-transition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0793 Unqualified DID Transition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0794-did-rotate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0794 DID Rotate 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    DEMONSTRATED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            DEMONSTRATED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0032-message-timing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0032 Message Timing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0042-lox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0042 LOX -- A more secure pluggable framework for protecting wallet keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0043-l10n/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0043 l10n (Locali[s|z]ation)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0113-question-answer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0113 Question Answer Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0509-action-menu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0509 Action Menu Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0748-n-wise-did-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0748 N-wise DID Exchange Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0755-oca-for-aries/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0755 Overlays Capture Architecture (OCA) For Aries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0756-oca-for-aries-style-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0756 OCA for Aries Style Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0780-data-urls-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0780 Use Data URLs for Images and More in Credential Attributes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0804-didcomm-rpc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0804 DIDComm Remote Procedure Call (DRPC)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0809-w3c-data-integrity-credential-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0809 W3C Verifiable Credential Data Integrity Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    PROPOSED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            PROPOSED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0028-introduce/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0028 Introduce Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0034-message-tracing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0034 Message Tracing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0056-service-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0056 Service Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0066-non-repudiable-cryptographic-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0066 Non-Repudiable Signature for Cryptographic Envelope
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0067-didcomm-diddoc-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0067 DIDComm DID document conventions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0074-didcomm-best-practices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0074 DIDComm Best Practices
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0103-indirect-identity-control/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0103 Indirect Identity Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0104-chained-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0104 Chained Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0124-did-resolution-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0124 DID Resolution Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0167-data-consent-lifecycle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0167 Data Consent Lifecycle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0212-pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0212 Pickup Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0213-transfer-policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0213 Transfer Policy Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0214-help-me-discover/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0214 "Help Me Discover" Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0231-biometric-service-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0231 Biometric Service Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0268-unified-didcomm-agent-deeplinking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0268 Unified DIDCOMM Deeplinking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0270-interop-test-suite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0270 Interop Test Suite
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0345-community-coordinated-update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0345 Community Coordinated Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0346-didcomm-between-two-mobile-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0346 DIDComm Between Two Mobile Agents Using Cloud Agent Mediator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0347-proof-negotiation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0347 Proof Negotiation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0430-machine-readable-governance-frameworks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0430 Machine-Readable Governance Frameworks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0440-kms-architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0440 KMS Architectures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0511-dif-cred-manifest-attach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0511 Credential-Manifest Attachment format for requesting and presenting credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0530-goal-human-readable-verified-identifer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0530 Goal - Human Readable Verifiable Identifier
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0535-email-access-governance-framework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0535 Email Access Governance Framework
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0559-pppu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0559 Privacy-Preserving Proof of Uniqueness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0566-issuer-hosted-custodidal-agents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0566 Issuer-Hosted Custodial Agents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0641-linking-binary-objects-to-credentials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0641 Linking binary objects to credentials using hash based references
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0693-credential-representation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0693 Cross-Platform Credential Representation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0699-push-notifications-apns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0699 Push Notifications apns Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0700-oob-through-redirect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0700 Out-of-Band through redirect
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0728-device-binding-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0728 Device Binding Attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0734-push-notifications-fcm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0734 Push Notifications fcm Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0745-push-notifications-expo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0745 Push Notifications Expo Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0757-push-notification/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0757 Push Notification
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0771-anoncreds-attachments/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0771 AnonCreds Attachment Formats for Requesting and Presenting Credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0781-trust-input-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0781 Trust Input Protocol
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0799-long-term-support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0799 Aries Long Term Support Releases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0812-compression-dictionary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0812 Compressing DIDComm messages using dictionaries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0829-VDR-Proxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0829 VDR Proxy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0881-w3c-vc-sd-jwt-credential-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0881 W3C SD-JWT Verifiable Credential (`vc+sd-jwt`) Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0882-dcql-presentation-attachment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0882 DCQL Attachment format for requesting and presenting proofs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    0884 IETF SD-JWT VC (`dc+sd-jwt`) Attachment format for requesting and issuing credentials
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    0884 IETF SD-JWT VC (`dc+sd-jwt`) Attachment format for requesting and issuing credentials
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#credential-offer-attachment-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Offer Attachment Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credential-request-attachment-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Request Attachment Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credential-attachment-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Attachment Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binding-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binding Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#didcomm-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      DIDComm v2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presenting-the-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Presenting the Credential
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Specifications
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security considerations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#privacy-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Privacy considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawbacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rationale-and-alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale and alternatives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior art
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    STALLED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            STALLED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0024-didcomm-over-xmpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0024 DIDComm over XMPP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0029-message-trust-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0029 Message Trust Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0030-sync-connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0030 Sync Connection Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0075-payment-decorators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0075 Payment Decorators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0114-predefined-identities/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0114 Predefined Identities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0116-evidence-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0116 Evidence Exchange Protocol 0.9
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0193-coin-flip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0193 Coin Flip Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0207-credential-fraud-threat-model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0207 Credential Fraud Threat Model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0217-linkable-message-paths/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0217 Linkable Message Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0249-rich-schema-contexts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0249 Aries Rich Schema Contexts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0250-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0250 Rich Schema Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0257-private-credential-issuance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0257 Private Credential Issuance
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0281-rich-schemas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0281 Aries Rich Schemas
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0289-toip-stack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0289 The Trust Over IP Stack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0309-didauthz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0309 DIDAuthZ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0327-crypto-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0327 Crypto service Protocol 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0334-jwe-envelope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0334 JWE envelope 1.0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0335-http-over-didcomm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0335 HTTP Over DIDComm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0351-purpose-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0351 Purpose Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0418-rich-schema-encoding/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0418 Aries Rich Schema Encoding Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0420-rich-schemas-common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0420 Rich Schema Objects Common
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0428-prepare-issue-rich-credential/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0428 Prerequisites to Issue Rich Credential
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0429-prepare-req-rich-pres/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0429 Prerequisites to Request Rich Presentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0445-rich-schema-mapping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0445 Aries Rich Schema Mapping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0446-rich-schema-cred-def/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0446 Aries Rich Schema Credential Definition
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0478-coprotocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0478 Coprotocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0482-coprotocol-protocol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0482 Coprotocol Protocol 0.5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RETIRED
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            RETIRED
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0013-overlays/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0013 Overlays
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/0051-dkms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0051 Decentralized Key Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0234-signature-decorator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0234 Signature Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0303-v01-credential-exchange/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0303 V0.1 Credential Exchange (Deprecated)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0317-please-ack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0317 Please ACK Decorator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0348-transition-msg-type-to-https/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0348 Transition Message Type to HTTPs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0627-static-peer-dids/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    0627 Static Peer DIDs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#credential-offer-attachment-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Offer Attachment Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credential-request-attachment-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Request Attachment Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credential-attachment-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Credential Attachment Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binding-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binding Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#didcomm-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      DIDComm v2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presenting-the-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Presenting the Credential
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Specifications
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security considerations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#privacy-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Privacy considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drawbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drawbacks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rationale-and-alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rationale and alternatives
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prior-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior art
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unresolved-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unresolved questions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementations
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="aries-rfc-0884-ietf-sd-jwt-vc-dcsd-jwt-attachment-format-for-requesting-and-issuing-credentials">Aries RFC 0884: IETF SD-JWT VC (<code>dc+sd-jwt</code>) Attachment format for requesting and issuing credentials<a class="headerlink" href="#aries-rfc-0884-ietf-sd-jwt-vc-dcsd-jwt-attachment-format-for-requesting-and-issuing-credentials" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Authors: <a href="mailto:vaddeofficial@gmail.com">Tarun Vadde</a> (2060.io)</li>
+<li>Status: <a href="../../#proposed">PROPOSED</a></li>
+<li>Since: 2026-10-30</li>
+<li>Status Note: Initial draft.</li>
+<li>Supersedes:</li>
+<li>Start Date: 2026-10-30</li>
+<li>Tags: <a href="../../tags/#feature">feature</a>, <a href="../../tags/#protocol">protocol</a>, <a href="../../tags/#credentials">credentials</a></li>
+</ul>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>This RFC registers an attachment format for use in the <a href="../0453-issue-credential-v2/">issue-credential V2</a> protocol based on IETF <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/">SD-JWT-based Verifiable Digital Credentials</a> (SD-JWT VC), with the media type <code>application/dc+sd-jwt</code>. The formats work over DIDComm v1 and DIDComm v2.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>The Issue Credential protocol has no attachment format for IETF SD-JWT VCs. <a href="../0881-w3c-vc-sd-jwt-credential-attachment/">RFC 0881</a> issues W3C VC Data Model 2.0 credentials secured with SD-JWT (<code>vc+sd-jwt</code>), which have a different payload, different required claims and a different way to prove holder binding. SD-JWT VC is the format that <a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html">OpenID for Verifiable Credential Issuance</a> (OpenID4VCI) and <a href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">OpenID for Verifiable Presentations</a> (OpenID4VP) use as <code>dc+sd-jwt</code>, and it is commonly paired with Token Status List for revocation. With this format an issuer can issue the same credential over DIDComm that it issues over OpenID4VCI, and a holder can present it over DIDComm with <a href="https://github.com/decentralized-identity/aries-rfcs/pull/882">RFC 0882</a> or over OpenID4VP.</p>
+<h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY" and "OPTIONAL" in this document are to be interpreted as described in BCP 14 (<a href="https://www.rfc-editor.org/rfc/rfc2119">RFC 2119</a>, <a href="https://www.rfc-editor.org/rfc/rfc8174">RFC 8174</a>) when, and only when, they appear in all capitals, as shown here.</p>
+<p>Complete examples of messages are provided in the <a href="#reference">reference section</a>.</p>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<p>Credentials issued with this format are SD-JWT VCs, and <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22">SD-JWT VC</a> and <a href="https://www.rfc-editor.org/rfc/rfc9901.html">RFC 9901</a> apply to them unless this RFC says otherwise.</p>
+<h3 id="credential-offer-attachment-format">Credential Offer Attachment Format<a class="headerlink" href="#credential-offer-attachment-format" title="Permanent link">&para;</a></h3>
+<p>Format identifier: <code>didcomm/dc-sd-jwt-offer@v1.0</code></p>
+<p>This format is used to offer a credential to a potential holder. The JSON structure might look like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"binding_required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">"binding_method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">"didcomm_signed_attachment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">"algs_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ES256"</span><span class="p">,</span><span class="w"> </span><span class="s2">"EdDSA"</span><span class="p">],</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">"did_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"key"</span><span class="p">,</span><span class="w"> </span><span class="s2">"jwk"</span><span class="p">],</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jypsHZPgS3pcEdDm-bKnxA"</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nt">"selectively_disclosable_claims"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p">[</span><span class="s2">"given_name"</span><span class="p">],</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">[</span><span class="s2">"family_name"</span><span class="p">],</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="p">[</span><span class="s2">"birthdate"</span><span class="p">],</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="p">[</span><span class="s2">"address"</span><span class="p">,</span><span class="w"> </span><span class="s2">"locality"</span><span class="p">],</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">[</span><span class="s2">"nationalities"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span><span class="nt">"credential"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did:example:issuer"</span><span class="p">,</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="nt">"vct"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://credentials.example.com/identity_credential"</span><span class="p">,</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="nt">"given_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Erika"</span><span class="p">,</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="nt">"family_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mustermann"</span><span class="p">,</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="nt">"birthdate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1963-08-12"</span><span class="p">,</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">      </span><span class="nt">"locality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Berlin"</span><span class="p">,</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">      </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE"</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="nt">"nationalities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"DE"</span><span class="p">],</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">      </span><span class="nt">"status_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="p">}</span>
+</code></pre></div>
+<p>A complete <a href="../0453-issue-credential-v2/#offer-credential"><code>offer-credential</code> message from the Issue Credential protocol 2.0</a> might look like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8b5c4e5a-1d0f-4a5e-9a43-2f0b8f6c1e27"</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/issue-credential/2.0/offer-credential"</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;some comment&gt;"</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="nt">"attach_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c1e5f7a2-3b4d-4e6f-8a9b-0c1d2e3f4a5b"</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"didcomm/dc-sd-jwt-offer@v1.0"</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nt">"offers~attach"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c1e5f7a2-3b4d-4e6f-8a9b-0c1d2e3f4a5b"</span><span class="p">,</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">"mime-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="nt">"base64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ewogICJiaW5kaW5nX3JlcXVpcmVkIjogdHJ1ZSwK...(clipped)...IH0KfQ=="</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>binding_required</code> - Optional. Boolean indicating whether the credential MUST be bound to the holder. If omitted, the credential is not required to be bound to the holder. If set to <code>true</code>, the credential MUST be bound to the holder using at least one of the binding methods defined in <code>binding_method</code>.</li>
+<li><code>binding_method</code> - Required if <code>binding_required</code> is <code>true</code>. Object containing key-value pairs of binding methods supported by the issuer to bind the credential to a holder. When <code>binding_required</code> is <code>false</code> or omitted, the issuer MAY still include <code>binding_method</code>, and the holder MAY then choose to send a binding proof. See <a href="#binding-methods">Binding Methods</a> for a registry of default binding methods supported as part of this RFC.</li>
+<li><code>selectively_disclosable_claims</code> - Optional. Array of claims path pointers indicating which claims in the issued credential will be selectively disclosable. A claims path pointer is a non-empty array of strings and non-negative integers, as defined in <a href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-7.1">OpenID4VP section 7.1, Semantics for JSON-based credentials</a>. A string selects an object property and an integer selects an array element. Pointers start at the root of <code>credential</code>, which is the root of the SD-JWT VC payload. Each pointer MUST select exactly one claim that exists in <code>credential</code>. The <code>null</code> component (all elements of an array) MUST NOT be used. If omitted, the issuer does not communicate which claims will be selectively disclosable ahead of issuance.</li>
+<li><code>credential</code> - Required. The JWT Claims Set of the SD-JWT VC to be issued, with every claim in plain form. It MUST conform to <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.2.2">SD-JWT VC section 2.2.2, JWT Claims Set</a>, with two exceptions: it MUST NOT contain <code>cnf</code>, and its <code>status</code> MAY name the status mechanisms that will be used with their members omitted. For example <code>{"status_list": {}}</code> says the credential will reference a Token Status List. It MUST contain <code>vct</code>. It MUST NOT contain <code>_sd</code>, <code>_sd_alg</code> or <code>...</code> entries.</li>
+</ul>
+<p>A claims path pointer in <code>selectively_disclosable_claims</code> MUST NOT select a claim that <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.2.2.3">SD-JWT VC section 2.2.2.3</a> does not allow to be selectively disclosed, or anything inside such a claim.</p>
+<p>The holder MUST reject an offer that does not meet the rules above by sending a <code>problem-report</code> with the code <code>issuance-abandoned</code>.</p>
+<p>The issuer MUST NOT offer a pointer that selects a claim the Type Metadata of <code>vct</code> marks <code>sd</code> <code>never</code>. A claim marked <code>sd</code> <code>always</code> is selectively disclosable in the issued credential even if no pointer selects it. The holder does not need Type Metadata to check an offer.</p>
+<h4 id="issuance-time-claims">Issuance-time Claims<a class="headerlink" href="#issuance-time-claims" title="Permanent link">&para;</a></h4>
+<p>The issued credential can differ from the offered <code>credential</code> only in these claims:</p>
+<ul>
+<li><code>iss</code>, <code>sub</code> and <code>vct#integrity</code>. If the offer omits one, the issuer MAY add it.</li>
+<li><code>iat</code>, <code>nbf</code> and <code>exp</code>. If the offer has one, the issued value can differ. If the offer omits one, the issuer MAY add it.</li>
+<li><code>status</code>. If the offer omits it, the issuer MAY add it. If the offer names a mechanism with its members omitted, the issued <code>status</code> has the full value for that mechanism.</li>
+<li><code>cnf</code>. The issuer sets it from the binding proof (see <a href="#binding-in-credential">Binding in Credential</a>).</li>
+</ul>
+<h3 id="credential-request-attachment-format">Credential Request Attachment Format<a class="headerlink" href="#credential-request-attachment-format" title="Permanent link">&para;</a></h3>
+<p>Format identifier: <code>didcomm/dc-sd-jwt-request@v1.0</code></p>
+<p>This format is used to request issuance of a credential. A request with this format MUST be sent in response to an <code>offer-credential</code> message with a <code>didcomm/dc-sd-jwt-offer@v1.0</code> offer in the same thread, because the credential content and the binding nonce come from the offer. The issuer MUST reject a request that has no such offer by sending a <code>problem-report</code> with the code <code>issuance-abandoned</code>.</p>
+<p>When the issuer sent the <code>offer-credential</code> over a connection, the holder MUST authcrypt the <code>request-credential</code> over that connection. The issuer MUST reject a <code>request-credential</code> in that thread unless it is authcrypted and its sender key is the holder's key for that connection.</p>
+<p>The JSON structure might look like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"binding_proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">"didcomm_signed_attachment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="nt">"attachment_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attachment-0"</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>A complete <a href="../0453-issue-credential-v2/#request-credential"><code>request-credential</code> message from the Issue Credential protocol 2.0</a> might look like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f3a1c9d2-6e7b-4c8d-9e0f-1a2b3c4d5e6f"</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/issue-credential/2.0/request-credential"</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">"~thread"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"thid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8b5c4e5a-1d0f-4a5e-9a43-2f0b8f6c1e27"</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;some comment&gt;"</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="nt">"attach_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4d6e8f0a-2b3c-4d5e-8f7a-9b0c1d2e3f4a"</span><span class="p">,</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"didcomm/dc-sd-jwt-request@v1.0"</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">"requests~attach"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">      </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4d6e8f0a-2b3c-4d5e-8f7a-9b0c1d2e3f4a"</span><span class="p">,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="nt">"mime-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">,</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="nt">"base64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ewogICJiaW5kaW5nX3Byb29mIjogewogICAgImRpZGNvbW1fc2lnbmVkX2F0dGFjaG1lbnQiOiB7CiAgICAgICJhdHRhY2htZW50X2lkIjogImF0dGFjaG1lbnQtMCIKICAgIH0KICB9Cn0="</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">  </span><span class="nt">"~attach"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">      </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attachment-0"</span><span class="p">,</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">      </span><span class="nt">"mime-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">,</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">        </span><span class="nt">"base64"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJub25jZSI6ICJqeXBzSFpQZ1MzcGNFZERtLWJLbnhBIn0"</span><span class="p">,</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">        </span><span class="nt">"jws"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">          </span><span class="nt">"protected"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJFUzI1NiIsImtpZCI6ImRpZDprZXk6ekRuYWVyRGFURjVCWEVhdkNyZlJaRWszMTZkcGJMc2ZQRFozV0o1aFJUUEZVMjE2OSN6RG5hZXJEYVRGNUJYRWF2Q3JmUlpFazMxNmRwYkxzZlBEWjNXSjVoUlRQRlUyMTY5In0"</span><span class="p">,</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">          </span><span class="nt">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"...(clipped)"</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>binding_proof</code> - Required if <code>binding_required</code> is <code>true</code> in the offer. Object containing key-value pairs of proofs for the binding to the holder. The keys MUST match keys of the <code>binding_method</code> object from the offer. See <a href="#binding-methods">Binding Methods</a> for a registry of default binding methods supported as part of this RFC.</li>
+</ul>
+<p>If the offer set <code>binding_required</code> to <code>true</code> and the request has no <code>binding_proof</code> for a method in <code>binding_method</code>, the issuer MUST NOT issue the credential and sends a <code>problem-report</code> with the code <code>issuance-abandoned</code>.</p>
+<h3 id="credential-attachment-format">Credential Attachment Format<a class="headerlink" href="#credential-attachment-format" title="Permanent link">&para;</a></h3>
+<p>Format identifier: <code>didcomm/dc-sd-jwt@v1.0</code></p>
+<p>This format is used to transmit an SD-JWT VC. The JSON structure might look like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"credential"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJFUzI1NiIsInR5cCI6ImRjK3NkLWp3dCIsImtpZCI6IiNrZXktMSJ9.eyJpc3MiOiJkaWQ6ZXhhbXBs...(clipped)~WyIyR0xDNDJzS1F2ZUNmR2ZyeU5STjl3IiwgImdpdmVuX25hbWUiLCAiRXJpa2EiXQ~...(clipped)~"</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>A complete <a href="../0453-issue-credential-v2/#issue-credential"><code>issue-credential</code> message from the Issue Credential protocol 2.0</a> might look like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2a7e9c1b-5d3f-4b6a-8c0e-7f1d2b3a4c5e"</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://didcomm.org/issue-credential/2.0/issue-credential"</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">"~thread"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"thid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8b5c4e5a-1d0f-4a5e-9a43-2f0b8f6c1e27"</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;some comment&gt;"</span><span class="p">,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">      </span><span class="nt">"attach_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9e0f1a2b-3c4d-4e5f-a6b7-c8d9e0f1a2b3"</span><span class="p">,</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"didcomm/dc-sd-jwt@v1.0"</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="nt">"credentials~attach"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">      </span><span class="nt">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9e0f1a2b-3c4d-4e5f-a6b7-c8d9e0f1a2b3"</span><span class="p">,</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">      </span><span class="nt">"mime-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">      </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">        </span><span class="nt">"json"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">          </span><span class="nt">"credential"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJFUzI1NiIsInR5cCI6ImRjK3NkLWp3dCIsImtpZCI6IiNrZXktMSJ9.eyJpc3MiOiJkaWQ6ZXhhbXBs...(clipped)~WyIyR0xDNDJzS1F2ZUNmR2ZyeU5STjl3IiwgImdpdmVuX25hbWUiLCAiRXJpa2EiXQ~WyJlbHVWNU9nM2dTTklJOEVZbnN4QV9BIiwgImZhbWlseV9uYW1lIiwgIk11c3Rlcm1hbm4iXQ~WyI2SWo3dE0tYTVpVlBHYm9TNXRtdlZBIiwgImJpcnRoZGF0ZSIsICIxOTYzLTA4LTEyIl0~WyJlSThaV205UW5LUHBOUGVOZW5IZGhRIiwgImxvY2FsaXR5IiwgIkJlcmxpbiJd~WyJRZ19PNjR6cUF4ZTQxMmExMDhpcm9BIiwgIkRFIl0~"</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>credential</code> - Required. The SD-JWT VC in the compact serialization of <a href="https://www.rfc-editor.org/rfc/rfc9901.html#section-4">RFC 9901 section 4, SD-JWT and SD-JWT+KB Data Formats</a>, with all of its Disclosures and without a Key Binding JWT. It uses the <code>application/dc+sd-jwt</code> media type as defined in <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.1">SD-JWT VC section 2.1, Media Type</a>. The header <code>typ</code> MUST be <code>dc+sd-jwt</code>.</li>
+</ul>
+<p>One attachment holds one credential.</p>
+<p>The issued SD-JWT VC MUST meet these rules:</p>
+<ul>
+<li><code>vct</code> MUST be the <code>vct</code> of the offer.</li>
+<li>The payload, after processing the Disclosures as in <a href="https://www.rfc-editor.org/rfc/rfc9901.html#section-7.1">RFC 9901 section 7.1, Verification of the SD-JWT</a>, MUST have the claims of the offered <code>credential</code> with the same values, except for the changes allowed in <a href="#issuance-time-claims">Issuance-time Claims</a>. No other claim can be added.</li>
+<li>The issuer decides which claims are selectively disclosable, within the rules of <a href="#selective-disclosure">Selective Disclosure</a>. If <code>selectively_disclosable_claims</code> was provided in the offer, the issued SD-JWT MUST make at least those claims selectively disclosable.</li>
+<li><code>cnf</code> follows <a href="#binding-in-credential">Binding in Credential</a>.</li>
+<li>The issuer key can be found as described in <a href="#issuer-key">Issuer Key</a>.</li>
+<li>If <code>status</code> references a Token Status List, it follows <a href="#status">Status</a>.</li>
+</ul>
+<h4 id="selective-disclosure">Selective Disclosure<a class="headerlink" href="#selective-disclosure" title="Permanent link">&para;</a></h4>
+<p>Which claims can be selectively disclosed follows <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.2.2.3">SD-JWT VC section 2.2.2.3</a> and, when the Type Metadata of <code>vct</code> has claim metadata, its <code>sd</code> values (<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-5.6.4">SD-JWT VC section 5.6.4</a>).</p>
+<h4 id="issuer-key">Issuer Key<a class="headerlink" href="#issuer-key" title="Permanent link">&para;</a></h4>
+<p>The holder and later verifiers need to find the issuer key for the <code>iss</code> of the credential (<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.5">SD-JWT VC section 2.5, Issuer Verification Key Discovery and Validation</a>). The issuer MUST use one of these:</p>
+<ul>
+<li>One of the two mechanisms defined in SD-JWT VC section 2.5, JWT VC Issuer Metadata or Inline X.509 Certificates.</li>
+<li>DID-based key discovery. <code>iss</code> is a DID and the header <code>kid</code> MUST be a DID URL of that DID: either relative, such as <code>#key-1</code>, and resolved against <code>iss</code>, or absolute with the same DID as <code>iss</code>. A relative <code>kid</code> is RECOMMENDED. The key is the verification method that DID URL dereferences to, and it MUST be in the <code>assertionMethod</code> relationship of the resolved DID document.</li>
+</ul>
+<p>When <code>iss</code> is a DID, the issuer MUST use DID-based key discovery and the credential MUST NOT have an <code>x5c</code> header. A holder that permits DID-based key discovery MUST use only that mechanism when <code>iss</code> is a DID, so that an attacker cannot change which mechanism is used, for example by adding an <code>x5c</code> header (<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-7.3">SD-JWT VC section 7.3, Ecosystem-specific Public Key Verification Methods</a>). <a href="https://github.com/decentralized-identity/aries-rfcs/pull/882">RFC 0882</a> defines how its verifiers find the issuer key of a <code>dc+sd-jwt</code> presentation.</p>
+<h4 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h4>
+<p>When the credential references a Token Status List, <code>status</code> follows <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21#section-6.2">Token Status List section 6.2, Referenced Token in JOSE</a> and the <code>uri</code> of <code>status_list</code> MUST be an <code>https</code> URI. The Status List Token SHOULD be signed by the issuer of the credential, with a key that can be found the same way as the credential's issuer key.</p>
+<p><a href="https://github.com/decentralized-identity/aries-rfcs/pull/882">RFC 0882</a> defines how its verifiers check the <code>status</code> claim. An issuer that uses a status mechanism other than Token Status List SHOULD do so only when the verifiers of the credential support it.</p>
+<h4 id="holder-verification">Holder Verification<a class="headerlink" href="#holder-verification" title="Permanent link">&para;</a></h4>
+<p>When the holder receives an <code>issue-credential</code> message with this format, it MUST check that:</p>
+<ol>
+<li><code>credential</code> is an SD-JWT in compact serialization without a Key Binding JWT (<a href="https://www.rfc-editor.org/rfc/rfc9901.html#section-7.2">RFC 9901 section 7.2, Processing by the Holder</a>).</li>
+<li>The SD-JWT VC verifies as in <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.4">SD-JWT VC section 2.4, Verification and Processing</a>, the header <code>typ</code> is <code>dc+sd-jwt</code>, and the issuer key was found with a mechanism of <a href="#issuer-key">Issuer Key</a> that the holder's policy permits. A holder that permits DID-based key discovery MUST use only that mechanism when <code>iss</code> is a DID, and MUST reject the credential if it has an <code>x5c</code> header.</li>
+<li>No claim that <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.2.2.3">SD-JWT VC section 2.2.2.3</a> does not allow to be selectively disclosed, and nothing inside one, is in a Disclosure or holds an <code>_sd</code> or <code>...</code> digest.</li>
+<li><code>vct</code> and the other claims match the offer as required in <a href="#credential-attachment-format">Credential Attachment Format</a>.</li>
+<li>Every claims path pointer in the offer's <code>selectively_disclosable_claims</code> selects a claim that is selectively disclosable in the issued credential.</li>
+<li>The binding matches the request. If the request carried a binding proof, <code>cnf</code> MUST be present and follow <a href="#binding-in-credential">Binding in Credential</a>: <code>cnf.kid</code> is the same string as the <code>kid</code> of the signed attachment, or <code>cnf.jwk</code> is the same public key as its <code>jwk</code>, for example compared by their <a href="https://www.rfc-editor.org/rfc/rfc7638">RFC 7638</a> thumbprints. If the request carried no binding proof, <code>cnf</code> MUST NOT be present.</li>
+<li>If <code>status</code> references a Token Status List, it has the form required in <a href="#status">Status</a>.</li>
+</ol>
+<p>If a check fails, the holder MUST NOT store the credential and sends a <code>problem-report</code> with the code <code>issuance-abandoned</code>, as described in <a href="../0453-issue-credential-v2/">RFC 0453</a>.</p>
+<h4 id="example-credential">Example Credential<a class="headerlink" href="#example-credential" title="Permanent link">&para;</a></h4>
+<p>The issued SD-JWT VC from the example <code>issue-credential</code> message above.</p>
+<p>Issuer-signed JWT header:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES256"</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">"typ"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dc+sd-jwt"</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#key-1"</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>Issuer-signed JWT payload:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did:example:issuer"</span><span class="p">,</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1793350800</span><span class="p">,</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1951117200</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">"vct"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://credentials.example.com/identity_credential"</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nt">"_sd"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="s2">"0HZmnSIPz337kSWe7C34l--88gzJi-eBJ2Vz_HJwATg"</span><span class="p">,</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="s2">"I00fcFUoDXCucp5yy2ujqPssDVGaWNiUliNz_awD0gc"</span><span class="p">,</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="s2">"Lai6IU6d7GQagXR7AvGTrnXgSld3z8EIg_fv3fOZ1Wg"</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">  </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="nt">"_sd"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"aWdEwsZvJfFQeBPWRsGf9W_6dnY-O0TUYvwQyYJqfcE"</span><span class="p">],</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE"</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">  </span><span class="nt">"nationalities"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">"..."</span><span class="p">:</span><span class="w"> </span><span class="s2">"3j6R6Qrii_oY-llhg021nA2silD3yG4tr3P1z9FWyjE"</span><span class="w"> </span><span class="p">}],</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="nt">"status_list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">      </span><span class="nt">"idx"</span><span class="p">:</span><span class="w"> </span><span class="mi">412</span><span class="p">,</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">      </span><span class="nt">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://issuer.example.com/statuslists/1"</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">  </span><span class="nt">"cnf"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">    </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did:key:zDnaerDaTF5BXEavCrfRZEk316dpbLsfPDZ3WJ5hRTPFU2169#zDnaerDaTF5BXEavCrfRZEk316dpbLsfPDZ3WJ5hRTPFU2169"</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">  </span><span class="nt">"_sd_alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha-256"</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="p">}</span>
+</code></pre></div>
+<p>The Disclosures decode to:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>["2GLC42sKQveCfGfryNRN9w", "given_name", "Erika"]
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>["eluV5Og3gSNII8EYnsxA_A", "family_name", "Mustermann"]
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>["6Ij7tM-a5iVPGboS5tmvVA", "birthdate", "1963-08-12"]
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>["eI8ZWm9QnKPpNPeNenHdhQ", "locality", "Berlin"]
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>["Qg_O64zqAxe412a108iroA", "DE"]
+</code></pre></div>
+<p><code>cnf.kid</code> is the <code>kid</code> of the request's signed attachment. A signed attachment with a <code>jwk</code> header gives <code>cnf.jwk</code> with that key instead.</p>
+<h3 id="binding-methods">Binding Methods<a class="headerlink" href="#binding-methods" title="Permanent link">&para;</a></h3>
+<p>The attachment format supports different methods to bind the credential to the receiver of the credential. In the offer message the issuer can indicate which binding methods are supported in the <code>binding_method</code> object. Each key represents the id of the supported binding method.</p>
+<p>This section defines a set of binding methods supported by this attachment format, but other binding methods may be used. Based on the binding method, the request needs to include a <code>binding_proof</code> object where the key matches the key of the binding method from the offer.</p>
+<h4 id="didcomm-signed-attachment">DIDComm Signed Attachment<a class="headerlink" href="#didcomm-signed-attachment" title="Permanent link">&para;</a></h4>
+<p>Identifier: <code>didcomm_signed_attachment</code></p>
+<p>This is the binding method of the same name defined in <a href="../0881-w3c-vc-sd-jwt-credential-attachment/#didcomm-signed-attachment">RFC 0881</a>, including its <code>jwk_supported</code> option. This RFC adds these rules:</p>
+<ul>
+<li>The issuer MUST create a new <code>nonce</code> for every offer from a cryptographically secure random source with at least 120 bits of entropy. A version 4 UUID made with such a source (<a href="https://www.rfc-editor.org/rfc/rfc9562.html#section-5.4">RFC 9562 section 5.4, UUID Version 4</a>, 122 random bits) meets this, and so does the base64url encoding of 16 or more random bytes. The issuer stores it with the protocol thread. When the issuer sends more than one offer in a thread, only the nonce of the last offer is valid.</li>
+<li>The JWS payload is the base64url encoding, without padding, of the bytes decoded from <code>data.base64</code>. Writers SHOULD put that unpadded base64url string in <code>data.base64</code>, as <a href="../../concepts/0017-attachments/#base64url">RFC 0017</a> recommends, and the issuer verifies the signature over the re-encoded payload.</li>
+<li>If a check of the signed attachment fails, the issuer sends a <code>problem-report</code> with the code <code>issuance-abandoned</code>.</li>
+</ul>
+<p>An implementation that shares code with RFC 0881 can apply these rules to both formats.</p>
+<h5 id="binding-in-credential">Binding in Credential<a class="headerlink" href="#binding-in-credential" title="Permanent link">&para;</a></h5>
+<p>If the request carried a <code>didcomm_signed_attachment</code> binding proof, the issued SD-JWT VC MUST include a <code>cnf</code> claim (<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.2.2.3">SD-JWT VC section 2.2.2.3</a>) taken from the signed attachment as in <a href="../0881-w3c-vc-sd-jwt-credential-attachment/#binding-in-credential">RFC 0881</a>: <code>cnf.kid</code> for a <code>kid</code> header and <code>cnf.jwk</code> for a <code>jwk</code> header.</p>
+<p>If the request carried no binding proof, the issued credential MUST NOT have a <code>cnf</code> claim.</p>
+<h3 id="didcomm-v2">DIDComm v2<a class="headerlink" href="#didcomm-v2" title="Permanent link">&para;</a></h3>
+<p>Issue-credential 2.0 messages with these formats can also be sent over <a href="https://identity.foundation/didcomm-messaging/spec/v2.1/">DIDComm v2.1</a>. The attachment content and the format identifiers do not change. These rules replace the DIDComm v1 message layout and the connection rule in <a href="#credential-request-attachment-format">Credential Request Attachment Format</a>:</p>
+<ul>
+<li>Layout: this layout is used until a specification defines issue-credential 2.0 over DIDComm v2. Each attachment that would be in <code>offers~attach</code>, <code>requests~attach</code> or <code>credentials~attach</code> goes in the top-level <code>attachments</code> (<a href="https://identity.foundation/didcomm-messaging/spec/v2.1/#attachments">Attachments</a>). It has an <code>id</code>, a <code>media_type</code> of <code>application/json</code>, the format identifier in <code>format</code>, and the same <code>data</code> object as in DIDComm v1, with the content in <code>data.json</code> or <code>data.base64</code>. <code>body</code> has no <code>formats</code> and none of these <code>~attach</code> arrays. Other fields such as <code>comment</code>, <code>goal_code</code>, <code>replacement_id</code> and <code>credential_preview</code> stay in <code>body</code>.</li>
+<li>Binding proof: the signed attachment of a <a href="#didcomm-signed-attachment"><code>didcomm_signed_attachment</code></a> binding proof goes in the top-level <code>attachments</code> instead of <code>~attach</code>, with a <code>media_type</code> of <code>application/json</code> and no <code>format</code>. Its <code>id</code> is the <code>attachment_id</code> of the binding proof. Its <code>data</code> object, including <code>data.jws</code>, stays the same as in DIDComm v1.</li>
+<li>Sender: when the <code>offer-credential</code> has a <code>to</code> with one DID, the holder MUST authcrypt the <code>request-credential</code> from that DID, or from a DID it rotated to with <code>from_prior</code>. The issuer MUST reject a <code>request-credential</code> in that thread unless it is authcrypted, its <code>from</code> matches the sender key (<a href="https://identity.foundation/didcomm-messaging/spec/v2.1/#message-layer-addressing-consistency">Message Layer Addressing Consistency</a>) and the DID of that <code>from</code>, without any path or query, is the DID in the <code>to</code> of the offer, another form of that DID defined by its DID method, or a DID that DID rotated to with a valid <code>from_prior</code>.</li>
+</ul>
+<h3 id="presenting-the-credential">Presenting the Credential<a class="headerlink" href="#presenting-the-credential" title="Permanent link">&para;</a></h3>
+<p>A credential issued with this format is an IETF SD-JWT VC and can be presented under the <code>dc+sd-jwt</code> Credential Format of <a href="https://github.com/decentralized-identity/aries-rfcs/pull/882">RFC 0882</a>, or with OpenID4VP. A credential without <code>cnf</code> can only answer a DCQL query that sets <code>require_cryptographic_holder_binding</code> to <code>false</code>. Holder binding uses only <code>cnf</code>, not the keys of the DIDComm connection the credential was issued over.</p>
+<h3 id="specifications">Specifications<a class="headerlink" href="#specifications" title="Permanent link">&para;</a></h3>
+<p>This RFC uses these versions:</p>
+<ul>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9901.html">RFC 9901: Selective Disclosure for JSON Web Tokens</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22">SD-JWT-based Verifiable Digital Credentials (SD-JWT VC), draft -22</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21">Token Status List, draft -21</a></li>
+<li><a href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">OpenID for Verifiable Presentations 1.0</a>, for the claims path pointer syntax</li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7800.html">RFC 7800: Proof-of-Possession Key Semantics for JSON Web Tokens</a></li>
+<li><a href="https://www.w3.org/TR/did-1.0/">Decentralized Identifiers (DIDs) v1.0</a>, W3C Recommendation</li>
+<li><a href="https://identity.foundation/didcomm-messaging/spec/v2.1/">DIDComm Messaging v2.1</a></li>
+</ul>
+<h3 id="security-considerations">Security considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h3>
+<p>The signed attachment payload has only the <code>nonce</code>, so a binding proof is not tied to one issuer. A dishonest issuer can copy another issuer's nonce into its own offer, pass the holder's proof on to that issuer and get back a credential bound to the holder's key, which the holder then receives from an issuer it never talked to.</p>
+<h3 id="privacy-considerations">Privacy considerations<a class="headerlink" href="#privacy-considerations" title="Permanent link">&para;</a></h3>
+<p>The privacy considerations of <a href="https://www.rfc-editor.org/rfc/rfc9901.html#section-10">RFC 9901 section 10</a>, <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-8">SD-JWT VC section 8</a> and <a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21#section-12">Token Status List section 12</a> apply.</p>
+<h2 id="drawbacks">Drawbacks<a class="headerlink" href="#drawbacks" title="Permanent link">&para;</a></h2>
+<ul>
+<li>There is currently no attachment format defined for a credential proposal, and a request can only answer an offer. This makes it impossible for a holder to initiate the issuance of a credential using this attachment format.</li>
+<li>There is no way for the holder to say which signature algorithms it supports for the issuer signature. The issuer chooses.</li>
+<li>Each issuance gives one credential. Batch issuance, as in <a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-8.3">OpenID4VCI section 8.3, Credential Response</a>, is not covered.</li>
+<li>SD-JWT VC and Token Status List are not yet published as RFCs.</li>
+</ul>
+<h2 id="rationale-and-alternatives">Rationale and alternatives<a class="headerlink" href="#rationale-and-alternatives" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../0881-w3c-vc-sd-jwt-credential-attachment/">RFC 0881</a> issues W3C VCDM 2.0 credentials secured with SD-JWT. An SD-JWT VC payload is a flat JWT Claims Set with <code>vct</code> instead of a VCDM credential, has its own list of claims that are never selectively disclosable, and proves holder binding with a Key Binding JWT. Earlier SD-JWT VC drafts used the <code>typ</code> <code>vc+sd-jwt</code>, which now names VCDM 2.0 secured with SD-JWT. A separate format with <code>typ</code> <code>dc+sd-jwt</code> keeps the two credential types apart and keeps both RFCs simple.</li>
+<li>The structure and the <code>didcomm_signed_attachment</code> binding method are the same as in RFC 0881, so an implementation can share most code between the two formats.</li>
+<li><code>selectively_disclosable_claims</code> uses claims path pointers instead of the JSONPath subset of RFC 0881. The same syntax is used by OpenID4VCI claims metadata (<a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-B.2">Appendix B.2</a>, <a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-C">Appendix C</a>), by SD-JWT VC Type Metadata (<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-5.6.1">section 5.6.1</a>) and by DCQL in OpenID4VP and RFC 0882. Claim names that contain <code>.</code> or <code>[</code> need no escaping. An issuer can take the pointers from its Type Metadata or OpenID4VCI configuration.</li>
+<li>The holder picks the binding by how it signs the signed attachment: a DID URL in <code>kid</code> gives <code>cnf.kid</code> and a bare key in <code>jwk</code> gives <code>cnf.jwk</code>, the way the OpenID4VCI <code>jwt</code> proof binds the credential to the DID or to the key (<a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-F.1">OpenID4VCI Appendix F.1</a>). The issuer never turns one into the other. A holder that wants <code>cnf.jwk</code>, which SD-JWT VC recommends, signs with <code>jwk</code>.</li>
+<li>RFC 0881 requires a binding key named by <code>kid</code> to be in the <code>authentication</code> relationship. RFC 0882 verifiers require this for a <code>cnf.kid</code> key, and a key the holder's DID only lists for other purposes should not become a credential key.</li>
+<li><a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-A.3">OpenID4VCI Appendix A.3, IETF SD-JWT VC</a> issues the same credential but is not a DIDComm-based protocol. Its parameters map onto this format: <code>vct</code> and the claims stay the same, <code>cryptographic_binding_methods_supported</code> values <code>did:&lt;method&gt;</code> map to <code>did_methods_supported</code> and the value <code>jwk</code> to <code>jwk_supported</code>, and <code>proof_signing_alg_values_supported</code> maps to <code>algs_supported</code>. The OpenID4VCI <code>jwt</code> proof carries <code>aud</code> and <code>iat</code> as well as the nonce. The signed attachment here keeps only the nonce, as in RFC 0881, so that its payload stays the same across RFC 0809, RFC 0881 and this RFC. See <a href="#security-considerations">Security considerations</a> for what this leaves out.</li>
+</ul>
+<h2 id="prior-art">Prior art<a class="headerlink" href="#prior-art" title="Permanent link">&para;</a></h2>
+<p>This attachment format is structurally based on <a href="../0881-w3c-vc-sd-jwt-credential-attachment/">RFC 0881: W3C SD-JWT Verifiable Credential Attachment</a> and <a href="../0809-w3c-data-integrity-credential-attachment/">RFC 0809: W3C Data Integrity Credential Attachment</a>, adapted for IETF SD-JWT VC as issued by <a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html">OpenID4VCI</a>.</p>
+<h2 id="unresolved-questions">Unresolved questions<a class="headerlink" href="#unresolved-questions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Should <code>selectively_disclosable_claims</code> allow the <code>null</code> component to make every element of an array selectively disclosable?</li>
+<li>Should the signed attachment payload add <code>aud</code>, <code>iat</code> or a <code>typ</code> header, as in the OpenID4VCI <code>jwt</code> proof? Adding these would change the binding method shared with RFC 0809 and RFC 0881. See <a href="#security-considerations">Security considerations</a>.</li>
+<li>When SD-JWT VC and Token Status List are published as RFCs, this RFC should reference those.</li>
+</ul>
+<h2 id="implementations">Implementations<a class="headerlink" href="#implementations" title="Permanent link">&para;</a></h2>
+<p>The following lists the implementations (if any) of this RFC. Please do a pull request to add your implementation. If the implementation is open source, include a link to the repo or to the implementation within the repo. Please be consistent in the "Name" field so that a mechanical processing of the RFCs can generate a list of all RFCs supported by an Aries implementation.</p>
+<table>
+<thead>
+<tr>
+<th>Name / Link</th>
+<th>Implementation Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../0882-dcql-presentation-attachment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 0882 DCQL Attachment format for requesting and presenting proofs">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                0882 DCQL Attachment format for requesting and presenting proofs
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../0024-didcomm-over-xmpp/" class="md-footer__link md-footer__link--next" aria-label="Next: 0024 DIDComm over XMPP">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                0024 DIDComm over XMPP
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.expand", "navigation.footer", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
