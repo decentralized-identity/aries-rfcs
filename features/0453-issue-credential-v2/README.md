@@ -233,6 +233,7 @@ Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-d
 Hyperledger AnonCreds Credential Offer | `anoncreds/credential-offer@v1.0` | [`Credential Offer` format](../0771-anoncreds-attachments/README.md#credential-offer-format)|
 W3C VC - Data Integrity Proof Credential Offer | `didcomm/w3c-di-vc-offer@v0.1` | [`Credential Offer` format](../0809-w3c-data-integrity-credential-attachment/README.md#credential-offer-attachment-format)|
 W3C SD-JWT VC Offer | `didcomm/w3c-vc-sd-jwt-offer@v1.0` | [`Credential Offer` format](../0881-w3c-vc-sd-jwt-credential-attachment/README.md#credential-offer-attachment-format) | |
+IETF SD-JWT VC Offer | `didcomm/dc-sd-jwt-offer@v1.0` | [`Credential Offer` format](../0884-dc-sd-jwt-credential-attachment/README.md#credential-offer-attachment-format) | |
 
 #### Request Credential
 
@@ -281,6 +282,7 @@ Linked Data Proof VC Detail  | `aries/ld-proof-vc-detail@v1.0` | [`ld-proof-vc-d
 Hyperledger AnonCreds Credential Request | `anoncreds/credential-request@v1.0` | [`Credential Request` format](../0771-anoncreds-attachments/README.md#credential-request-format)|
 W3C VC - Data Integrity Proof Credential Request | `didcomm/w3c-di-vc-request@v0.1` | [`Credential Request` format](../0809-w3c-data-integrity-credential-attachment/README.md#credential-request-attachment-format)|
 W3C SD-JWT VC Request | `didcomm/w3c-vc-sd-jwt-request@v1.0` | [`Credential Request` format](../0881-w3c-vc-sd-jwt-credential-attachment/README.md#credential-request-attachment-format) | |
+IETF SD-JWT VC Request | `didcomm/dc-sd-jwt-request@v1.0` | [`Credential Request` format](../0884-dc-sd-jwt-credential-attachment/README.md#credential-request-attachment-format) | |
 
 #### Issue Credential
 
@@ -330,6 +332,7 @@ Hyperledger Indy Credential | `hlindy/cred@v2.0` | [credential format](../0592-i
 Hyperledger AnonCreds Credential| `anoncreds/credential@v1.0` | [`Credential` format](../0771-anoncreds-attachments/README.md#credential-format)|
 W3C VC - Data Integrity Proof Credential | `didcomm/w3c-di-vc@v0.1` | [`Credential` format](../0809-w3c-data-integrity-credential-attachment/README.md#credential-attachment-format)|
 W3C SD-JWT VC  | `didcomm/w3c-vc-sd-jwt@v1.0` | [`Credential` format](../0881-w3c-vc-sd-jwt-credential-attachment/README.md#credential-attachment-format) | |
+IETF SD-JWT VC | `didcomm/dc-sd-jwt@v1.0` | [`Credential` format](../0884-dc-sd-jwt-credential-attachment/README.md#credential-attachment-format) | |
 
 #### Adopted Problem Report
 
