@@ -28,31 +28,25 @@ Format identifier: `didcomm/w3c-di-vc-offer@v0.1`
 
 ```json
 {
-  "data_model_versions_supported": ["1.1", "2.0"],
-  "binding_required": true,
-  "binding_method": {
-    "anoncreds_link_secret": {
-      "nonce": "1234",
-      "cred_def_id": "did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT/credential-definition",
-      "key_correctness_proof": "<key_correctness_proof>"
-    },
-    "didcomm_signed_attachment": {
-      "algs_supported": ["EdDSA"],
-      "did_methods_supported": ["key", "web"],
-      "nonce": "1234"
+  "options": {
+    "binding_method": {
+      "anoncreds_link_secret": {
+        "nonce": "1234",
+        "cred_def_id": "did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT/credential-definition",
+        "key_correctness_proof": "<key_correctness_proof>"
+      },
+      "didcomm_signed_attachment": {
+        "algs_supported": ["EdDSA"],
+        "did_methods_supported": ["key", "web"],
+        "nonce": "1234"
+      }
     }
   },
   "credential": {
     "@context": [
-      "https://www.w3.org/2018/credentials/v1",
-      "https://w3id.org/security/data-integrity/v2",
-      {
-        "@vocab": "https://www.w3.org/ns/credentials/issuer-dependent#"
-      }
+      "https://www.w3.org/ns/credentials/v2",
     ],
     "type": ["VerifiableCredential"],
-    "issuer": "did:key:z6MkwXG2WjeQnNxSoynSGYU8V9j3QzP3JSqhdmkHc6SaVWoT",
-    "issuanceDate": "2024-01-10T04:44:29.563418Z",
     "credentialSubject": {
       "height": 175,
       "age": 28,
@@ -62,10 +56,7 @@ Format identifier: `didcomm/w3c-di-vc-offer@v0.1`
   }
 }
 ```
-
-- `data_model_versions_supported` - Required. List of strings indicating the supported VC Data Model versions. The list MUST contain at least one value. The values MUST be a valid data model version. Current supported values include `1.1` and `2.0`.
-- `binding_required` - Optional. Boolean indicating whether the credential MUST be bound to the holder. If omitted, the credential is not required to be bound to the holder. If set to `true`, the credential MUST be bound to the holder using at least one of the binding methods defined in `binding_method`.
-- `binding_method` - Required if `binding_required` is true. Object containing key-value pairs of binding methods supported by the issuer to bind the credential to a holder. If the value is omitted, this indicates the issuer does not support any binding methods for issuance of the credential. See [Binding Methods](#binding-methods) for a registry of default binding methods supported as part of this RFC.
+- `binding_method` - Optional. Object containing key-value pairs of binding methods supported by the issuer to bind the credential to a holder. If the value is omitted, this indicates the issuer does not support any binding methods for issuance of the credential. See [Binding Methods](#binding-methods) for a registry of default binding methods supported as part of this RFC.
 - `credential` - Required. The credential to be issued. The credential MUST be compliant with the **first** `data_model_versions_supported` entry version of VC Data Model, except for the omission of a set required keys that may only be known at the time of issuance. See [Credential Offer Exceptions](#credential-offer-exceptions) for a list of exceptions. The credential MUST NOT contain any proofs. Some properties MAY be omitted if they will only be available at time of issuance, such as `issuanceDate`, `issuer`, `credentialSubject.id`, `credentialStatus`, `credentialStatus.id`.
 
 #### Credential Offer Exceptions
