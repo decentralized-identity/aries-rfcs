@@ -10,10 +10,11 @@
 
 ## Summary
 
-This RFC registers attachment formats for the [Present Proof Protocol 2.0 (RFC 0454)](../0454-present-proof-v2/README.md) that use the Digital Credentials Query Language (DCQL) from [OpenID for Verifiable Presentations 1.0](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) (OpenID4VP). A verifier sends a DCQL query with a nonce and an audience. The prover answers with a `vp_token` object in the shape OpenID4VP 1.0 defines. The formats work over DIDComm v1 and DIDComm v2 and cover three credential formats:
+This RFC registers attachment formats for the [Present Proof Protocol 2.0 (RFC 0454)](../0454-present-proof-v2/README.md) that use the Digital Credentials Query Language (DCQL) from [OpenID for Verifiable Presentations 1.0](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) (OpenID4VP). A verifier sends a DCQL query with a nonce and an audience. The prover answers with a `vp_token` object in the shape OpenID4VP 1.0 defines. The formats work over DIDComm v1 and DIDComm v2 and cover four credential formats:
 
 - IETF SD-JWT VC (`dc+sd-jwt`)
 - W3C Verifiable Credentials Data Model 2.0 secured with SD-JWT (`vc+sd-jwt`), the format issued by [RFC 0881](../0881-w3c-vc-sd-jwt-credential-attachment/README.md)
+- W3C Verifiable Credentials Data Model 1.1 or 2.0 secured with Data Integrity (`ldp_vc`), the format issued by [RFC 0809](../0809-w3c-data-integrity-credential-attachment/README.md)
 - ISO mdoc (`mso_mdoc`)
 
 For `mso_mdoc` this RFC defines a DIDComm specific `Handover` for the ISO 18013-5 `SessionTranscript`, the DIDComm counterpart of `OpenID4VPHandover`.
@@ -23,8 +24,9 @@ For `mso_mdoc` this RFC defines a DIDComm specific `Handover` for the ISO 18013-
 - The present-proof v2 registry has request and presentation formats for Hyperledger Indy, DIF Presentation Exchange and AnonCreds only. There is no way to request or present an SD-JWT VC or an mdoc over DIDComm.
 - RFC 0881 issues `vc+sd-jwt` credentials over issue-credential v2. Its Drawbacks section says a separate attachment format is needed to present them with RFC 0454.
 - Agents that hold `dc+sd-jwt` or `mso_mdoc` credentials issued with [OpenID for Verifiable Credential Issuance](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) have no DIDComm path to present them to verifiers they already have a connection with.
-- OpenID4VP 1.0 already defines a query language (DCQL), a response shape (`vp_token`) and the binding rules for `dc+sd-jwt` and `mso_mdoc`. This RFC defines the identifier and binding rules for `vc+sd-jwt`. Reusing DCQL, `vp_token` and the OpenID4VP binding rules avoids a new Aries query language and lets one implementation serve both OpenID4VP and DIDComm.
-- DCQL names the credential format per query. One attachment format can therefore cover `dc+sd-jwt`, `vc+sd-jwt` and `mso_mdoc`, including requests that mix them.
+- RFC 0809 issues VCDM 1.1 and 2.0 credentials secured with Data Integrity. The only present-proof v2 format that can request them is DIF Presentation Exchange ([RFC 0510](../0510-dif-pres-exch-attach/README.md)).
+- OpenID4VP 1.0 already defines a query language (DCQL), a response shape (`vp_token`) and the binding rules for `dc+sd-jwt`, `mso_mdoc` and VCDM 1.1 `ldp_vc`. This RFC defines the identifier and binding rules for `vc+sd-jwt` and extends `ldp_vc` to VCDM 2.0. Reusing DCQL, `vp_token` and the OpenID4VP binding rules avoids a new Aries query language and lets one implementation serve both OpenID4VP and DIDComm.
+- DCQL names the credential format per query. One attachment format can therefore cover `dc+sd-jwt`, `vc+sd-jwt`, `ldp_vc` and `mso_mdoc`, including requests that mix them.
 
 ## Tutorial
 
@@ -39,7 +41,7 @@ The roles are the `verifier` and the `prover` of [RFC 0454](../0454-present-proo
 3. The prover sends a `presentation` with one attachment in the `didcomm/dcql-presentation@v1.0` format. It holds a `vp_token` with one or more presentations. Presentations with holder binding are bound to the `nonce` and the `audience`.
 4. The verifier checks the presentations and answers with an `ack` (when `will_confirm` is `true`) or a `problem-report`.
 
-Holder binding ties a presentation to the key the credential is bound to: the `cnf` claim for `dc+sd-jwt` and `vc+sd-jwt`, and the device key in the MSO for `mso_mdoc`. It does not use the DIDComm connection keys or the prover's DID for the connection, which only show who sent the message (step 2 of [Verifier processing rules](#verifier-processing-rules)). A credential received over OpenID4VCI and bound to a `did:key`, a `did:jwk` or a plain JWK can therefore be presented over a `did:peer` connection that has nothing to do with that key. Whether holder binding is required comes from `require_cryptographic_holder_binding` in the request, never from the presentation.
+Holder binding ties a presentation to the key the credential is bound to: the `cnf` claim for `dc+sd-jwt` and `vc+sd-jwt`, a key of the `credentialSubject.id` DID for `ldp_vc`, and the device key in the MSO for `mso_mdoc`. It does not use the DIDComm connection keys or the prover's DID for the connection, which only show who sent the message (step 2 of [Verifier processing rules](#verifier-processing-rules)). A credential received over OpenID4VCI and bound to a `did:key`, a `did:jwk` or a plain JWK can therefore be presented over a `did:peer` connection that has nothing to do with that key. Whether holder binding is required comes from `require_cryptographic_holder_binding` in the request, never from the presentation.
 
 A single query can ask for credentials in different formats. For example, this query accepts either an SD-JWT VC or an mDL:
 
@@ -131,7 +133,7 @@ These formats use only the parts of OpenID4VP 1.0 that this RFC references. Othe
 
 #### Audience
 
-The `audience` plays the role of the OpenID4VP Client Identifier. The prover copies it unchanged into every presentation that has holder binding: the `aud` of a KB-JWT, the `aud` of a `vp+sd-jwt` and the first element of the [DIDComm Handover](#didcomm-handover) info. The verifier compares it as an exact string with the value it sent.
+The `audience` plays the role of the OpenID4VP Client Identifier. The prover copies it unchanged into every presentation that has holder binding: the `aud` of a KB-JWT, the `aud` of a `vp+sd-jwt`, the proof `domain` of an `ldp_vc` presentation and the first element of the [DIDComm Handover](#didcomm-handover) info. The verifier compares it as an exact string with the value it sent.
 
 The `didcomm:` prefix keeps these presentations apart from presentations to the same DID in protocols that use the bare DID as the audience, such as OpenID4VP drafts before 1.0 with the `did` Client Identifier Scheme, or an OpenID4VP 1.0 pre-registered client whose Client Identifier is the DID ([OpenID4VP section 5.9.2, Fallback](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-5.9.2)). OpenID4VP 1.0 itself writes a DID Client Identifier with the `decentralized_identifier:` prefix ([OpenID4VP section 5.9.3, Defined Client Identifier Prefixes](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-5.9.3)). OpenID4VP uses `origin:` the same way for the Digital Credentials API ([OpenID4VP Appendix A.4, Response](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-A.4)). OpenID4VP lets a wallet treat a Client Identifier with an unknown prefix as a pre-registered client ([OpenID4VP section 5.9.2, Fallback](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-5.9.2)). A wallet that also implements OpenID4VP MUST therefore reject an OpenID4VP request whose Client Identifier starts with `didcomm:`, including as a pre-registered client.
 
@@ -158,7 +160,7 @@ Format identifier: `didcomm/dcql-presentation@v1.0`
 
 The attachment is a JSON object with:
 
-- `vp_token` - Required. An object as defined for the `vp_token` response parameter in [OpenID4VP section 8.1, Response Parameters](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-8.1). Each key is the `id` of a Credential Query in the request. Each value is a non-empty array of presentations that match that query. The array MUST hold exactly one presentation unless the query has `multiple` set to `true`. An optional query that the prover cannot match has no entry. For the three formats in this RFC every presentation is a string, and every SD-JWT in it, including one in a `data:` URL, uses the compact serialization of [RFC 9901 section 4](https://www.rfc-editor.org/rfc/rfc9901.html#section-4).
+- `vp_token` - Required. An object as defined for the `vp_token` response parameter in [OpenID4VP section 8.1, Response Parameters](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-8.1). Each key is the `id` of a Credential Query in the request. Each value is a non-empty array of presentations that match that query. The array MUST hold exactly one presentation unless the query has `multiple` set to `true`. An optional query that the prover cannot match has no entry. For `dc+sd-jwt`, `vc+sd-jwt` and `mso_mdoc` every presentation is a string, and every SD-JWT in it, including one in a `data:` URL, uses the compact serialization of [RFC 9901 section 4](https://www.rfc-editor.org/rfc/rfc9901.html#section-4). For `ldp_vc` every presentation is a JSON object ([OpenID4VP Appendix B.1.3.2.5, Presentation Response](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-B.1.3.2.5)).
 
 ```json
 {
@@ -178,6 +180,7 @@ DCQL Credential Queries in these attachments can use the Credential Format Ident
 | --- | --- | --- | --- |
 | `dc+sd-jwt` | IETF SD-JWT VC | `vct_values` | SD-JWT with a KB-JWT |
 | `vc+sd-jwt` | W3C VCDM 2.0 secured with SD-JWT | `type_values` | `vp+sd-jwt` signed by the holder |
+| `ldp_vc` | W3C VCDM 1.1 or 2.0 secured with Data Integrity | `type_values` | `VerifiablePresentation` with a Data Integrity proof by the holder |
 | `mso_mdoc` | ISO mdoc | `doctype_value` | `DeviceResponse` with a `deviceSignature` over `DeviceAuthenticationBytes`, whose `SessionTranscript` uses the DIDComm Handover |
 
 The `meta` object is REQUIRED in every Credential Query ([OpenID4VP section 6.1, Credential Query](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-6.1)). Claims path pointers follow [OpenID4VP section 7, Claims Path Pointer](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-7).
@@ -215,9 +218,30 @@ When holder binding is required (`require_cryptographic_holder_binding` is absen
 - The payload MUST have `nonce` (the `nonce` of the request) and `aud` (the `audience` of the request, as a single string, not an array) as plain JWT claims. The base context defines `aud` and `iat` but defines `nonce` only inside Data Integrity proofs, so unless another context in the payload `@context` defines it, `https://www.w3.org/ns/credentials/undefined-terms/v2` MUST be its last value ([VCDM 2.0 section 5.2, Extensibility (Semantic Interoperability)](https://www.w3.org/TR/vc-data-model-2.0/#semantic-interoperability)). `iat` is RECOMMENDED. `nbf` is NOT RECOMMENDED ([VC-JOSE-COSE section 3.1.3, JOSE Header Parameters and JWT Claims](https://www.w3.org/TR/vc-jose-cose/#jose-header-parameters-jwt-claims)) and the claim names `vc` and `vp` MUST NOT be used ([VC-JOSE-COSE section 1.1.2.1, JWT Format and Requirements](https://www.w3.org/TR/vc-jose-cose/#jwt-format-and-requirements)). `nonce`, `aud` and `iat` MUST NOT be selectively disclosable. The `vp+sd-jwt` SHOULD have no disclosures.
 - The `vp+sd-jwt` MUST be signed with the holder key named by the `cnf` claim of the enveloped credential (`cnf.jwk`, or `cnf.kid` as an absolute DID URL whose verification method MUST be in the `authentication` relationship of the resolved DID document). With `cnf.kid`, the header `kid` MUST be present and MUST be the same string as `cnf.kid` ([VC-JOSE-COSE section 4.1.1, kid](https://www.w3.org/TR/vc-jose-cose/#kid)). With `cnf.jwk`, the verifier ignores any `kid` and uses `cnf.jwk`. If `holder` is present and the credential uses `cnf.kid`, `holder` (or `holder.id` when `holder` is an object) MUST be the DID of the `cnf.kid` DID URL.
 
-The signature on the `vp+sd-jwt` is the proof of possession of the `cnf` key. A KB-JWT is not used for `vc+sd-jwt`. Holder binding uses only `cnf`. `credentialSubject.id` MAY differ from the `cnf.kid` DID and MUST NOT be used for holder binding.
+The signature on the `vp+sd-jwt` is the proof of possession of the `cnf` key. A KB-JWT is not used for `vc+sd-jwt`. Holder binding of a `vc+sd-jwt` uses only `cnf`. `credentialSubject.id` MAY differ from the `cnf.kid` DID and MUST NOT be used for holder binding.
 
 When `require_cryptographic_holder_binding` is `false`, the presentation is the credential SD-JWT itself with the selected disclosures and no KB-JWT, following the rule in OpenID4VP Appendix B.1.
+
+#### `ldp_vc`
+
+The credential is a W3C Verifiable Credential secured with [Data Integrity](https://www.w3.org/TR/vc-data-integrity/), the credential [RFC 0809](../0809-w3c-data-integrity-credential-attachment/README.md) issues. The first value of its `@context` tells the data model version: `https://www.w3.org/2018/credentials/v1` for VCDM 1.1 ([VCDM 1.1 section 4.1, Contexts](https://www.w3.org/TR/vc-data-model-1.1/#contexts)) and `https://www.w3.org/ns/credentials/v2` for VCDM 2.0 ([VCDM 2.0 section 4.3, Contexts](https://www.w3.org/TR/vc-data-model-2.0/#contexts)). The identifier, `meta`, claims and presentation rules are those of [OpenID4VP Appendix B.1, W3C Verifiable Credentials](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-B.1) and [Appendix B.1.3.2, LDP VCs](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-B.1.3.2), with the `audience` of the request in place of the Client Identifier. Appendix B.1 covers VCDM 1.1 only, and this RFC applies the same rules to VCDM 2.0 credentials. For both versions:
+
+- `meta.type_values` is REQUIRED and holds fully expanded type IRIs, matched as in [OpenID4VP Appendix B.1.1, Parameters in the meta parameter in Credential Query](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-B.1.1). The VCDM 2.0 base context maps `VerifiableCredential` to `https://www.w3.org/2018/credentials#VerifiableCredential`, the same IRI as VCDM 1.1. Every `type` value of a VCDM 2.0 credential expands to an absolute IRI ([VCDM 2.0 section 5.2, Extensibility (Semantic Interoperability)](https://www.w3.org/TR/vc-data-model-2.0/#semantic-interoperability)), so the relative IRI case of Appendix B.1.1 does not apply to it.
+- Claims path pointers start at the root of the credential, not the presentation ([OpenID4VP Appendix B.1.2, Claims Matching](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-B.1.2)).
+- The credential proof, or at least one proof when it has several, has `proofPurpose` `assertionMethod` and a `verificationMethod` of the `issuer` (or `issuer.id`). When the issuer is a DID, the `verificationMethod` MUST be a DID URL of that DID, and the verification method it dereferences to MUST be in the `assertionMethod` relationship of the resolved DID document ([DID Core section 5.3.2, Assertion](https://www.w3.org/TR/did-1.0/#assertion)). Otherwise the controller of the verification method MUST be the issuer and the method MUST be in its `assertionMethod` relationship ([VC Data Integrity section 5.9, Verification Method Binding](https://www.w3.org/TR/vc-data-integrity/#verification-method-binding), [section 5.10, Verification Relationship Validation](https://www.w3.org/TR/vc-data-integrity/#verification-relationship-validation)). A credential whose proof key cannot be tied to the issuer this way is discarded.
+
+The holder DID of a credential is the `id` of its `credentialSubject`. When `credentialSubject` holds several objects, the holder DID is the `id` they share, and objects without an `id` are allowed. A credential has no holder DID when no object has an `id`, when an `id` is not a DID, or when two `id` values differ.
+
+When holder binding is required (`require_cryptographic_holder_binding` is absent or `true`), a credential without a holder DID cannot be returned. The presentation is a `VerifiablePresentation` ([VCDM 1.1 section 4.10, Presentations](https://www.w3.org/TR/vc-data-model-1.1/#presentations-0), [VCDM 2.0 section 4.13, Verifiable Presentations](https://www.w3.org/TR/vc-data-model-2.0/#verifiable-presentations)) of the same VCDM version as the credential:
+
+- `verifiableCredential` holds exactly one credential.
+- If `holder` is present, `holder` (or `holder.id` when `holder` is an object) MUST be the holder DID.
+- The presentation has exactly one Data Integrity proof ([VC Data Integrity section 2.1, Proofs](https://www.w3.org/TR/vc-data-integrity/#proofs)). Its `proofPurpose` is `authentication`, its `challenge` is the `nonce` of the request and its `domain` is the `audience` of the request, as a single string, not an array ([OpenID4VP Appendix B.1.3.2.5, Presentation Response](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-B.1.3.2.5)).
+- The proof `verificationMethod` MUST be a DID URL of the holder DID, and the verification method it dereferences to MUST be in the `authentication` relationship of the resolved DID document ([DID Core section 5.3.1, Authentication](https://www.w3.org/TR/did-1.0/#authentication)).
+
+When `require_cryptographic_holder_binding` is `false`, the presentation is the credential itself, with no `VerifiablePresentation`, following the rule in OpenID4VP Appendix B.1.
+
+AnonCreds credentials in the [W3C representation](https://anoncreds.github.io/anoncreds-spec/#w3c-verifiable-credentials-representation) are out of scope. DCQL has no predicates, so they are presented as AnonCreds with [RFC 0771](../0771-anoncreds-attachments/README.md).
 
 #### `mso_mdoc`
 
@@ -320,7 +344,7 @@ CBOR diagnostic:
 
 ### Credential status
 
-If a credential carries status information, the verifier MUST check it as its credential format defines: the `status` claim of a `dc+sd-jwt` ([SD-JWT VC draft -22 section 2.4](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.4), [Token Status List draft -21 section 8.3, Validation Rules](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21#section-8.3)), the `credentialStatus` of a `vc+sd-jwt` ([VC-JOSE-COSE section 5.4, Validation](https://www.w3.org/TR/vc-jose-cose/#validation-algorithm)) and the status in the MSO of an `mso_mdoc` when it has one. The verifier MUST discard a presentation whose credential is revoked (for a Token Status List, the status `0x01` INVALID). Other status values, such as `0x02` SUSPENDED, are left to verifier policy. If the verifier cannot determine the status, also when it does not support the status mechanism, it MUST discard the presentation. This is stricter than SD-JWT VC, which says status SHOULD be checked, and than VC-JOSE-COSE, which ignores a `credentialStatus` type the verifier does not understand.
+If a credential carries status information, the verifier MUST check it as its credential format defines: the `status` claim of a `dc+sd-jwt` ([SD-JWT VC draft -22 section 2.4](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.4), [Token Status List draft -21 section 8.3, Validation Rules](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21#section-8.3)), the `credentialStatus` of a `vc+sd-jwt` ([VC-JOSE-COSE section 5.4, Validation](https://www.w3.org/TR/vc-jose-cose/#validation-algorithm)), the `credentialStatus` of an `ldp_vc` ([VCDM 1.1 section 4.9, Status](https://www.w3.org/TR/vc-data-model-1.1/#status), [VCDM 2.0 section 4.10, Status](https://www.w3.org/TR/vc-data-model-2.0/#status)), such as a `BitstringStatusListEntry` in a VCDM 2.0 credential ([Bitstring Status List section 3.2, Validate Algorithm](https://www.w3.org/TR/vc-bitstring-status-list/#validate-algorithm)), and the status in the MSO of an `mso_mdoc` when it has one. The verifier MUST discard a presentation whose credential is revoked (for a Token Status List, the status `0x01` INVALID, and for a Bitstring Status List, a set bit in an entry with `statusPurpose` `revocation`). Other status values, such as `0x02` SUSPENDED or the `suspension` purpose, are left to verifier policy. If the verifier cannot determine the status, also when it does not support the status mechanism, it MUST discard the presentation. This is stricter than SD-JWT VC, which says status SHOULD be checked, and than VC-JOSE-COSE, which ignores a `credentialStatus` type the verifier does not understand.
 
 The verifier fetches a status list only after it has decided to trust the issuer (see [Verifier processing rules](#verifier-processing-rules)), only from an `https` URI, and accepts it only when it is signed by a key the verifier trusts for that issuer. Token Status List leaves key resolution and trust to the verifier ([section 11.3](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21#section-11.3)).
 
@@ -349,7 +373,7 @@ On a `presentation` with a `didcomm/dcql-presentation@v1.0` attachment, the veri
 3. Checks the `vp_token` shape against [OpenID4VP section 8.1](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-8.1). Every key is the `id` of a Credential Query in the request, and every array holds exactly one presentation unless that query has `multiple` set to `true`.
 4. Selects the verification rules for each presentation from the `format` of the Credential Query whose `id` is its `vp_token` key, never from the presentation itself, and discards a presentation that is not of that format.
 5. Decides with its own policy whether it trusts each issuer for the type of its credential. For that decision it MAY resolve the issuer DID and, for `dc+sd-jwt`, MAY retrieve the Type Metadata named by `vct` and the types it `extends` ([SD-JWT VC draft -22 section 5.3, Retrieving Type Metadata](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-5.3)). It SHOULD retrieve Type Metadata only after it has verified the Issuer-signed JWT, which it can do for this ahead of step 6, so that the `vct` it follows is the one the issuer signed ([section 2.4](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-2.4) of the same draft). These retrievals follow [section 3, Retrieving Documents and Resources via HTTP](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-3) and [section 7.1, Server-Side Request Forgery](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-22#section-7.1) of the same draft. The verifier retrieves nothing else a credential names, such as issuer metadata or a status list, before it trusts the issuer. A presentation from an issuer it does not trust is discarded. `trusted_authorities` in the query is only a hint to the prover ([OpenID4VP section 6.1](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-6.1)). The `trusted_authorities` types of OpenID4VP 1.0 do not identify DID issuers, so a verifier that wants credentials from given DID issuers can match the issuer DID in `iss`, `issuer` or `issuer.id` with `values` in a Claims Query instead ([OpenID4VP section 6.1.1, Trusted Authorities Query](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-6.1.1)).
-6. Verifies each remaining presentation as described in [Verifying each format](#verifying-each-format). A presentation that fails a check is discarded ([OpenID4VP section 8.6, VP Token Validation](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-8.6)). If any presentation that this step verifies carries a wrong `nonce` or `audience`, the whole response is rejected. This is the `nonce` rule of [OpenID4VP section 14.1.2, Verifiable Presentations](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-14.1.2), limited to the presentations this step verifies and applied to the `audience` as well. A presentation that needs holder binding, or a `dc+sd-jwt` presentation that has a KB-JWT, carries a wrong value when its KB-JWT or `vp+sd-jwt` does not have a plain `nonce` and `aud` claim equal to the request. For `mso_mdoc` the values are only in the `SessionTranscript`, so a `deviceSignature` that does not verify counts as a wrong value.
+6. Verifies each remaining presentation as described in [Verifying each format](#verifying-each-format). A presentation that fails a check is discarded ([OpenID4VP section 8.6, VP Token Validation](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-8.6)). If any presentation that this step verifies carries a wrong `nonce` or `audience`, the whole response is rejected. This is the `nonce` rule of [OpenID4VP section 14.1.2, Verifiable Presentations](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-14.1.2), limited to the presentations this step verifies and applied to the `audience` as well. A presentation that needs holder binding, or a `dc+sd-jwt` presentation that has a KB-JWT, carries a wrong value when its KB-JWT or `vp+sd-jwt` does not have a plain `nonce` and `aud` claim equal to the request. For `ldp_vc` the values are the `challenge` and `domain` of the presentation proof, which MUST equal the request `nonce` and `audience`. For `mso_mdoc` the values are only in the `SessionTranscript`, so a `deviceSignature` that does not verify counts as a wrong value.
 7. Checks, with the verified data only, that the remaining presentations satisfy the query: the format and `meta` of each Credential Query, the requested claims and their `values`, `claim_sets` and `credential_sets` ([OpenID4VP section 6.4](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-6.4)). It MUST NOT rely on the prover having applied the query ([OpenID4VP section 14.9, Security Checks on the Returned Credentials and Presentations](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-14.9)).
 
 If steps 1 to 3 pass, no presentation that step 6 verifies carries a wrong `nonce` or `audience`, and the presentations left after steps 4 to 6 satisfy the query in step 7, the verifier moves to `done` and sends an `ack` when `will_confirm` was `true`. Otherwise it sends a `problem-report` ([RFC 0035](../0035-report-problem/README.md)) and the protocol is `abandoned`, as in [RFC 0454](../0454-present-proof-v2/README.md#problem-report).
@@ -371,6 +395,17 @@ If steps 1 to 3 pass, no presentation that step 6 verifies carries a wrong `nonc
 - Reject the presentation if it has a disclosure for a top-level property that MUST NOT be selectively disclosable, or if such a property holds an `_sd` or `...` digest at any depth (see [Credential formats](#credential-formats)).
 - Check the credential `type` against `meta.type_values` with the exact string matching in [Credential formats](#credential-formats).
 - Reject the credential if the current time is before its `validFrom` or after its `validUntil` ([VCDM 2.0 section 4.9, Validity Period](https://www.w3.org/TR/vc-data-model-2.0/#validity-period)).
+- Check `credentialStatus` as in [Credential status](#credential-status).
+
+`ldp_vc`:
+
+- Whether holder binding is required comes from `require_cryptographic_holder_binding` in the request, never from the `type` of the presentation.
+- When it is absent or `true`, the presentation MUST be a `VerifiablePresentation` and a bare credential MUST be rejected. Check the presentation rules in [Credential formats](#credential-formats), including the holder DID. Verify the presentation proof as in [VC Data Integrity section 4.4, Verify Proof](https://www.w3.org/TR/vc-data-integrity/#verify-proof) with `authentication` as the expected proof purpose, the request `nonce` as the challenge and the request `audience` as the domain, and check that `domain` is a string. Its verification method MUST be in the `authentication` relationship of the holder DID's resolved DID document. Then verify the one credential in `verifiableCredential` as below.
+- When it is `false`, the presentation is the credential. Verify it as below. A `VerifiablePresentation` MUST be rejected ([OpenID4VP Appendix B.1](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-B.1)).
+- Verify the credential proof as in VC Data Integrity section 4.4, or [section 4.5, Verify Proof Sets and Chains](https://www.w3.org/TR/vc-data-integrity/#verify-proof-sets-and-chains) when it has several proofs. The proof, or at least one of several proofs, MUST have `assertionMethod` as its proof purpose and meet the issuer key rule in [Credential formats](#credential-formats).
+- Validate the `@context` values of the credential and of the presentation as in [VC Data Integrity section 2.4.1, Validating Contexts](https://www.w3.org/TR/vc-data-integrity/#validating-contexts). The verifier MUST NOT retrieve a context for which it has neither a local copy nor an approved hash.
+- Check the fully expanded credential types against `meta.type_values` as in OpenID4VP Appendix B.1.1.
+- Reject a VCDM 1.1 credential if the current time is before its `issuanceDate` or after its `expirationDate` ([VCDM 1.1 section 4.6, Issuance Date](https://www.w3.org/TR/vc-data-model-1.1/#issuance-date), [section 4.8, Expiration](https://www.w3.org/TR/vc-data-model-1.1/#expiration)). Reject a VCDM 2.0 credential if it is before its `validFrom` or after its `validUntil` ([VCDM 2.0 section 4.9, Validity Period](https://www.w3.org/TR/vc-data-model-2.0/#validity-period)).
 - Check `credentialStatus` as in [Credential status](#credential-status).
 
 `mso_mdoc`:
@@ -727,6 +762,127 @@ The enveloped credential's issuer-signed payload (with its `_sd` digests clipped
 ["Qg8IxUVOb7tVZPKIa7BaAw", "name", "Bachelor of Science and Arts"]
 ```
 
+#### `ldp_vc` example
+
+The credential is a VCDM 2.0 credential issued with [RFC 0809](../0809-w3c-data-integrity-credential-attachment/README.md) and signed with `eddsa-rdfc-2022` ([Data Integrity EdDSA Cryptosuites section 3.2, eddsa-rdfc-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-rdfc-2022)). The query matches its fully expanded types. The examples context expands `ExampleDegreeCredential` to `https://www.w3.org/ns/credentials/examples#ExampleDegreeCredential`.
+
+A complete `request-presentation` message:
+
+```json
+{
+  "@id": "f2d91150-f97c-4c20-8358-5f02b51d6be8",
+  "@type": "https://didcomm.org/present-proof/2.0/request-presentation",
+  "comment": "Please share your degree",
+  "formats": [
+    {
+      "attach_id": "889695ce-a927-4c18-a635-0c2f3b869fd6",
+      "format": "didcomm/dcql-request@v1.0"
+    }
+  ],
+  "request_presentations~attach": [
+    {
+      "@id": "889695ce-a927-4c18-a635-0c2f3b869fd6",
+      "mime-type": "application/json",
+      "data": {
+        "json": {
+          "dcql_query": {
+            "credentials": [
+              {
+                "id": "degree",
+                "format": "ldp_vc",
+                "meta": {
+                  "type_values": [
+                    [
+                      "https://www.w3.org/2018/credentials#VerifiableCredential",
+                      "https://www.w3.org/ns/credentials/examples#ExampleDegreeCredential"
+                    ]
+                  ]
+                },
+                "claims": [{ "path": ["credentialSubject", "degree", "name"] }]
+              }
+            ]
+          },
+          "nonce": "Io4xU82hxdlXEcN8GJNgTZ96wgPTis9NT6uJ8AhZtHg",
+          "audience": "didcomm:did:example:verifier"
+        }
+      }
+    }
+  ]
+}
+```
+
+A complete `presentation` message:
+
+```json
+{
+  "@id": "e9034c6a-a724-4271-b23e-0724c19a8ed3",
+  "@type": "https://didcomm.org/present-proof/2.0/presentation",
+  "~thread": { "thid": "f2d91150-f97c-4c20-8358-5f02b51d6be8" },
+  "formats": [
+    {
+      "attach_id": "305c6788-4226-4d71-a896-6dffcf76dd7a",
+      "format": "didcomm/dcql-presentation@v1.0"
+    }
+  ],
+  "presentations~attach": [
+    {
+      "@id": "305c6788-4226-4d71-a896-6dffcf76dd7a",
+      "mime-type": "application/json",
+      "data": {
+        "json": {
+          "vp_token": {
+            "degree": [
+              {
+                "@context": ["https://www.w3.org/ns/credentials/v2"],
+                "type": ["VerifiablePresentation"],
+                "holder": "did:example:holder",
+                "verifiableCredential": [
+                  {
+                    "@context": [
+                      "https://www.w3.org/ns/credentials/v2",
+                      "https://www.w3.org/ns/credentials/examples/v2"
+                    ],
+                    "id": "urn:uuid:b7bc292f-5b70-4a01-a5ab-58f79851400b",
+                    "type": ["VerifiableCredential", "ExampleDegreeCredential"],
+                    "issuer": "did:example:university",
+                    "validFrom": "2026-01-01T00:00:00Z",
+                    "credentialSubject": {
+                      "id": "did:example:holder",
+                      "degree": {
+                        "type": "ExampleBachelorDegree",
+                        "name": "Bachelor of Science and Arts"
+                      }
+                    },
+                    "proof": {
+                      "type": "DataIntegrityProof",
+                      "cryptosuite": "eddsa-rdfc-2022",
+                      "created": "2026-01-01T00:00:00Z",
+                      "verificationMethod": "did:example:university#key-1",
+                      "proofPurpose": "assertionMethod",
+                      "proofValue": "z3FXQjecWufY46...(clipped)"
+                    }
+                  }
+                ],
+                "proof": {
+                  "type": "DataIntegrityProof",
+                  "cryptosuite": "eddsa-rdfc-2022",
+                  "created": "2026-10-28T09:30:00Z",
+                  "verificationMethod": "did:example:holder#key-1",
+                  "proofPurpose": "authentication",
+                  "challenge": "Io4xU82hxdlXEcN8GJNgTZ96wgPTis9NT6uJ8AhZtHg",
+                  "domain": "didcomm:did:example:verifier",
+                  "proofValue": "z5vgFc8GSHKP3S...(clipped)"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
 #### `mso_mdoc` example
 
 A complete `request-presentation` message:
@@ -840,6 +996,10 @@ This RFC uses these versions:
 - [Token Status List, draft -21](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21)
 - [Securing Verifiable Credentials using JOSE and COSE](https://www.w3.org/TR/vc-jose-cose/), W3C Recommendation ([13 October 2026](https://www.w3.org/TR/2026/REC-vc-jose-cose-20261013/))
 - [Verifiable Credentials Data Model v2.0](https://www.w3.org/TR/vc-data-model-2.0/), W3C Recommendation
+- [Verifiable Credentials Data Model v1.1](https://www.w3.org/TR/vc-data-model-1.1/), W3C Recommendation
+- [Verifiable Credential Data Integrity 1.0](https://www.w3.org/TR/vc-data-integrity/), W3C Recommendation
+- [Data Integrity EdDSA Cryptosuites v1.0](https://www.w3.org/TR/vc-di-eddsa/), W3C Recommendation
+- [Bitstring Status List v1.0](https://www.w3.org/TR/vc-bitstring-status-list/), W3C Recommendation
 - [Decentralized Identifiers (DIDs) v1.0](https://www.w3.org/TR/did-1.0/), W3C Recommendation
 - [DIDComm Messaging v2.1](https://identity.foundation/didcomm-messaging/spec/v2.1/)
 - [ISO/IEC 18013-5:2021](https://www.iso.org/standard/69084.html)
@@ -861,14 +1021,17 @@ The media types `application/vc+sd-jwt` and `application/vp+sd-jwt` are register
 ### Privacy considerations
 
 - The prover discloses only the selectively disclosable claims the query selected ([OpenID4VP section 6.4](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#section-6.4)) and presents only with the user's consent or under the prover's policy.
+- An `ldp_vc` credential whose cryptosuite has no selective disclosure, such as `eddsa-rdfc-2022`, can only be presented whole. The `claims` of the query then pick which credential is presented but do not reduce what it discloses ([VC Data Integrity section 6.2, Selective Disclosure](https://www.w3.org/TR/vc-data-integrity/#selective-disclosure)).
 - Fetching a status list tells the status list host that some verifier is checking a credential from that list. A verifier SHOULD NOT keep `uri` and `idx` to poll the status later without the holder knowing ([Token Status List draft -21 section 12.3, Observability of Relying Parties](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-21#section-12.3)).
 
 ## Drawbacks
 
-- Verifiers and provers need SD-JWT, SD-JWT VC, Token Status List and mdoc support. That is a large stack compared to the existing JSON-LD and AnonCreds formats.
+- Verifiers and provers need SD-JWT, SD-JWT VC, Token Status List and mdoc support for the formats other than `ldp_vc`. That is a large stack compared to the existing JSON-LD and AnonCreds formats.
 - The DIDComm Handover is new. mdoc libraries often only decode the handover types they know. For example `@owf/mdoc` rejects `SessionTranscript` bytes with an unknown handover, both when signing and when verifying. Until libraries support it, provers and verifiers have to build the `SessionTranscript` structure themselves.
 - `vc+sd-jwt` had a different meaning in OpenID4VP drafts up to -22, where it named IETF SD-JWT VC. Wallets and DCQL libraries that still support those drafts read it that way, and an agent that supports them next to this RFC sees both meanings. Implementations that still use the old meaning will not interoperate.
-- For `vc+sd-jwt`, `type_values` holds the `type` values as they appear in the credential, not the expanded IRIs that OpenID4VP Appendix B.1.1 uses for its W3C formats. An agent that uses one DCQL engine for OpenID4VP and for this RFC passes the credential `type` values unchanged for `vc+sd-jwt` and expanded types for the OpenID4VP formats. A verifier that sends expanded IRIs for `vc+sd-jwt` gets no match.
+- For `vc+sd-jwt`, `type_values` holds the `type` values as they appear in the credential, not the expanded IRIs that OpenID4VP Appendix B.1.1 uses for its W3C formats. An agent that uses one DCQL engine for OpenID4VP and for this RFC passes the credential `type` values unchanged for `vc+sd-jwt` and expanded types for `ldp_vc` and the OpenID4VP formats. A verifier that sends expanded IRIs for `vc+sd-jwt` gets no match.
+- `ldp_vc` needs JSON-LD processing: context documents to expand types and validate contexts, and RDF canonicalization for cryptosuites such as `eddsa-rdfc-2022`. Verifiers and provers have to know the contexts they accept in advance.
+- For VCDM 2.0, `ldp_vc` goes beyond OpenID4VP Appendix B.1, which covers VCDM 1.1 only. An OpenID4VP implementation that follows Appendix B.1 alone may not accept VCDM 2.0 credentials under `ldp_vc`.
 - The prover's `audience` check needs data from the DIDComm layer (the sender DID, the keys it will encrypt to or the invitation DID of the connection) inside the attachment format handler. Deriving the `audience` instead of sending it would need the same data.
 - The format depends on DCQL as defined in OpenID4VP 1.0. Later DCQL changes need a new version of these identifiers.
 - There is no `transaction_data` support.
@@ -876,7 +1039,7 @@ The media types `application/vc+sd-jwt` and `application/vp+sd-jwt` are register
 
 ## Rationale and alternatives
 
-- [RFC 0510](../0510-dif-pres-exch-attach/README.md) (DIF Presentation Exchange) requires presentations in JSON-LD syntax and lists only `ldp_vc` and `ldp_vp`. It defines nothing for SD-JWT key binding or mdoc device authentication. OpenID4VP 1.0 requests presentations with DCQL only and does not use Presentation Exchange.
+- [RFC 0510](../0510-dif-pres-exch-attach/README.md) (DIF Presentation Exchange) requires presentations in JSON-LD syntax and lists only `ldp_vc` and `ldp_vp`. It defines nothing for SD-JWT key binding or mdoc device authentication. OpenID4VP 1.0 requests presentations with DCQL only and does not use Presentation Exchange. This RFC covers `ldp_vc` with DCQL too.
 - One RFC per credential format was considered. DCQL already names the format per Credential Query, a query can mix formats, and RFC 0454 does not allow several attachments for different presentations. One pair of identifiers is simpler.
 - Tunnelling OpenID4VP itself over DIDComm was considered. Like the Digital Credentials API binding in OpenID4VP Appendix A, it would need its own response mode and its own Client Identifier and audience rules, and the thread, `ack` and `problem-report` of present-proof would be lost.
 - A new present-proof version built around DCQL was considered, with the query and `vp_token` in the message body, protocol-level nonce and audience, and discovery through its protocol identifier. Present-proof 2.0 is what agents run today, [RFC 0881](../0881-w3c-vc-sd-jwt-credential-attachment/README.md) uses the same registry for issuance, and DCQL fits the RFC 0454 state machine without changes. A new version would also tie protocol versions to DCQL versions. The formats in this RFC do not depend on the protocol, so a later version can reuse them.
@@ -886,6 +1049,9 @@ The media types `application/vc+sd-jwt` and `application/vp+sd-jwt` are register
 - For `vc+sd-jwt`, an SD-JWT+KB of the credential (as for `dc+sd-jwt`) was considered. VC-JOSE-COSE section 3.2.2 defines a `vp+sd-jwt` presentation with an `EnvelopedVerifiableCredential` and gives no rules for a KB-JWT on a credential. A `vp+jwt` ([VC-JOSE-COSE section 3.1.2, Securing JSON-LD Verifiable Presentations with JOSE](https://www.w3.org/TR/vc-jose-cose/#securing-vps-with-jose)) with the same `EnvelopedVerifiableCredential` was also considered. This RFC uses `vp+sd-jwt` because it is the presentation VC-JOSE-COSE defines for SD-JWT credentials.
 - A new identifier instead of `vc+sd-jwt` was considered. `vc+sd-jwt` matches the VC-JOSE-COSE `typ` and media type, and the [`dcql` library](https://github.com/openwallet-foundation-labs/identity-common-ts/tree/main/packages/dcql) (formerly dcql-ts) already treats `vc+sd-jwt` with `meta.type_values` as a W3C credential. OpenID4VP 1.0 uses only `dc+sd-jwt` for IETF SD-JWT VC, so the old meaning of `vc+sd-jwt` is left only in implementations of earlier drafts.
 - For `vc+sd-jwt`, matching `type_values` against fully expanded type IRIs, as OpenID4VP Appendix B.1.1 does, was considered. In VCDM 2.0 every `type` term expands to an absolute IRI, an undefined term through the `@vocab` of a context such as `https://www.w3.org/ns/credentials/undefined-terms/v2`. So the relative IRI shortcut in Appendix B.1.1 never applies, and both sides would need the context documents of each credential. VC-JOSE-COSE has no expansion step, and the `dcql` library compares the `type` strings it is given. Accepting both forms was also considered. It would not spare the prover from expansion, and a verifier could not tell which form a prover supports.
+- A separate identifier for VCDM 2.0 Data Integrity credentials, such as `di_vc`, was considered. OpenID4VP 1.0 already describes `ldp_vc` in `vp_formats_supported` with the `proof_type_values` and `cryptosuite_values` of VC Data Integrity ([OpenID4VP Appendix B.1.3.2.3, Metadata](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-B.1.3.2.3)), and implementations that support VCDM 2.0 with Data Integrity over OpenID4VP use `ldp_vc` for it. The `@context` already tells the two versions apart.
+- For `ldp_vc`, `type_values` holds fully expanded type IRIs as in OpenID4VP Appendix B.1.1, unlike `vc+sd-jwt`. Verifying a Data Integrity credential already needs its context documents ([VC Data Integrity section 2.4.1](https://www.w3.org/TR/vc-data-integrity/#validating-contexts)), so expansion adds no new dependency and the OpenID4VP rule applies unchanged.
+- For `ldp_vc`, holder binding follows the `credentialSubject.id` binding of RFC 0809. A credential bound only through a `holder` property has no holder DID here. Rejecting credentials with several `credentialSubject` objects was considered. Requiring every `id` to be the same DID keeps them usable.
 
 ## Prior art
 
@@ -898,7 +1064,7 @@ The media types `application/vc+sd-jwt` and `application/vp+sd-jwt` are register
 ## Unresolved questions
 
 - OpenID4VP or OpenID4VCI may later define an identifier for VCDM 2.0 credentials ([OpenID4VCI issue 194](https://github.com/openid/OpenID4VCI/issues/194)) and guidance on identifier collisions ([OpenID4VP issue 777](https://github.com/openid/OpenID4VP/issues/777)). If they do, this RFC should follow.
-- Which status mechanisms should a verifier support for `vc+sd-jwt`?
+- Which status mechanisms should a verifier support for `vc+sd-jwt` and `ldp_vc`?
 - RFC 0881 allows `cnf` as `jwk` or `kid`. This RFC supports both. Should a verifier be able to require one of them?
 - Should `transaction_data` be supported in a later version?
 - When SD-JWT VC and Token Status List are published as RFCs, this RFC should reference those.
