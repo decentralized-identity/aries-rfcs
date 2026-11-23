@@ -3,7 +3,7 @@
 - Authors: [Tarun Vadde](mailto:vaddeofficial@gmail.com) (2060.io)
 - Status: [PROPOSED](/README.md#proposed)
 - Since: 2026-10-28
-- Status Note: Initial draft. See [Implementations](#implementations).
+- Status Note: Initial draft. See [Implementations](#implementations). The rules for W3C Verifiable Credentials are experimental and may change to follow what the [High Assurance Profile for W3C VCDM 2.0 Community Group](https://www.w3.org/community/vc-haip/) defines.
 - Supersedes:
 - Start Date: 2026-10-28
 - Tags: [feature](/tags.md#feature), [protocol](/tags.md#protocol), [credentials](/tags.md#credentials)
