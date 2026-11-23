@@ -230,7 +230,7 @@ The credential is a W3C Verifiable Credential secured with [Data Integrity](http
 - Claims path pointers start at the root of the credential, not the presentation ([OpenID4VP Appendix B.1.2, Claims Matching](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#appendix-B.1.2)).
 - The credential proof, or at least one proof when it has several, has `proofPurpose` `assertionMethod` and a `verificationMethod` of the `issuer` (or `issuer.id`). When the issuer is a DID, the `verificationMethod` MUST be a DID URL of that DID, and the verification method it dereferences to MUST be in the `assertionMethod` relationship of the resolved DID document ([DID Core section 5.3.2, Assertion](https://www.w3.org/TR/did-1.0/#assertion)). Otherwise the controller of the verification method MUST be the issuer and the method MUST be in its `assertionMethod` relationship ([VC Data Integrity section 5.9, Verification Method Binding](https://www.w3.org/TR/vc-data-integrity/#verification-method-binding), [section 5.10, Verification Relationship Validation](https://www.w3.org/TR/vc-data-integrity/#verification-relationship-validation)). A credential whose proof key cannot be tied to the issuer this way is discarded.
 
-The holder DID of a credential is the `id` of its `credentialSubject`. When `credentialSubject` holds several objects, the holder DID is the `id` they share, and objects without an `id` are allowed. A credential has no holder DID when no object has an `id`, when an `id` is not a DID, or when two `id` values differ.
+The holder DID of a credential is the `id` of its `credentialSubject`. When `credentialSubject` holds several objects, the holder DID is the `id` they share, and objects without an `id` are allowed. A credential has no holder DID when no object has an `id`, when an `id` is not a DID, or when two `id` values differ. A DID URL with a path, query or fragment, such as `did:example:holder#key-1`, is not a DID ([DID Core section 3.1, DID Syntax](https://www.w3.org/TR/did-1.0/#did-syntax), [section 3.2, DID URL Syntax](https://www.w3.org/TR/did-1.0/#did-url-syntax)). A credential with such an `id` can therefore only be presented when `require_cryptographic_holder_binding` is `false`.
 
 When holder binding is required (`require_cryptographic_holder_binding` is absent or `true`), a credential without a holder DID cannot be returned. The presentation is a `VerifiablePresentation` ([VCDM 1.1 section 4.10, Presentations](https://www.w3.org/TR/vc-data-model-1.1/#presentations-0), [VCDM 2.0 section 4.13, Verifiable Presentations](https://www.w3.org/TR/vc-data-model-2.0/#verifiable-presentations)) of the same VCDM version as the credential:
 
@@ -240,6 +240,8 @@ When holder binding is required (`require_cryptographic_holder_binding` is absen
 - The proof `verificationMethod` MUST be a DID URL of the holder DID, and the verification method it dereferences to MUST be in the `authentication` relationship of the resolved DID document ([DID Core section 5.3.1, Authentication](https://www.w3.org/TR/did-1.0/#authentication)).
 
 When `require_cryptographic_holder_binding` is `false`, the presentation is the credential itself, with no `VerifiablePresentation`, following the rule in OpenID4VP Appendix B.1.
+
+> **WARNING**: `vc+sd-jwt` and `ldp_vc` bind the holder in different ways. The binding rules of one format do not apply to the other.
 
 AnonCreds credentials in the [W3C representation](https://anoncreds.github.io/anoncreds-spec/#w3c-verifiable-credentials-representation) are out of scope. DCQL has no predicates, so they are presented as AnonCreds with [RFC 0771](../0771-anoncreds-attachments/README.md).
 
@@ -1060,6 +1062,7 @@ The media types `application/vc+sd-jwt` and `application/vp+sd-jwt` are register
 - [RFC 0510](../0510-dif-pres-exch-attach/README.md) and [RFC 0771](../0771-anoncreds-attachments/README.md) share one identifier for proposals and requests. RFC 0771 also forbids a `nonce` in proposals.
 - [Present Proof 3.0](https://github.com/decentralized-identity/waci-didcomm/blob/main/present_proof/present-proof-v3.md) is the DIDComm v2 native present-proof protocol. This RFC uses its attachment layout for present-proof 2.0 over DIDComm v2. It does not register formats for Present Proof 3.0, but they could be used with it unchanged.
 - The [OpenID4VCI 1.1 editor's draft](https://github.com/openid/OpenID4VCI/blob/bde23b72150967a701b66ec4caffcb4d2b8a8627/1.1/openid-4-verifiable-credential-issuance-1_1.md) defines `OpenID4VCIIAEHandover` outside OpenID4VP with the same pattern as the DIDComm Handover. [ISO/IEC TS 18013-7:2025](https://www.iso.org/standard/91154.html) defines further handovers for remote mdoc presentation.
+- The [High Assurance Profile for W3C VCDM 2.0 Community Group](https://www.w3.org/community/vc-haip/) is developing a high assurance profile for the W3C Verifiable Credentials Data Model.
 
 ## Unresolved questions
 
